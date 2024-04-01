@@ -231,7 +231,7 @@
             error: function(error) {
                 toast({
                     title: 'Failed',
-                    message: `${JSON.parse(error.responseText).message}`,
+                    message: `${error.responseJSON.message}`,
                     type: 'error',
                     duration: 3000,
                 });
@@ -269,8 +269,8 @@
                 },
                 error: function(error) {
                     toast({
-                        title: 'Failed',
-                        message: `${JSON.parse(error.responseText).message}`,
+                        title: `${error.responseJSON.title}`,
+                        message: `${error.responseJSON.message}`,
                         type: 'error',
                         duration: 3000,
                     });
@@ -314,7 +314,7 @@
                 error: function(error) {
                     toast({
                         title: 'Failed',
-                        message: `${JSON.parse(error.responseText).message}`,
+                        message: `${error.responseJSON.message}`,
                         type: 'error',
                         duration: 3000,
                     });

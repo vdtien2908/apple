@@ -3,12 +3,12 @@ class CategoryController extends BaseController
 {
     
     private $categoryModel;
-    private $table;
+    private $folder;
 
     public function __construct()
     {
         $this->categoryModel = $this->model('CategoryModel');
-        $this->table = 'categories';
+        $this->folder = 'categories';
     }
 
     function index()
@@ -16,7 +16,7 @@ class CategoryController extends BaseController
         $this->view(
             'main-layout',
             [
-                'page' => 'categories/index',
+                'page' => $this->folder . "/index",
                 'title' => 'Categories',
             ]
         );
@@ -24,68 +24,132 @@ class CategoryController extends BaseController
 
     function all()
     {
-        $categories = $this->categoryModel->getAll($this->table);
+        $categories = $this->categoryModel->getAll();
 
+        http_response_code(200);
         header('Content-Type: application/json');
         echo json_encode($categories);
     }
 
     function create(){
+        if(!isset($_POST['title'])) {
+            $result['status'] = 500;
+            $result['title'] = 'Error';
+            $result['message'] = "Title not provided!";
+            
+            http_response_code($result['status']);
+            header('Content-Type: application/json');
+            echo json_encode($result);
+            return;
+        }
+        
         $title = $_POST['title'];
-        if ($title) {
-            $data = ['title' => $title];
-            $this->categoryModel->create($this->table,$data);
-            $result =[
-                'status'=>'success',
-                'message'=>"created category successfully"
-            ];
+        $slug = $this->slugify($title);
+    
+        $result = [];
+        $data = ['title' => $title, 'slug' => $slug];
+        $categories = $this->categoryModel->querySql("SELECT * FROM categories WHERE categories.title = '$title' AND `delete` = 0");
+    
+        if(mysqli_num_rows($categories) > 0){
+            $result['status'] = 500;
+            $result['title'] = 'Failed';
+            $result['message'] = "Title already exists!";
+
+            http_response_code($result['status']);
             header('Content-Type: application/json');
             echo json_encode($result);
         } else {
-            $result =[
-                'status'=>'error',
-                'message'=>"created category failure!"
-            ];
+            $this->categoryModel->create($data);
+    
+            $result['status'] = 200;
+            $result['title'] = 'Success';
+            $result['message'] = "Created successfully!";
+    
+            http_response_code($result['status']);
             header('Content-Type: application/json');
             echo json_encode($result);
         }
     }
 
     function edit($id){
-        $category =$this->categoryModel->find($this->table,$id);
+        $category =$this->categoryModel->find($id);
         header('Content-Type: application/json');
         echo json_encode($category);
     }
 
     function update($id){
-        $title = $_POST['title'];
+        if(!isset($_POST['title'])) {
+            $result['status'] = 500;
+            $result['title'] = 'Error';
+            $result['message'] = "Title not provided!";
+            
+            http_response_code($result['status']);
+            header('Content-Type: application/json');
+            echo json_encode($result);
+            return;
+        }
 
-        if ($title) {
-            $data = ['title' => $title];
-            $this->categoryModel->update($this->table,$id,$data);
-            $result =[
-                'status'=>'success',
-                'message'=>"created category successfully"
-            ];
+        $title = $_POST['title'];
+        $slug = $this->slugify($title);
+        $result = [];
+        $data = ['title' => $title,'slug' => $slug];
+        $categories = $this->categoryModel->querySql("SELECT * FROM categories WHERE categories.title = '$title' AND `delete` = 0 AND categories.id != $id");
+    
+        if(mysqli_num_rows($categories) > 0){
+            $result['status'] = 500;
+            $result['title'] = 'Failed';
+            $result['message'] = "Title already exists!";
+
+            http_response_code($result['status']);
             header('Content-Type: application/json');
             echo json_encode($result);
         } else {
-            $result =[
-                'status'=>'error',
-                'message'=>"created category failure!"
-            ];
+            $this->categoryModel->update($id,$data);
+    
+            $result['status'] = 200;
+            $result['title'] = 'Success';
+            $result['message'] = "Updated successfully!";
+    
+            http_response_code($result['status']);
             header('Content-Type: application/json');
             echo json_encode($result);
         }
     }
 
     function delete($id){
-        $this->categoryModel->destroy($this->table,$id);
+        $this->categoryModel->destroy($id);
         $result =[
             'status'=>'success',
             'message'=>"Deleted category successfully"
         ];
         header('Content-Type: application/json');
         echo json_encode($result);
+    }
+
+    public static function slugify($text, string $divider = '-')
+    {
+        // replace non letter or digits by divider
+        $text = preg_replace('~[^\pL\d]+~u', $divider, $text);
+
+        // transliterate
+        $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+
+        // remove unwanted characters
+        $text = preg_replace('~[^-\w]+~', '', $text);
+
+        // trim
+        $text = trim($text, $divider);
+
+        // remove duplicate divider
+        $text = preg_replace('~-+~', $divider, $text);
+
+        // lowercase
+        $text = strtolower($text);
+
+        if (empty($text)) {
+            return 'n-a';
+        }
+
+        return $text;
     }
 }

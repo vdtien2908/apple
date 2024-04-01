@@ -62,8 +62,12 @@
             </a>
         </li>
 
-        <li class="menu_item">
-            <a href="{{ route('admin.products.index') }}" class="menu_link">
+        <li class="menu_item 
+        <?php
+            echo $func->handleActive('product')['active'];
+            ?>"
+        >
+            <a href="/apple/admin/product" class="menu_link">
                 <span class="icon">
                     <i class="fa fa-shopping-cart"></i>
                 </span>

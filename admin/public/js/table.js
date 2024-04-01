@@ -1,19 +1,19 @@
-function renderTable(data, columns, showAction, fieldStatus = "confirm") {
-    const table = document.querySelector("#table");
+function renderTable(data, columns, showAction, fieldStatus = 'confirm') {
+    const table = document.querySelector('#table');
 
     if (table) {
-        table.innerHTML = "";
+        table.innerHTML = '';
 
-        $("#total_item").text(data.length);
+        $('#total_item').text(data.length);
 
-        let thead = table.querySelector("thead");
+        let thead = table.querySelector('thead');
         if (!thead) {
-            thead = document.createElement("thead");
+            thead = document.createElement('thead');
             table.appendChild(thead);
 
-            const headerRow = document.createElement("tr");
+            const headerRow = document.createElement('tr');
             columns.forEach((column, index) => {
-                const th = document.createElement("th");
+                const th = document.createElement('th');
                 th.textContent = column.title;
                 if (column.width) {
                     th.style.width = column.width;
@@ -22,30 +22,30 @@ function renderTable(data, columns, showAction, fieldStatus = "confirm") {
             });
 
             if (showAction) {
-                const th = document.createElement("th");
-                th.textContent = "Action";
+                const th = document.createElement('th');
+                th.textContent = 'Action';
                 headerRow.appendChild(th);
             }
 
             thead.appendChild(headerRow);
         }
 
-        let tbody = table.querySelector("tbody");
+        let tbody = table.querySelector('tbody');
         if (!tbody) {
-            tbody = document.createElement("tbody");
+            tbody = document.createElement('tbody');
             table.appendChild(tbody);
         }
 
-        const VND = new Intl.NumberFormat("vi-VN", {
-            style: "currency",
-            currency: "VND",
+        const VND = new Intl.NumberFormat('vi-VN', {
+            style: 'currency',
+            currency: 'VND',
         });
 
         const rowsHTML = data.map((rowData, rowIndex) => {
             const cellsHTML = columns.map((column, colIndex) => {
                 const field = column.field;
 
-                if (field === "index") {
+                if (field === 'index') {
                     return `<td style="width: ${column.width}">${
                         rowIndex + 1
                     }</td>`;
@@ -58,13 +58,13 @@ function renderTable(data, columns, showAction, fieldStatus = "confirm") {
                             }
                         });
 
-                        let color = "#000";
-                        if (value === "Chờ duyệt") {
-                            color = "orange";
-                        } else if (value === "Đã duyệt") {
-                            color = "green";
-                        } else if (value === "Đã huỷ") {
-                            color = "red";
+                        let color = '#000';
+                        if (value === 'Chờ duyệt') {
+                            color = 'orange';
+                        } else if (value === 'Đã duyệt') {
+                            color = 'green';
+                        } else if (value === 'Đã huỷ') {
+                            color = 'red';
                         }
 
                         return `<td style="width: ${column.width}; text-align:${column.align};">
@@ -72,32 +72,32 @@ function renderTable(data, columns, showAction, fieldStatus = "confirm") {
                                         ${value}
                                     </span>
                                 </td>`;
-                    } else if (field === "dob") {
+                    } else if (field === 'dob') {
                         const dateWithTimezone = new Date(rowData[field]);
 
                         const dateUTC = new Date(
                             dateWithTimezone.toISOString()
                         );
 
-                        const formattedDate = dateUTC.toLocaleString("en-US", {
-                            year: "numeric",
-                            month: "2-digit",
-                            day: "2-digit",
-                            timeZone: "UTC",
+                        const formattedDate = dateUTC.toLocaleString('en-US', {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit',
+                            timeZone: 'UTC',
                         });
 
                         return `<td style="width: ${column.width}; text-align:${column.align}">
                                     ${formattedDate}
                                 </td>`;
-                    } else if (column.type === "format") {
+                    } else if (column.type === 'format') {
                         return `<td style="width: ${column.width}; text-align:${
                             column.align
                         }">
                                     ${VND.format(rowData[field])}
                                 </td>`;
-                    } else if (column.type === "img") {
+                    } else if (column.type === 'img') {
                         return `<td style="width: ${column.width}; text-align:${column.align}">
-                            <img src="/storage/${rowData[field]}" alt="Logo product">
+                            <img src="../product_img/${rowData[field]}" alt="Logo product">
                     </td>`;
                     } else {
                         return `<td style="width: ${column.width}; text-align:${column.align}">
@@ -149,26 +149,26 @@ function renderTable(data, columns, showAction, fieldStatus = "confirm") {
                 }
             }
 
-            return `<tr>${cellsHTML.join("")}</tr>`;
+            return `<tr>${cellsHTML.join('')}</tr>`;
         });
-        tbody.innerHTML = rowsHTML.join("");
+        tbody.innerHTML = rowsHTML.join('');
 
-        const rows = table.querySelectorAll("tbody tr");
-        if ($("#search").val() !== "") {
-            const searchTerm = $("#search").val();
+        const rows = table.querySelectorAll('tbody tr');
+        if ($('#search').val() !== '') {
+            const searchTerm = $('#search').val();
             const filteredData = data.filter((item) =>
                 Object.values(item).some(
                     (value) =>
-                        typeof value === "string" && value.includes(searchTerm)
+                        typeof value === 'string' && value.includes(searchTerm)
                 )
             );
 
             rows.forEach((row, index) => {
                 const rowData = data[index];
                 if (filteredData.includes(rowData)) {
-                    row.style.display = "";
+                    row.style.display = '';
                 } else {
-                    row.style.display = "none";
+                    row.style.display = 'none';
                 }
             });
         }
@@ -177,32 +177,32 @@ function renderTable(data, columns, showAction, fieldStatus = "confirm") {
 
 function searchTable(data, searchSelector, columns, showAction) {
     const searchInput = document.querySelector(searchSelector);
-    const table = document.querySelector("#table");
+    const table = document.querySelector('#table');
 
-    searchInput.addEventListener("input", function () {
+    searchInput.addEventListener('input', function () {
         const searchTerm = this.value;
 
         const filteredData = data.filter((item) =>
             Object.values(item).some(
                 (value) =>
-                    typeof value === "string" && value.includes(searchTerm)
+                    typeof value === 'string' && value.includes(searchTerm)
             )
         );
 
-        const rows = table.querySelectorAll("tbody tr");
+        const rows = table.querySelectorAll('tbody tr');
         rows.forEach((row, index) => {
             const rowData = data[index];
             if (filteredData.includes(rowData)) {
-                row.style.display = "";
+                row.style.display = '';
             } else {
-                row.style.display = "none";
+                row.style.display = 'none';
             }
         });
 
-        if ($(this).val() === "") {
+        if ($(this).val() === '') {
             renderTable(data, columns, true);
         }
 
-        $("#total_item").text(filteredData.length);
+        $('#total_item').text(filteredData.length);
     });
 }
