@@ -151,7 +151,7 @@
             <i class="fa-solid fa-xmark"></i>
         </button>
         <div class="modal_inner">
-            <h1 class="modal_title">Cập nhật sản phẩm</h1>
+            <h1 class="modal_title">Update product</h1>
             <form class="form mt-5" id="form_edit" style="width: 700px;">
                 <div class="form_group" style="display: none;">
                     <div class='form_field'>
@@ -272,12 +272,145 @@
     </div>
 </div>
 <!-- /Modal delete -->
+
+<!-- Modal show -->
+<div id="show-modal" class="modal">
+    <div class="modal_container">
+        <button class="modal_close btn-close">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="modal_inner">
+            <h1 class="modal_title">Detail product</h1>
+            <div class="form_container" style="display:flex; width: 1000px; max-height:inset;">
+                <form class="form mt-5" id="form_show" style="width:60%;">
+                    <div class="group_container">
+                        <div class="form_group ">
+                            <div class='form_field'>
+                                <div class="form-img text-center">
+                                    <img style="width:120px" id="blah" src="./public/img/img.png" alt="">
+                                </div>
+                            </div>
+                            <span class="form_messages"></span>
+                        </div>
+                        <div class="form_group">
+                            <div class='form_field'>
+                                <input name="title" id='title' type="text" class="form_input" placeholder=" "
+                                    autocomplete="off" readonly="true">
+                                <label for="title" class="form_label">Title</label>
+                            </div>
+                            <span class="form_messages"></span>
+                        </div>
+                    </div>
+                    <div class="group_container">
+                        <div class="form_group ">
+                            <div class='form_field'>
+                                <input name="price" id='price' type="text" class="form_input" placeholder=" "
+                                    autocomplete="off" readonly="true">
+                                <label for="price" class="form_label">Price</label>
+                            </div>
+                            <span class="form_messages"></span>
+                        </div>
+                        <div class="form_group ">
+                            <div class='form_field'>
+                                <input name="sale_price" id='sale_price' type="text" class="form_input"
+                                    placeholder=" " autocomplete="off" readonly="true">
+                                <label for="sale_price" class="form_label">Sale price</label>
+                            </div>
+                            <span class="form_messages"></span>
+                        </div>
+                    </div>
+                    <div class="group_container">
+                        <div class="form_group ">
+                            <div class='form_field'>
+                                <input name="color" id='color' type="text" class="form_input" placeholder=" "
+                                    autocomplete="off" readonly="true">
+                                <label for="color" class="form_label">Color</label>
+                            </div>
+                            <span class="form_messages"></span>
+                        </div>
+                        <div class="form_group ">
+                            <div class='form_field'>
+                                <select name="hot" id="hot" class="form_input" style="pointer-events:none">
+                                    <option value="0" selected>No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                                <label for="hot" class="form_label">Hot</label>
+                            </div>
+                            <span class="form_messages"></span>
+                        </div>
+                    </div>
+                    <div class="form_group ">
+                        <div class='form_field'>
+                            <textarea name="description" id='description' type="text" class="form_input" placeholder=" "
+                                autocomplete="off" readonly="true"></textarea>
+                            <label for="description" class="form_label">Description</label>
+                        </div>
+                        <span class="form_messages"></span>
+                    </div>
+                    <div class="form_group ">
+                        <div class='form_field'>
+                            <textarea name="content" id='content' type="text" class="form_input" placeholder=" " autocomplete="off" readonly="true"></textarea>
+                            <label for="content" class="form_label">Content</label>
+                        </div>
+                        <span class="form_messages"></span>
+                    </div>
+                    <div class="form_group ">
+                        <div class='form_field'>
+                            <select name="category_id" id="category_id" class="form_input" style="pointer-events:none">
+                                <option selected disabled value="">Select category</option>
+                            </select>
+                            <label for="category_id" class="form_label">Category</label>
+                        </div>
+                        <span class="form_messages"></span>
+                    </div>
+                </form>
+    
+                <div class="info_product-detail" style="width:40%">
+                    <h2 class="text-center">Add specification</h2>
+                    <!-- Add info detail product -->
+                    <form class="form" id="form_add-info" style="padding:10px;">
+                        <div class="group_container-3">
+                            <div class="form_group">
+                                <div class='form_field'>
+                                    <input name="key" id='key' type="text" class="form_input" placeholder=" "
+                                        autocomplete="off">
+                                    <label for="key" class="form_label">Key</label>
+                                </div>
+                                <span class="form_messages"></span>
+                            </div>
+                            <div class="form_group ">
+                                <div class='form_field'>
+                                    <input name="value" id='value' type="text" class="form_input" placeholder=" "
+                                        autocomplete="off">
+                                    <label for="value" class="form_label">Value</label>
+                                </div>
+                                <span class="form_messages"></span>
+                            </div>
+                            <div class="form_action text-right">
+                                <button type="submit" class="btn btn_primary">Add</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="" style="overflow: auto;max-height: calc(100vh - 310px);">
+                        <table id="table-mini"></table>
+                    </div>
+                    <!-- /Add info detail product -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Modal show-->
+
+
 <script src="./public/js/table.js"></script>
+<script src="./public/js/table-mini.js"></script>
 <script src="./public/js/toast.js"></script>
 <script src="./public/js/validator.js"></script>
 <script src="./public/js/utils.js"></script>
 
 <script>
+    let product_id = 0;
     // Preview Img Input form create
     const fileValueCreate =document.querySelector('#form_create #img');
     const blahCreate =document.querySelector('#form_create #blah');
@@ -298,7 +431,70 @@
         }
     }
 
-    const columns = [{
+    // Handle validation form specification
+    Validator({
+        form: '#form_add-info',
+        formGroupSelector: '.form_group',
+        errorSelector: '.form_messages',
+        rules: [
+            Validator.isRequired('#key', 'Key is require.'),
+            Validator.isRequired('#value', 'Value is require.'),
+        ],
+        onSubmit: (data) => {
+            $.ajax({
+                type: 'POST',
+                url: `/apple/admin/specification/create/${product_id}`,
+                data: data,
+                success: function(response) {
+                    toast({
+                        title: 'Success',
+                        message: `Created specification successfully!`,
+                        type: 'success',
+                        duration: 3000,
+                    });
+                    initTableMini(product_id);
+                },
+                error: function(error) {
+                    toast({
+                        title: `${error.responseJSON.title}`,
+                        message: `${error.responseJSON.message}`,
+                        type: 'error',
+                        duration: 3000,
+                    });
+                    initTableMini(product_id);
+                }
+            });
+        }
+    });
+
+     // Handle edit
+     const handleDeleteMini = (id) => {
+        $.ajax({
+            type: 'GET',
+            url: `/apple/admin/specification/delete/${id}`,
+            success: function(response) {
+                toast({
+                        title: 'Success',
+                        message: `Deleted specification successfully!`,
+                        type: 'success',
+                        duration: 3000,
+                    });
+                initTableMini(product_id);
+            },
+            error: function(error) {
+                toast({
+                        title: `${error.responseJSON.title}`,
+                        message: `${error.responseJSON.message}`,
+                        type: 'error',
+                        duration: 3000,
+                    });
+                initTableMini(product_id);
+            }
+        });
+    }
+
+    const columns = [
+        {
             title: '#',
             field: 'index',
             width: '100px'
@@ -338,6 +534,41 @@
             type: 'format'
         },
     ];
+    
+    const columns_table_mini = [
+        {
+            title: 'Key',
+            field: 'key',
+            align: 'center',
+
+        },
+        {
+            title: 'Value',
+            field: 'value',
+            align: 'center',
+        },
+    ];
+
+    const initTableMini = () =>{
+        $.ajax({
+            type: 'GET',
+            url: `/apple/admin/specification/all/${product_id}`,
+            success: function(response) {
+                const specifications = response;
+                // Init table
+                renderTable_mini(specifications, columns_table_mini, true);
+            },
+            error: function(error) {
+                toast({
+                    title: 'Failed load specification form show',
+                    message: `Error server`,
+                    type: 'error',
+                    duration: 3000,
+                });
+            }
+        });
+    }
+
     // Define api
     const urlGlobal = '/apple/admin/product'
 
@@ -410,15 +641,15 @@
                 const product = response;
                 $('#form_edit #id').val(product.id);
                 $('#form_edit #title').val(product.title);
-                $('#form_edit #price').val(product.price);
+                $('#form_edit #price').val(product.price + 'đ');
                 $('#form_edit #sale_price').val(product.sale_price);
                 $('#form_edit #content').val(product.content);
                 $('#form_edit #description').val(product.description);
                 $('#form_edit #color').val(product.color);
-                    // Reset img  form create
+                    // Reset img  form edit
                 $('#form_edit #blah').attr('src', `../product_img/${product.img}`);
 
-                 //  Handle load categories form create product
+                 //  Handle load categories form edit product
                 $.ajax({
                     type: 'GET',
                     url: '/apple/admin/category/all',
@@ -449,6 +680,74 @@
                         });
                     }
                 });
+            },
+            error: function(error) {
+                toast({
+                    title: 'Error',
+                    message: `${error.responseJSON.message}`,
+                    type: 'error',
+                    duration: 3000,
+                });
+            }
+        });
+    }
+
+    // Handle show
+    const handleShow = (id) => {
+        $('#show-modal').addClass('show');
+
+        product_id = id;
+
+        initTableMini();
+
+        $.ajax({
+            type: 'GET',
+            url: `${urlGlobal}/edit/${id}`,
+            success: function(response) {
+                const product = response;
+                $('#form_show #id').val(product.id);
+                $('#form_show #title').val(product.title);
+                $('#form_show #price').val(product.price);
+                $('#form_show #sale_price').val(product.sale_price);
+                $('#form_show #content').val(product.content);
+                $('#form_show #description').val(product.description);
+                $('#form_show #color').val(product.color);
+
+                    // Reset img  form show
+                $('#form_show #blah').attr('src', `../product_img/${product.img}`);
+
+                 //  Handle load categories form show product
+                $.ajax({
+                    type: 'GET',
+                    url: '/apple/admin/category/all',
+                    success: function(response) {
+                        const categories = response;
+                        const selectElement = $('#show-modal #category_id');
+
+                        // Xóa các option cũ nếu có
+                        selectElement.empty();
+
+                        // Lặp qua mảng categories và tạo các option
+                        categories.map((category) => {
+                            const option = $('<option></option>');
+                            option.attr('value', category.id);
+                            option.text(category.title);
+                            if(product.category_id == category.id){
+                                option.attr('selected', 'selected');
+                            }
+                            selectElement.append(option);
+                        });
+                    },
+                    error: function(error) {
+                        toast({
+                            title: 'Failed',
+                            message: `${error.responseJSON.message}`,
+                            type: 'error',
+                            duration: 3000,
+                        });
+                    }
+                });
+
             },
             error: function(error) {
                 toast({

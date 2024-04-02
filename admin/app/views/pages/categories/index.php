@@ -85,7 +85,7 @@
             <form class="form mt-5" id="form_edit" style="width: 700px;">
                 <div class="form_group" style="display: none;">
                     <div class='form_field'>
-                        <input name="id" id='id' type="text" class="form_input">
+                        <input name="id" id='id' type="number" class="form_input">
                     </div>
                 </div>
                 <div class="form_group ">
