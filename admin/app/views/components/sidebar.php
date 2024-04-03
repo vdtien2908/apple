@@ -21,8 +21,10 @@
             Manage
         </li>
 
-        <li class="menu_item ">
-            <a href="/quan-tri/nhan-vien" class="menu_link">
+        <li class="menu_item <?php
+            echo $func->handleActive('staff')['active'];
+            ?>">
+            <a href="/apple/admin/staff" class="menu_link">
                 <span class="icon">
                     <i class="fa fa-id-badge"></i>
                 </span>
@@ -33,8 +35,10 @@
         </li>
 
 
-        <li class="menu_item">
-            <a href="/quan-tri/khach-hang" class="menu_link">
+        <li class="menu_item <?php
+            echo $func->handleActive('customer')['active'];
+            ?>">
+            <a href="/apple/admin/customer" class="menu_link">
                 <span class="icon">
                     <i class="fa fa-users"></i>
                 </span>
@@ -45,7 +49,7 @@
         </li>
 
         <li class="menu_item menu_item-title">
-            Products
+            Product
         </li>
 
         <li class="menu_item 
@@ -81,8 +85,10 @@
             Order
         </li>
 
-        <li class="menu_item">
-            <a href="/quan-tri/don-hang" class="menu_link">
+        <li class="menu_item <?php
+            echo $func->handleActive('order')['active'];
+            ?>">
+            <a href="/apple/admin/order" class="menu_link">
                 <span class="icon">
                     <i class="fa-solid fa-truck"></i>
                 </span>

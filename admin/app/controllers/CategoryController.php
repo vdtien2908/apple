@@ -117,13 +117,25 @@ class CategoryController extends BaseController
     }
 
     function delete($id){
-        $this->categoryModel->destroy($id);
-        $result =[
-            'status'=>'success',
-            'message'=>"Deleted category successfully"
-        ];
-        header('Content-Type: application/json');
-        echo json_encode($result);
+        $products_by_category = $this->categoryModel->querySql("SELECT * FROM products WHERE products.category_id = '$id' AND `delete` = 0");
+    
+        if(mysqli_num_rows($products_by_category) > 0){
+            $result['status'] = 500;
+            $result['title'] = 'Failed';
+            $result['message'] = "Products containing categories cannot be deleted!";
+
+            http_response_code($result['status']);
+            header('Content-Type: application/json');
+            echo json_encode($result);
+        } else {
+            $this->categoryModel->destroy($id);
+            $result =[
+                'status'=>'success',
+                'message'=>"Deleted category successfully"
+            ];
+            header('Content-Type: application/json');
+            echo json_encode($result);
+        }
     }
 
     public static function slugify($text, string $divider = '-')

@@ -59,12 +59,12 @@ function renderTable(data, columns, showAction, fieldStatus = 'confirm') {
                         });
 
                         let color = '#000';
-                        if (value === 'Chờ duyệt') {
+                        if (value === 'Pending') {
                             color = 'orange';
-                        } else if (value === 'Đã duyệt') {
+                        } else if (value === 'Approved') {
                             color = 'green';
-                        } else if (value === 'Đã huỷ') {
-                            color = 'red';
+                        } else if (value === 'Canceled') {
+                            color = '#ccc';
                         }
 
                         return `<td style="width: ${column.width}; text-align:${column.align};">
@@ -108,15 +108,11 @@ function renderTable(data, columns, showAction, fieldStatus = 'confirm') {
             });
 
             if (showAction) {
-                if (
-                    rowData[fieldStatus] &&
-                    (rowData[fieldStatus] !== 0 ||
-                        rowData[fieldStatus] !== false)
-                ) {
+                if (rowData[fieldStatus] && rowData[fieldStatus] != 0) {
                     cellsHTML.push(`
                         <td>
                             <button class="btn btn_show" onclick="handleShow(${rowData.id})">
-                               Chi tiết
+                               Detail
                             </button>
                             <button class="btn btn_edit" onclick="handleEdit(${rowData.id})">
                                 <i class="fa-solid fa-pen-to-square"></i>

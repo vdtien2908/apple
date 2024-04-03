@@ -217,7 +217,7 @@
         const id = $(this).data('id');
 
         $.ajax({
-            type: 'get',
+            type: 'GET',
             url: `${urlGlobal}/delete/${id}`,
             success: function(response) {
                 init();

@@ -2,15 +2,15 @@
     <div class="table">
         <div class="table_head">
             <div class="table_title">
-                <h1>Khách hàng</h1>
+                <h1>Customers</h1>
             </div>
             <div class="table_action">
                 <ul class="table_tab">
-                    <li class="active"><a href="#">Danh sách</a></li>
+                    <li class="active"><a href="#">Table</a></li>
                     <!-- <li><a href="#">Thùng rác (10)</a></li> -->
                 </ul>
                 <div class="table_totalItem">
-                    Tổng: <b id="total_item">0</b> khách hàng
+                    Total: <b id="total_item">0</b> customers
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
             <div class="top_table">
                 <div class="table_right">
                     <div class="table_search">
-                        <input id="search" type="text" placeholder="Tìm kiếm...">
+                        <input id="search" type="text" placeholder="Search...">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
                 </div>
@@ -48,32 +48,32 @@
     }
 </style>
 
-<script src="/js/table.js"></script>
-<script src="/js/toast.js"></script>
-<script src="/js/validator.js"></script>
+<script src="./public/js/table.js"></script>
+<script src="./public/js/toast.js"></script>
+<script src="./public/js/validator.js"></script>
+<script src="./public/js/utils.js"></script>
 
 <script>
     const columns = [
         { title: '#', field: 'index', width: '100px' },
-        { title: 'Tên', field: 'fullName' },
-        { title: 'Email', field: 'email' },
-        { title: 'Điện thoại', field: 'phoneNumber' },
+        { title: 'Name', field: 'name' },
         {
-            title: 'Giới tính',
+            title: 'Gender',
             field: 'gender',
             width: '100px',
             align: 'center',
-            filter: [{ 1: 'Nam' }, { 0: 'Nữ' }],
+            filter: [{ 1: 'Male' }, { 0: 'Female' }],
         },
-        { title: 'Ngày sinh', field: 'dob', align: 'center' }
+        { title: 'Email', field: 'email' },
+        { title: 'Phone number', field: 'phone' }
     ];
 
     const init = () => {
         $.ajax({
             type: 'GET',
-            url: 'khach-hang/danh-sach',
+            url: '/apple/admin/customer/all',
             success: function (response) {
-                const customers = response.data;
+                const customers = response;
 
                 // Init table
                 renderTable(customers, columns, false);
@@ -85,8 +85,8 @@
             },
             error: function (error) {
                 toast({
-                    title: 'Tải trang thất bại',
-                    message: `Lỗi máy chủ`,
+                    title: 'Fail load page!',
+                    message: `Error server`,
                     type: 'error',
                     duration: 3000,
                 });
@@ -95,5 +95,4 @@
     }
 
     init();
-
 </script>

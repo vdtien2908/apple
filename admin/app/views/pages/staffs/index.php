@@ -2,15 +2,15 @@
     <div class="table">
         <div class="table_head">
             <div class="table_title">
-                <h1>Nhân viên</h1>
+                <h1>Staff</h1>
             </div>
             <div class="table_action">
                 <ul class="table_tab">
-                    <li class="active"><a href="#">Danh sách</a></li>
+                    <li class="active"><a href="#">Table</a></li>
                     <!-- <li><a href="#">Thùng rác (10)</a></li> -->
                 </ul>
                 <div class="table_totalItem">
-                    Tổng: <b id="total_item">0</b> nhân viên
+                    Total: <b id="total_item">0</b> staff
                 </div>
             </div>
         </div>
@@ -21,13 +21,13 @@
             <div class="top_table">
                 <div class="table_right">
                     <div class="table_search">
-                        <input id="search" type="text" placeholder="Tìm kiếm...">
+                        <input id="search" type="text" placeholder="Search...">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
                 </div>
                 <div class="table_left">
                     <button class="modal-open btn btn_primary table_add" data-modal-target="#create-modal">
-                        Thêm mới
+                        Create
                     </button>
                 </div>
             </div>
@@ -52,13 +52,13 @@
             <i class="fa-solid fa-xmark"></i>
         </button>
         <div class="modal_inner">
-            <h1 class="modal_title">Thêm nhân viên</h1>
+            <h1 class="modal_title">Create staff</h1>
             <form class="form mt-5" id="form_create" style="width: 700px;">
                 <div class="form_group ">
                     <div class='form_field'>
-                        <input name="fullName" id='fullName' type="text" class="form_input" placeholder=" "
+                        <input name="name" id='name' type="text" class="form_input" placeholder=" "
                             autocomplete="off">
-                        <label for="name" class="form_label">Tên nhân viên</label>
+                        <label for="name" class="form_label">Name</label>
                     </div>
                     <span class="form_messages"></span>
                 </div>
@@ -74,37 +74,29 @@
 
                 <div class="form_group">
                     <div class='form_field'>
-                        <input name="dob" id='dob' type="date" class="form_input" placeholder=" " autocomplete="off">
-                        <label for="dob" class="form_label">Ngày sinh</label>
-                    </div>
-                    <span class="form_messages"></span>
-                </div>
-
-                <div class="form_group">
-                    <div class='form_field'>
                         <textarea name="address" id='address' type="text" class="form_input" placeholder=" "
                             autocomplete="off"></textarea>
-                        <label for="address" class="form_label">Địa chỉ</label>
+                        <label for="address" class="form_label">Address</label>
                     </div>
                     <span class="form_messages"></span>
                 </div>
                 <div class="form_group">
                     <div class='form_field'>
                         <select name="gender" id='gender' class="form_input">
-                            <option value="" disabled selected hidden>-- Chọn --</option>
-                            <option value="1">Nam</option>
-                            <option value="0">Nữ</option>
+                            <option value="" disabled selected hidden>-- Select --</option>
+                            <option value="1">Male</option>
+                            <option value="0">Female</option>
                         </select>
-                        <label for="gender" class="form_label">Giới tính</label>
+                        <label for="gender" class="form_label">Gender</label>
                     </div>
                     <span class="form_messages"></span>
                 </div>
 
                 <div class="form_group">
                     <div class='form_field'>
-                        <input name="phoneNumber" id='phoneNumber' type="text" class="form_input" placeholder=" "
+                        <input name="phone" id='phone' type="text" class="form_input" placeholder=" "
                             autocomplete="off">
-                        <label for="phoneNumber" class="form_label">Điện thoại</label>
+                        <label for="phone" class="form_label">Phone number</label>
                     </div>
                     <span class="form_messages"></span>
                 </div>
@@ -113,7 +105,7 @@
                     <div class='form_field'>
                         <input name="password" id='password' type="password" class="form_input" placeholder=" "
                             autocomplete="off">
-                        <label for="password" class="form_label">Mật khẩu</label>
+                        <label for="password" class="form_label">Password</label>
                     </div>
                     <span class="form_messages"></span>
                 </div>
@@ -122,15 +114,15 @@
                     <div class='form_field'>
                         <input name="password_r" id='password_r' type="password" class="form_input" placeholder=" "
                             autocomplete="off">
-                        <label for="password_r" class="form_label">Nhập lại mật khẩu</label>
+                        <label for="password_r" class="form_label">Retype password</label>
                     </div>
                     <span class="form_messages"></span>
                 </div>
 
                 <div class="form_action text-right">
-                    <div class="btn btn_secondary modal_close">Huỷ</div>
+                    <div class="btn btn_secondary modal_close">Cancel</div>
                     <button type="submit" class="btn btn_primary
-                    ">Thêm</button>
+                    ">Add</button>
                 </div>
             </form>
         </div>
@@ -145,7 +137,7 @@
             <i class="fa-solid fa-xmark"></i>
         </button>
         <div class="modal_inner">
-            <h1 class="modal_title">Cập nhật nhân viên</h1>
+            <h1 class="modal_title">Update staff</h1>
             <form class="form mt-5" id="form_edit" style="width: 700px;">
                 <div class="form_group" style="display: none;">
                     <div class='form_field'>
@@ -154,9 +146,9 @@
                 </div>
                 <div class="form_group ">
                     <div class='form_field'>
-                        <input name="fullName" id='fullName' type="text" class="form_input" placeholder=" "
+                        <input name="name" id='name' type="text" class="form_input" placeholder=" "
                             autocomplete="off">
-                        <label for="name" class="form_label">Tên nhân viên</label>
+                        <label for="name" class="form_label">Name</label>
                     </div>
                     <span class="form_messages"></span>
                 </div>
@@ -172,45 +164,37 @@
 
                 <div class="form_group">
                     <div class='form_field'>
-                        <input name="dob" id='dob' type="date" class="form_input" placeholder=" " autocomplete="off">
-                        <label for="dob" class="form_label">Ngày sinh</label>
-                    </div>
-                    <span class="form_messages"></span>
-                </div>
-
-                <div class="form_group">
-                    <div class='form_field'>
                         <textarea name="address" id='address' type="text" class="form_input" placeholder=" "
                             autocomplete="off"></textarea>
-                        <label for="address" class="form_label">Địa chỉ</label>
+                        <label for="address" class="form_label">Address</label>
                     </div>
                     <span class="form_messages"></span>
                 </div>
                 <div class="form_group">
                     <div class='form_field'>
                         <select name="gender" id='gender' class="form_input">
-                            <option value="" disabled selected hidden>-- Chọn --</option>
-                            <option value="1">Nam</option>
-                            <option value="0">Nữ</option>
+                            <option value="" disabled selected hidden>-- Select --</option>
+                            <option value="1">Male</option>
+                            <option value="0">Female</option>
                         </select>
-                        <label for="gender" class="form_label">Giới tính</label>
+                        <label for="gender" class="form_label">Gender</label>
                     </div>
                     <span class="form_messages"></span>
                 </div>
 
                 <div class="form_group">
                     <div class='form_field'>
-                        <input name="phoneNumber" id='phoneNumber' type="text" class="form_input" placeholder=" "
+                        <input name="phone" id='phone' type="text" class="form_input" placeholder=" "
                             autocomplete="off">
-                        <label for="phoneNumber" class="form_label">Điện thoại</label>
+                        <label for="phone" class="form_label">Phone number</label>
                     </div>
                     <span class="form_messages"></span>
                 </div>
 
                 <div class="form_action text-right">
-                    <div class="btn btn_secondary modal_close">Huỷ</div>
-                    <button type="submit" class="btn btn_primary
-                    ">Cập nhật</button>
+                    <div class="btn btn_secondary modal_close">Cancel</div>
+                    <button type="submit" class="btn btn_submit-update
+                    ">Update</button>
                 </div>
             </form>
         </div>
@@ -225,52 +209,54 @@
             <i class="fa-solid fa-xmark"></i>
         </button>
         <div class="modal_inner">
-            <h1 class="modal_title">Xoá nhân viên</h1>
+        <h1 class="modal_title">Delete staff</h1>
             <div class="form mt-5" id="form_delete" style="width: 450px;">
-                <h1>Bạn có chắc muốn xoá nhân viên này?</h1>
+                <h1>Are you sure you want to delete the staff?</h1>
                 <div class="form_action text-right mt-5">
-                    <div class="btn btn_secondary modal_close">Huỷ</div>
-                    <button type="submit" class="btn btn_primary
-                    ">Xác nhận</button>
+                    <div class="btn btn_secondary modal_close">Cance</div>
+                    <button type="submit" class="btn btn_submit-delete">
+                        Confirm
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!-- /Modal delete -->
-
-<script src="/js/table.js"></script>
-<script src="/js/toast.js"></script>
-<script src="/js/validator.js"></script>
+<script src="./public/js/table.js"></script>
+<script src="./public/js/toast.js"></script>
+<script src="./public/js/validator.js"></script>
+<script src="./public/js/utils.js"></script>
 
 <script>
     const columns = [
         { title: '#', field: 'index', width: '100px' },
-        { title: 'Tên', field: 'fullName' },
+        { title: 'Name', field: 'name' },
         { title: 'Email', field: 'email' },
-        { title: 'Điện thoại', field: 'phoneNumber' },
+        { title: 'Phone number', field: 'phone' },
         {
-            title: 'Giới tính',
+            title: 'Gender',
             field: 'gender',
             width: '100px',
             align: 'center',
-            filter: [{ 1: 'Nam' }, { 0: 'Nữ' }],
+            filter: [{ 1: 'Male' }, { 0: 'Female' }],
         },
-        { title: 'Ngày sinh', field: 'dob', align: 'center' }
     ];
+
+    const urlGlobal = "/apple/admin/staff";
 
     const init = () => {
         $.ajax({
             type: 'GET',
-            url: 'nhan-vien/danh-sach',
+            url: `${urlGlobal}/all`,
             success: function (response) {
-                const users = response.data;
+                const staffs = response;
 
                 // Init table
-                renderTable(users, columns, true);
+                renderTable(staffs, columns, true);
 
                 // Handle search
-                searchTable(users, '#search', columns, true)
+                searchTable(staffs, '#search', columns, true)
 
                 $('#table_main').removeClass('animation')
             },
@@ -292,24 +278,21 @@
         $('#edit-modal').addClass('show');
         $.ajax({
             type: 'GET',
-            url: `nhan-vien/${id}`,
+            url: `${urlGlobal}/edit/${id}`,
             success: function (response) {
-                const user = response.data;
-                const dobDate = new Date(user.dob);
-                const formattedDate = dobDate.toISOString().split('T')[0];
+                const staff = response;
 
-                $('#form_edit #id').val(user.id)
-                $('#form_edit #fullName').val(user.fullName)
-                $('#form_edit #email').val(user.email)
-                $('#form_edit #dob').val(formattedDate)
-                $('#form_edit #address').val(user.address)
-                $('#form_edit #gender').val(user.gender)
-                $('#form_edit #phoneNumber').val(user.phoneNumber)
+                $('#form_edit #id').val(staff.id)
+                $('#form_edit #name').val(staff.name)
+                $('#form_edit #email').val(staff.email)
+                $('#form_edit #address').val(staff.address)
+                $('#form_edit #gender').val(staff.gender)
+                $('#form_edit #phone').val(staff.phone)
             },
             error: function (error) {
                 toast({
-                    title: 'Thất bại',
-                    message: `Lỗi hệ thống`,
+                    title: 'Error',
+                    message: `Error get staff`,
                     type: 'error',
                     duration: 3000,
                 });
@@ -320,34 +303,35 @@
     // Handle delete
     const handleDelete = (id) => {
         $('#delete-modal').addClass('show');
-        $('#delete-modal .btn_primary').data('id', id)
+        $('#delete-modal .btn_submit-delete').data('id', id)
     }
 
     // Handle click btn delete
-    $('#delete-modal .btn_primary').on('click', function () {
+    $('#delete-modal .btn_submit-delete').on('click', function () {
         $('#delete-modal').removeClass('show');
         $('#table_main').addClass('animation');
         const id = $(this).data('id');
 
         $.ajax({
-            type: 'DELETE',
-            url: `nhan-vien/${id}`,
-            success: function (response) {
+            type: 'GET',
+            url: `${urlGlobal}/delete/${id}`,
+            success: function(response) {
                 init();
                 toast({
-                    title: 'Thành công',
-                    message: `Xoá nhân viên thành công`,
+                    title: 'Success',
+                    message: `Deleted staff successfully!`,
                     type: 'success',
                     duration: 3000,
                 });
             },
-            error: function (error) {
+            error: function(error) {
                 toast({
-                    title: 'Thất bại',
-                    message: `Lỗi hệ thống`,
+                    title: 'Failed',
+                    message: `${error.responseJSON.message}`,
                     type: 'error',
                     duration: 3000,
                 });
+                init();
             }
         });
     })
@@ -359,19 +343,18 @@
         formGroupSelector: '.form_group',
         errorSelector: '.form_messages',
         rules: [
-            Validator.isRequired('#fullName', 'Vui lòng nhập đầy đủ họ tên.'),
-            Validator.isRequired('#email', 'Vui lòng nhập trường này'),
-            Validator.isRequired('#dob', 'Vui lòng nhập ngày sinh'),
-            Validator.isRequired('#address', 'Vui lòng nhập địa chỉ'),
-            Validator.isRequired('#phoneNumber', 'Vui lòng nhập số điện thoại'),
-            Validator.isRequired('#gender', 'Vui lòng chọn giới tính'),
-            Validator.isRequired('#password', 'Vui lòng nhập mật khẩu'),
-            Validator.minLength('#password', 6, 'Mật khẩu yêu cầu niều hơn 6 ký tự'),
-            Validator.isRequired('#password_r', 'Vui lòng nhập trường này'),
+            Validator.isRequired('#name', 'Name is required.'),
+            Validator.isRequired('#email', 'Email is required.'),
+            Validator.isRequired('#address', 'Address is required.'),
+            Validator.isRequired('#phone', 'Phone is required.'),
+            Validator.isRequired('#gender', 'Gender is required.'),
+            Validator.isRequired('#password', 'Password is required.'),
+            Validator.minLength('#password', 6, 'The password field must be at least 6 characters.'),
+            Validator.isRequired('#password_r', 'Please enter this field.'),
             Validator.isConfirmed('#password_r', () => {
                 return $('#password').val();
-            }, 'Mật khẩu nhập lại không chính xác'),
-            Validator.isEmail('#email', "Vui lòng nhập email"),
+            }, 'The re-entered password does not match.'),
+            Validator.isEmail('#email', "Please enter email"),
         ],
         onSubmit: (data) => {
             $('#create-modal').removeClass('show');
@@ -379,33 +362,25 @@
 
             $.ajax({
                 type: 'POST',
-                url: 'nhan-vien/tao-moi',
+                url: `${urlGlobal}/create`,
                 data: data,
-                success: function (response) {
-                    if (response.code === 1) {
-                        toast({
-                            title: 'Thất bại',
-                            message: response.message,
-                            type: 'error',
-                            duration: 3000,
-                        });
-                    } else {
-                        toast({
-                            title: 'Thành công',
-                            message: `Thêm nhân viên thành công`,
-                            type: 'success',
-                            duration: 3000,
-                        });
-                    }
+                success: function(response) {
+                    toast({
+                        title: 'Success',
+                        message: `Created staff successfully!`,
+                        type: 'success',
+                        duration: 3000,
+                    });
                     init();
                 },
-                error: function (error) {
+                error: function(error) {
                     toast({
-                        title: 'Thất bại',
-                        message: `Thêm nhân viên thất bại`,
+                        title: `${error.responseJSON.title}`,
+                        message: `${error.responseJSON.message}`,
                         type: 'error',
                         duration: 3000,
                     });
+                    init();
                 }
             });
         }
@@ -417,12 +392,12 @@
         formGroupSelector: '.form_group',
         errorSelector: '.form_messages',
         rules: [
-            Validator.isRequired('#fullName', 'Vui lòng nhập đầy đủ họ tên.'),
-            Validator.isRequired('#email', 'Vui lòng nhập trường này'),
-            Validator.isRequired('#dob', 'Vui lòng nhập ngày sinh'),
-            Validator.isRequired('#address', 'Vui lòng nhập địa chỉ'),
-            Validator.isRequired('#phoneNumber', 'Vui lòng nhập số điện thoại'),
-            Validator.isRequired('#gender', 'Vui lòng chọn giới tính'),
+            Validator.isRequired('#name', 'Name is required.'),
+            Validator.isRequired('#email', 'Email is required.'),
+            Validator.isRequired('#address', 'Address is required.'),
+            Validator.isRequired('#phone', 'Phone is required.'),
+            Validator.isRequired('#gender', 'Gender is required.'),
+            Validator.isEmail('#email', "Please enter email"),
         ],
         onSubmit: (data) => {
             const { id, ...restData } = data;
@@ -431,7 +406,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: `nhan-vien/${id}/cap-nhat`,
+                url: `${urlGlobal}/update/${id}`,
                 data: restData,
                 success: function (response) {
                     if (response.code === 1) {

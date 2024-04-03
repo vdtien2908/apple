@@ -2,15 +2,15 @@
     <div class="table">
         <div class="table_head">
             <div class="table_title">
-                <h1>Đơn hàng</h1>
+                <h1>Orders</h1>
             </div>
             <div class="table_action">
                 <ul class="table_tab">
-                    <li class="active"><a href="#">Danh sách</a></li>
+                    <li class="active"><a href="#">Table</a></li>
                     <!-- <li><a href="#">Thùng rác (10)</a></li> -->
                 </ul>
                 <div class="table_totalItem">
-                    Tổng: <b id="total_item">0</b> đơn hàng
+                    Total: <b id="total_item">0</b> orders
                 </div>
             </div>
         </div>
@@ -21,15 +21,10 @@
             <div class="top_table">
                 <div class="table_right">
                     <div class="table_search">
-                        <input id="search" type="text" placeholder="Tìm kiếm...">
+                        <input id="search" type="text" placeholder="Search...">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
                 </div>
-                <!-- <div class="table_left">
-                    <button class="modal-open btn btn_primary table_add" data-modal-target="#create-modal">
-                        Thêm mới
-                    </button>
-                </div> -->
             </div>
             <div class="table_content">
                 <!-- Table root -->
@@ -53,23 +48,23 @@
             <i class="fa-solid fa-xmark"></i>
         </button>
         <div class="modal_inner">
-            <h1 class="modal_title">Thông tin đơn hàng</h1>
+            <h1 class="modal_title">Detail order</h1>
             <div class="form mt-5" id="form_delete" style="width: 1000px;">
                 <div class="bill">
                     <div class="bill__header">
                         <div id="status"> </div>
-                        <p>Hóa đơn <b id="id-order"></b></p>
+                        <p>Order <b id="id-order"></b></p>
                     </div>
                     <div class=" bill__content">
                         <div class="bill__top">
                             <div class="bill__info">
                                 <div class="customer__info">
-                                    <p class="customer__position">Người đặt hàng</p>
+                                    <p class="customer__position">Orderer</p>
                                     <p class="customer__name"></p>
                                     <p class="customer__phone"></p>
                                 </div>
                                 <div class="bill__receive">
-                                    <div class="receive__title">Người nhận</div>
+                                    <div class="receive__title">Receiver</div>
                                     <div class="receive__name"></div>
                                     <div class="receive__phone"></div>
                                     <div class="receive__address"></div>
@@ -86,10 +81,10 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Sản phẩm</th>
-                                        <th>Số lượng</th>
-                                        <th>Giá</th>
-                                        <th>Tổng</th>
+                                        <th>Name product</th>
+                                        <th>quantity</th>
+                                        <th>Price</th>
+                                        <th>Total</th>
                                     </tr>
                                 </thead>
                                 <tbody id="list-product-order">
@@ -117,44 +112,48 @@
 </div>
 <!-- /Modal show -->
 
-<script src="/js/table.js"></script>
-<script src="/js/toast.js"></script>
-<script src="/js/validator.js"></script>
+<script src="./public/js/table.js"></script>
+<script src="./public/js/toast.js"></script>
+<script src="./public/js/validator.js"></script>
+<script src="./public/js/utils.js"></script>
 <script>
+    const urlGlobal ="/apple/admin/order";
+
     const columns = [
-        { title: 'Mã đơn hàng', field: 'id', align: 'center', width: '120px' },
+        { title: '#', field: 'id', align: 'center', width: '120px' },
         {
-            title: 'Trạng thái',
-            field: 'statusOrder',
+            title: 'Status',
+            field: 'status_order',
             filter:
                 [
-                    { 0: 'Chờ duyệt' }, { 1: "Đã duyệt" }, { 2: "Đã huỷ" }
+                    { 0: 'Pending' }, { 1: "Approved" }, { 2: "Canceled" }
                 ],
             align: 'center'
         },
-        { title: 'Tên người đặt', field: 'nameReceive' },
-        { title: 'Điện thoại', field: 'phoneReceive' },
-        { title: 'Tổng tiền', field: 'totalMoney', align: 'right', type: 'format' },
+        { title: 'Name receive', field: 'name_receive' },
+        { title: 'Phone receive', field: 'phone_receive' },
+        { title: 'Total money', field: 'total_money', align: 'right', type: 'format' },
     ];
+
 
     const init = () => {
         $.ajax({
             type: 'GET',
-            url: 'don-hang/danh-sach',
+            url: `${urlGlobal}/all`,
             success: function (response) {
-                const evaluates = response.data;
+                const orders = response;
                 // Init table
-                renderTable(evaluates, columns, true, 'statusOrder');
+                renderTable(orders, columns, true, 'status_order');
 
                 // Handle search
-                searchTable(evaluates, '#search', columns, true)
+                searchTable(orders, '#search', columns, true)
 
                 $('#table_main').removeClass('animation')
             },
             error: function (error) {
                 toast({
-                    title: 'Tải trang thất bại',
-                    message: `Lối máy chủ`,
+                    title: 'Fail load page',
+                    message: `Error server`,
                     type: 'error',
                     duration: 3000,
                 });
@@ -168,21 +167,21 @@
     const handleConfirm = (id) => {
         $('#table_main').addClass('animation');
         $.ajax({
-            type: 'POST',
-            url: `don-hang/${id}/xac-nhan`,
+            type: 'GET',
+            url: `${urlGlobal}/confirm/${id}`,
             success: function (response) {
                 init();
                 toast({
-                    title: 'Thành công',
-                    message: `Duyệt đơn hàng thành công`,
+                    title: 'Success',
+                    message: `Confirm order successfully`,
                     type: 'success',
                     duration: 3000,
                 });
             },
             error: function (error) {
                 toast({
-                    title: 'Thất bại',
-                    message: `Lỗi hệ thống`,
+                    title: 'Error',
+                    message: `Error system`,
                     type: 'error',
                     duration: 3000,
                 });
@@ -190,25 +189,25 @@
         });
     }
 
-    // Handle confirm
+    // Handle cancel
     const handleCancel = (id) => {
         $('#table_main').addClass('animation');
         $.ajax({
-            type: 'POST',
-            url: `don-hang/${id}/huy`,
+            type: 'GET',
+            url: `${urlGlobal}/cancel/${id}`,
             success: function (response) {
                 init();
                 toast({
-                    title: 'Thành công',
-                    message: `Huỷ đơn hàng thành công`,
+                    title: 'Success',
+                    message: `Cancel order successfully`,
                     type: 'success',
                     duration: 3000,
                 });
             },
             error: function (error) {
                 toast({
-                    title: 'Thất bại',
-                    message: `Lỗi hệ thống`,
+                    title: 'Error',
+                    message: `Error system`,
                     type: 'error',
                     duration: 3000,
                 });
@@ -221,7 +220,7 @@
         $('#table_main').addClass('animation');
         $.ajax({
             type: 'GET',
-            url: `don-hang/${id}`,
+            url: `${urlGlobal}/edit/${id}`,
             success: function (response) {
                 const VND = new Intl.NumberFormat('vi-VN', {
                     style: 'currency',
@@ -230,27 +229,25 @@
 
                 $('#show-modal').addClass('show');
                 $('#table_main').removeClass('animation');
-                const order = response.data;
-                const orderDetails = order.OrderDetails;
-                const payment = order.Payment;
-                const customer = order.Customer;
+                const order = response.order;
+                const orderDetails = response.order_details;
+                const customer = response.customer;
 
                 // Id order
                 $("#id-order").text('#' + order.id);
 
                 // Customer
-                $('.customer__name').text('- ' + customer.fullName);
-                $('.customer__phone').text('- ' + customer.phoneNumber);
+                $('.customer__name').text('- ' + customer.name);
+                $('.customer__phone').text('- ' + customer.phone);
 
                 // Receive
-                $('.receive__name').text(order.nameReceive);
-                $('.receive__phone').text(order.phoneReceive);
-                $('.receive__address').text(order.address);
+                $('.receive__name').text(order.name_receive);
+                $('.receive__phone').text(order.phone_receive);
+                $('.receive__address').text(order.address_receive);
                 $('.receive__note').text(order.note);
-                $('.receive__payment').text(payment.name);
 
                 // Date
-                const dateWithTimezone = new Date(order.createdAt);
+                const dateWithTimezone = new Date(order.created_at);
 
                 const dateUTC = new Date(
                     dateWithTimezone.toISOString()
@@ -265,49 +262,50 @@
                 $(".bill__date p").text('Thời gian: ' + formattedDate);
 
                 let total = 0;
-                // List product
+                let orderDetailHTML = '';
+                let index = 1;
                 orderDetails.forEach((orderDetail) => {
-                    let index = 0;
-                    let product = orderDetail.Product;
                     total += orderDetail.quantity * orderDetail.price;
-                    $('#list-product-order').html(
+                    orderDetailHTML += 
                         `<tr>
-                            <td class="text-center">${index + 1}</td>
+                            <td class="text-center">${index}</td>
                             <td>
-                                ${product.name}
+                                ${orderDetail.title}
                             </td>
                             <td class="text-center">
                                 ${orderDetail.quantity}
                             </td>
                             <td class="text-right">
-                               ${VND.format(orderDetail.price)}
+                            ${VND.format(orderDetail.price)}
                             </td>
                             <td class="text-right">
-                               ${VND.format(orderDetail.quantity * orderDetail.price)}
+                            ${VND.format(orderDetail.quantity * orderDetail.price)}
                             </td>
-                        </tr>`
-                    )
+                        </tr>`;
+                    index++;
                 })
+                $('#list-product-order').empty();
+                $('#list-product-order').append(orderDetailHTML);
 
                 // Total
-                $('.bill__total').text('Tổng cộng: ' + VND.format(total));
+                $('.bill__total').text('Total money: ' + VND.format(total));
 
                 // Status
                 let htmlStatus = `
                     <div class="btn-status btn-status--pending">
-                        Đơn hàng mới
+                        Pending
                     </div>
                 `;
                 if (order.statusOrder === 1) {
                     htmlStatus = `
                     <div class="btn-status btn-status--success">
-                        Đã duyệt
+                        Approved
                     </div>
                 `;
                 } else if (order.statusOrder === 2) {
                     htmlStatus = `
                     <div class="btn-status btn-status--close">
-                        Đã huỷ
+                        Canceled
                     </div>
                 `;
                 }
