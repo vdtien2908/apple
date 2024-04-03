@@ -94,4 +94,11 @@ class AuthController extends BaseController
         header('Content-Type: application/json');
         echo json_encode($result);
     }
+
+    function logout(){
+        if ($_SESSION['login']) {
+            unset($_SESSION['login']);
+            header('Location: ../auth/login');
+        }
+    }
 }

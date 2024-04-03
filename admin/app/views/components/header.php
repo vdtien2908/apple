@@ -21,7 +21,7 @@
                 <li class="menu_item"><a class="menu_link" href="#">Thông tin cá nhân</a></li>
                 <li class="menu_item"><a class="menu_link" href="#">Đổi mật khẩu</a></li>
                 <li class="menu_item">
-                    <a class="menu_link" href="#">
+                    <a class="menu_link" href="/apple/admin/auth/logout">
                         Đăng xuất
                         <i class="fa-solid fa-right-to-bracket"></i>
                     </a>
