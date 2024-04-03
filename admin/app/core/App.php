@@ -15,19 +15,19 @@ class App
             //handle str
             if (file_exists('./app/controllers/' . $elementUrlBox[0] . 'Controller.php')) {
                 // Check Login
-                // if (empty($_SESSION['login'])) {
-                //     $this->controller = 'AuthController';
-                // } else {
-                //     if ($this->controller == 'AuthController') {
-                //         header("Location:/apple/admin/home");
-                //     }
-                // }
+                if (empty($_SESSION['login'])) {
+                    $this->controller = 'AuthController';
+                } else {
+                    if ($this->controller == 'AuthController') {
+                        header("Location:/apple/admin/home");
+                    }
+                }
                 unset($elementUrlBox[0]);
             }
         }
-        // if ($this->controller == 'HomeController' && empty($_SESSION['login'])) {
-        //     $this->controller = 'AuthController';
-        // }
+        if ($this->controller == 'HomeController' && empty($_SESSION['login'])) {
+            $this->controller = 'AuthController';
+        }
 
 
         require_once('./app/controllers/' . $this->controller . '.php');
