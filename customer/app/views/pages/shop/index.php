@@ -6,7 +6,7 @@
                 <div class="breadcrumb__text">
                     <h4 class="text-white">Shop</h4>
                     <div class="breadcrumb__links">
-                        <a href=" <?php echo URL_APP ?>/home" class="text-secondary">Trang chủ</a>
+                        <a href=" <?php echo URL_APP ?>/home" class="text-secondary">Home</a>
                         <span class="text-secondary">Shop</span>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                         <div class="accordion" id="accordionExample">
                             <div class="card">
                                 <div class="card-heading">
-                                    <a data-toggle="collapse" data-target="#collapseOne">Danh mục</a>
+                                    <a data-toggle="collapse" data-target="#collapseOne">Categories</a>
                                 </div>
                                 <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
                                     <div class="card-body">
@@ -54,7 +54,7 @@
                             </div>
                             <div class="card">
                                 <div class="card-heading">
-                                    <a data-toggle="collapse" data-target="#collapseTwo">Thương hiệu</a>
+                                    <a data-toggle="collapse" data-target="#collapseTwo">Brand</a>
                                 </div>
                                 <div id="collapseTwo" class="collapse show" data-parent="#accordionExample">
                                     <div class="card-body">
@@ -71,7 +71,7 @@
                             </div>
                             <div class="card">
                                 <div class="card-heading">
-                                    <a data-toggle="collapse" data-target="#collapseThree">Giá thành</a>
+                                    <a data-toggle="collapse" data-target="#collapseThree">Price</a>
                                 </div>
                                 <div id="collapseThree" class="collapse show" data-parent="#accordionExample">
                                     <div class="card-body">
@@ -168,12 +168,12 @@
                                 <div id="collapseSix" class="collapse show" data-parent="#accordionExample">
                                     <div class="card-body">
                                         <div class="shop__sidebar__tags">
-                                            <a href="#">Sản phẩm</a>
+                                            <a href="#">Products</a>
                                             <a href="#">Laptop</a>
                                             <a href="#">Ipad</a>
                                             <a href="#">Iphone</a>
                                             <a href="#">Best sell</a>
-                                            <a href="#">Phụ kiện</a>
+                                            <a href="#">accessories</a>
                                         </div>
                                     </div>
                                 </div>
@@ -187,16 +187,16 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="shop__product__option__left">
-                                <p>Hiển thị 1–12 của 126 kết quả</p>
+                                <p>showing 1–12 of 126 result</p>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="shop__product__option__right">
-                                <p>Sắp xếp theo giá:</p>
+                                <p>Sort by price:</p>
                                 <select>
-                                    <option value="">Chưa sắp xếp</option>
-                                    <option value="">Thấp đến cao</option>
-                                    <option value="">Cao đến thấp</option>
+                                    <option value="">no sort</option>
+                                    <option value="">low to hight</option>
+                                    <option value="">hight to low</option>
                                 </select>
                             </div>
                         </div>
@@ -210,7 +210,7 @@
                                     <li><a href="#"><img loading="lazy" src="<?php echo SCRIPT_ROOT; ?>/assets/img/icon/heart.png" alt=""></a></li>
                                     <li><a href="#"><img loading="lazy" src="<?php echo SCRIPT_ROOT; ?>/assets/img/icon/compared.png" alt=""> <span>Compare</span></a>
                                     </li>
-                                    <li><a href="#"><img loading="lazy" src="<?php echo SCRIPT_ROOT; ?>/assets/img/icon/search.png" alt=""></a></li>
+                                    <li><a href="<?php echo URL_APP; ?>/shop/detail/1"><img loading="lazy" src="<?php echo SCRIPT_ROOT; ?>/assets/img/icon/search.png" alt=""></a></li>
                                 </ul>
                             </div>
                             <div class="product__item__text">

@@ -4,10 +4,10 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb__text">
-                    <h4 class="text-white">Về chúng tôi</h4>
+                    <h4 class="text-white">About us</h4>
                     <div class="breadcrumb__links">
-                        <a href="<?php echo URL_APP ?>/home" class="text-secondary">Trang chủ</a>
-                        <span class="text-secondary">Về chúng tôi</span>
+                        <a href="<?php echo URL_APP ?>/home" class="text-secondary">Home</a>
+                        <span class="text-secondary">About us</span>
                     </div>
                 </div>
             </div>

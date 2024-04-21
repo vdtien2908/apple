@@ -18,4 +18,15 @@ class ShopController extends BaseController
             ]
         );
     }
+
+    public function detail($id)
+    {
+        $this->view(
+            'app',
+            [
+                'pages' => 'shop/detail',
+                'title' => 'Trang sản phẩm',
+            ]
+        );
+    }
 }

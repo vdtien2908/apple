@@ -31,7 +31,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">
-                    <span>Tin mới nhất</span>
+                    <span>NEWEST POSTS</span>
                     <h2>Apple New Trends</h2>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                     <div class="blog__item__text">
                         <span><img loading="lazy" src="<?php echo SCRIPT_ROOT; ?>/assets/img/icon/calendar.png" alt=""> 16 February 2020</span>
                         <h5>What Curling Irons Are The Best Ones</h5>
-                        <a href="#">Đọc tiếp</a>
+                        <a href="#">Read more</a>
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                     <div class="blog__item__text">
                         <span><img loading="lazy" src="<?php echo SCRIPT_ROOT; ?>/assets/img/icon/calendar.png" alt=""> 21 February 2020</span>
                         <h5>Eternity Bands Do Last Forever</h5>
-                        <a href="#">Đọc tiếp</a>
+                        <a href="#">Read more</a>
                     </div>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                     <div class="blog__item__text">
                         <span><img loading="lazy" src="<?php echo SCRIPT_ROOT; ?>/assets/img/icon/calendar.png" alt=""> 28 February 2020</span>
                         <h5>The Health Benefits Of Sunglasses</h5>
-                        <a href="#">Đọc tiếp</a>
+                        <a href="#">Read more</a>
                     </div>
                 </div>
             </div>
@@ -81,7 +81,7 @@
                     <div class="footer__logo">
                         <a href="http://localhost/apple/customer/home" class="text-white font-weight-bold text-xl" style="font-size: 1.8rem;">APPLE <span style="color: #e53637;">.</span> </a>
                     </div>
-                    <p>Khách hàng là trung tâm của mô hình kinh doanh độc đáo của chúng tôi, bao gồm cả thiết kế.</p>
+                    <p>The customer is at the heart of our unique business model, which includes design.</p>
                     <a href="#"><img loading="lazy" src="<?php echo SCRIPT_ROOT; ?>/assets/img/payment.png" alt=""></a>
                 </div>
             </div>
@@ -111,7 +111,7 @@
                 <div class="footer__widget">
                     <h6>NewLetter</h6>
                     <div class="footer__newslatter">
-                        <p>Hãy là người đầu tiên biết về hàng mới, sách tra cứu, khuyến mại và khuyến mãi!</p>
+                        <p>Be the first to know about new arrivals, look books, sales & promos!</p>
                         <form action="#">
                             <input type="text" placeholder="Your email">
                             <button type="submit"><span class="icon_mail_alt"></span></button>

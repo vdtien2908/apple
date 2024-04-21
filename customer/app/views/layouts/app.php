@@ -103,6 +103,7 @@
     <script src="<?php echo SCRIPT_ROOT; ?>/assets/js/mixitup.min.js"></script>
     <script src="<?php echo SCRIPT_ROOT; ?>/assets/js/owl.carousel.min.js"></script>
     <script src="<?php echo SCRIPT_ROOT; ?>/assets/js/main.js"></script>
+    <script src="<?php echo SCRIPT_ROOT; ?>/assets/js/custom.js"></script>
 </body>
 
 </html>

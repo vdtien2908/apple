@@ -26,9 +26,9 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Sản phẩm</th>
-                                <th>Số lượng</th>
-                                <th>Tổng tiền</th>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>price</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -119,12 +119,12 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <div class="continue__btn">
-                            <a href="<?php echo URL_APP; ?>/shop">Tiếp tục mua sắm</a>
+                            <a href="<?php echo URL_APP; ?>/shop">Continue shopping</a>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <div class="continue__btn update__btn">
-                            <a href="#"><i class="fa fa-spinner"></i>Cập nhật giỏ hàng</a>
+                            <a href="#"><i class="fa fa-spinner"></i>Update cart</a>
                         </div>
                     </div>
                 </div>
@@ -138,12 +138,12 @@
                     </form>
                 </div> -->
                 <div class="cart__total">
-                    <h6>Tổng tiền</h6>
+                    <h6>TOTAL PRICE</h6>
                     <ul>
-                        <li>Tổng phụ <span>$ 169.50</span></li>
-                        <li>Tổng <span>$ 169.50</span></li>
+                        <li>subtax <span>$ 169.50</span></li>
+                        <li>Price <span>$ 169.50</span></li>
                     </ul>
-                    <a href="<?php echo URL_APP; ?>/checkout/process" class="primary-btn">Tiến hành thanh toán</a>
+                    <a href="<?php echo URL_APP; ?>/checkout/process" class="primary-btn">Process checkout</a>
                 </div>
             </div>
         </div>

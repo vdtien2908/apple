@@ -1,40 +1,43 @@
 <section class="my-5">
     <div class="container">
-        <h2 class="mb-5 font-weight-bolder">Login for faster checkout.</h2>
-        <form id="form" action="http://localhost/apple/customer/auth/signIn" class="mx-auto" style="max-width: 450px;">
+        <h3 class="mb-5 font-weight-bolder">Checking and update your information here.</h3>
+        <form id="form" action="http://localhost/apple/customer/auth/signIn">
             <div class="row">
-                <div class="col-12 mb-4">
-                    <h3 class="font-weight-bold text-center">Login to Apple Store</h3>
-                </div>
-                <div class="col-12 mb-3">
+                <div class="col-12 col-md-6 mb-3">
                     <div class="form-group">
                         <label for="emailinput">Email address</label>
                         <input type="email" name="email" class="form-control" id="emailinput" placeholder="name@example.com">
                     </div>
                 </div>
-                <div class="col-12">
+                <div class="col-12 col-md-6">
                     <div class="form-group">
                         <label for="passwordinput">Password</label>
                         <input type="password" name="password" class="form-control" id="passwordinput" placeholder="123456">
                     </div>
                 </div>
-                <div class="col-12 mb-3">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                        <label class="form-check-label" for="defaultCheck1">
-                            Remember Me
-                        </label>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="nameinput">Fullname</label>
+                        <input type="text" name="name" class="form-control" id="nameinput" placeholder="Jony">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" name="address" class="form-control" id="address" placeholder="washinton">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="number" name="phone" class="form-control" id="phone" placeholder="+1 3589">
                     </div>
                 </div>
                 <div class="col-12 my-4">
-                    <button role="button" class="primary-btn w-100">Sign In</button>
+                    <button role="button" class="primary-btn">Update INFORMATION</button>
                 </div>
                 <div class="col-12 text-center">
                     <a href="http://localhost/apple/customer/auth/forgotPassword">Forgot your password?</a>
-                </div>
-                <div class="col-12 text-center">
-                    Don't have account?
-                    <a href="http://localhost/apple/customer/auth/register">Register now.</a>
                 </div>
             </div>
         </form>

@@ -45,7 +45,7 @@ class BaseModel extends Database
         return mysqli_fetch_assoc($query);
     }
 
-   
+
     public function querySql($sql)
     {
         $query = $this->_query($sql);
@@ -53,9 +53,8 @@ class BaseModel extends Database
     }
 
 
-    public function create($data)
+    public function create($table, $data)
     {
-        $table = $this->table;
         function handleString($value)
         {
             return "'" . $value . "'";
@@ -72,7 +71,7 @@ class BaseModel extends Database
 
     public function update($id, $data)
     {
-        $table=$this->table;
+        $table = $this->table;
         $dataSet = [];
         foreach ($data as $key => $value) {
             array_push($dataSet, "${key} = '${value}'");

@@ -4,11 +4,11 @@
          <div class="row">
              <div class="col-lg-12">
                  <div class="breadcrumb__text">
-                     <h4 class="text-white">Thanh toán</h4>
+                     <h4 class="text-white">Checkout</h4>
                      <div class="breadcrumb__links">
                          <a href="/home" class="text-secondary">Home</a>
                          <a href="/shop" class="text-secondary">Shop</a>
-                         <span class="text-secondary">Thanh toán</span>
+                         <span class="text-secondary">Checkout</span>
                      </div>
                  </div>
              </div>
@@ -24,8 +24,8 @@
              <form action="#">
                  <div class="row">
                      <div class="col-lg-8 col-md-6">
-                         <h6 class="coupon__code"><span class="icon_tag_alt"></span> Bạn muốn thanh toán? Vui lòng kiểm tra kĩ thông tin trước khi thanh toán!</h6>
-                         <h6 class="checkout__title">Chi tiết đơn hàng</h6>
+                         <h6 class="coupon__code"><span class="icon_tag_alt"></span> you wanna checkout? Please carefully checking your information before checkout!</h6>
+                         <h6 class="checkout__title">Billing Details</h6>
                          <div class="row">
                              <div class="col-lg-6">
                                  <div class="checkout__input">
@@ -65,8 +65,8 @@
                      </div>
                      <div class="col-lg-4 col-md-6">
                          <div class="checkout__order">
-                             <h4 class="order__title">Đơn hàng của bạn</h4>
-                             <div class="checkout__order__products">Sản phẩm <span>Tổng tiền</span></div>
+                             <h4 class="order__title">Your orders</h4>
+                             <div class="checkout__order__products">Product <span>Total price</span></div>
                              <ul class="checkout__total__products">
                                  <li>01. Vanilla salted caramel <span>$ 300.0</span></li>
                                  <li>02. German chocolate <span>$ 170.0</span></li>
@@ -74,12 +74,12 @@
                                  <li>04. Cluten free mini dozen <span>$ 110.0</span></li>
                              </ul>
                              <ul class="checkout__total__all">
-                                 <li>Tổng phụ <span>$750.99</span></li>
-                                 <li>Thành tiền <span>$750.99</span></li>
+                                 <li>Subtax <span>$750.99</span></li>
+                                 <li>TotalPrice <span>$750.99</span></li>
                              </ul>
                              <div class="checkout__input__checkbox">
                                  <label for="payment">
-                                     thông thường
+                                     convential
                                      <input type="checkbox" id="payment" checked>
                                      <span class="checkmark"></span>
                                  </label>
@@ -91,7 +91,7 @@
                                      <span class="checkmark"></span>
                                  </label>
                              </div> -->
-                             <button type="submit" class="site-btn">ĐẶT HÀNG</button>
+                             <button type="submit" class="site-btn">PLACE ORDER</button>
                          </div>
                      </div>
                  </div>
