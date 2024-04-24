@@ -14,7 +14,7 @@ class AuthController extends BaseController
             'app',
             [
                 'pages' => 'auth/login',
-                'title' => 'Trang chủ',
+                'title' => 'Home',
             ]
         );
     }
@@ -130,9 +130,9 @@ class AuthController extends BaseController
                 'password' => password_hash($password, PASSWORD_DEFAULT),
             ];
 
-            // var_dump($data);
-
             $this->userModel->createUser($data);
+
+            $_SESSION['register-success'] = "Register successfully!";
 
             $result = [
                 'status' => 200,

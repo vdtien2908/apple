@@ -1,7 +1,7 @@
 <section class="my-5">
     <div class="container">
         <h2 class="mb-5 font-weight-bolder">Register to begin shopping our products.</h2>
-        <form id="registerForm" action="http://localhost/apple/customer/auth/signUp" class="mx-auto" style="max-width: 450px;">
+        <form id="registerForm" action="<?php echo URL_APP; ?>/auth/signUp" class="mx-auto" style="max-width: 450px;">
             <div class="row">
                 <div class="col-12 mb-4">
                     <h3 class="font-weight-bold text-center">Register to Apple Store</h3>
@@ -56,7 +56,7 @@
                 success: function(res) {
                     if (res.status === 200) {
                         showToast(res.message, true);
-                        window.location.href = URL + '/login';
+                        window.location.href = URL + '/auth/login';
                     } else if (res.status === 204) {
                         showToast(res.message, false);
                     } else if (res.status === 404) {

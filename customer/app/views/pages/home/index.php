@@ -33,10 +33,10 @@
                                 commitment to exceptional quality.</p>
                             <a href="<?php echo URL_APP; ?>/shop" class="primary-btn">SHOP NOW<span class="arrow_right"></span></a>
                             <div class="hero__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-pinterest"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
+                                <a href="#"><i class="fa fa-facebook text-white"></i></a>
+                                <a href="#"><i class="fa fa-twitter text-white"></i></a>
+                                <a href="#"><i class="fa fa-pinterest text-white"></i></a>
+                                <a href="#"><i class="fa fa-instagram text-white"></i></a>
                             </div>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                     </div>
                     <div class="banner__item__text">
                         <h2>IPhone Collection 2024</h2>
-                        <a href="<?php echo URL_APP; ?>/shop">SHOP NOW</a>
+                        <a href="<?php echo URL_APP; ?>/shop/filterByCat/iphone">SHOP NOW</a>
                     </div>
                 </div>
             </div>
@@ -69,7 +69,7 @@
                     </div>
                     <div class="banner__item__text">
                         <h2>Ipad</h2>
-                        <a href="<?php echo URL_APP; ?>/shop">SHOP NOW</a>
+                        <a href="<?php echo URL_APP; ?>/shop/filterByCat/ipad-gen">SHOP NOW</a>
                     </div>
                 </div>
             </div>
@@ -80,7 +80,7 @@
                     </div>
                     <div class="banner__item__text">
                         <h2>Macbook, accessories</h2>
-                        <a href="<?php echo URL_APP; ?>/shop">SHOP NOW</a>
+                        <a href="<?php echo URL_APP; ?>/shop/filterByCat/macbook">SHOP NOW</a>
                     </div>
                 </div>
             </div>
@@ -101,42 +101,8 @@
                 </ul>
             </div>
         </div>
-        <div class="row product__filter">
-            <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" style="background: #1a1a1a80;" data-setbg="<?php echo SCRIPT_ROOT; ?>/assets/img/product/product-1.jpg">
-                        <span class="label">new</span>
-                        <ul class="product__hover">
-                            <li><a href="#"><img loading="lazy" src="<?php echo SCRIPT_ROOT; ?>/assets/img/icon/heart.png" alt=""></a></li>
-                            <li><a href="#"><img loading="lazy" src="<?php echo SCRIPT_ROOT; ?>/assets/img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-                            <li><a href="#"><img loading="lazy" src="<?php echo SCRIPT_ROOT; ?>/assets/img/icon/search.png" alt=""></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6>Piqué Biker Jacket</h6>
-                        <a href="#" class="add-cart">+ Add to cart</a>
-                        <div class="rating">
-                            <i class="fa fa-star-o"></i>
-                            <i class="fa fa-star-o"></i>
-                            <i class="fa fa-star-o"></i>
-                            <i class="fa fa-star-o"></i>
-                            <i class="fa fa-star-o"></i>
-                        </div>
-                        <h5>$67.24</h5>
-                        <div class="product__color__select">
-                            <label for="pc-1">
-                                <input type="radio" id="pc-1">
-                            </label>
-                            <label class="active black" for="pc-2">
-                                <input type="radio" id="pc-2">
-                            </label>
-                            <label class="grey" for="pc-3">
-                                <input type="radio" id="pc-3">
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="row product__filter" id="productsContainer">
+
         </div>
     </div>
 </section>
@@ -191,5 +157,133 @@
 <!-- Categories Section End -->
 
 <script>
-    
+    const URL = "http://localhost/apple/customer"
+
+    // Fetch 
+    const fetchNewProduct = async () => {
+        $.ajax({
+            url: `${URL}/home/getAll`,
+            type: 'GET',
+            success: function(res) {
+                console.log(res);
+                if (res.status === 200) {
+                    renderProducts(res.data);
+                } else {
+                    showToast(res.message, true);
+                }
+            },
+            error: function(error) {
+                showToast(error, false);
+                console.error('Lỗi khi thêm sản phẩm vào giỏ hàng:', error);
+            }
+        });
+    }
+
+    const renderProducts = (products) => {
+        const productsContainer = document.getElementById('productsContainer');
+
+        const productItems = products
+            .map(product => {
+                let colorOptions = '';
+
+                switch (product.color) {
+                    case 'Black':
+                        colorOptions = `
+                        <label for="pc-1">
+                            <input type="radio" id="pc-1">
+                        </label>
+                        <label class="active black" for="pc-2">
+                            <input type="radio" id="pc-2">
+                        </label>
+                        <label class="grey" for="pc-3">
+                            <input type="radio" id="pc-3">
+                        </label>
+                    `;
+                        break;
+                    case 'Titan':
+                        colorOptions = `
+                        <label for="pc-1">
+                            <input type="radio" id="pc-1">
+                        </label>
+                        <label class="black" for="pc-2">
+                            <input type="radio" id="pc-2">
+                        </label>
+                        <label class="active grey" for="pc-3">
+                            <input type="radio" id="pc-3">
+                        </label>
+                    `;
+                        break;
+                    default:
+                        colorOptions = `
+                        <label class="active" for="pc-1">
+                            <input type="radio" id="pc-1">
+                        </label>
+                        <label class="black" for="pc-2">
+                            <input type="radio" id="pc-2">
+                        </label>
+                        <label class="grey" for="pc-3">
+                            <input type="radio" id="pc-3">
+                        </label>
+                    `;
+                }
+
+                let productClasses = ['mix'];
+
+                if (product.hot) {
+                    productClasses.push('hot-sales');
+                } else {
+                    productClasses.push('new-arrivals');
+                }
+
+                return `
+                <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix ${productClasses.join(' ')}">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" style="object-fit: cover;background-position: center center;background-size: contain;" data-setbg="">
+                            <span class="label">new</span>
+                            <ul class="product__hover">
+                                <li><a href="#"><img loading="lazy" src="<?php echo SCRIPT_ROOT; ?>/assets/img/icon/heart.png" alt=""></a></li>
+                                <li><a href="<?php echo URL_APP; ?>/shop/detail/${product.slug}"><img loading="lazy" src="<?php echo SCRIPT_ROOT; ?>/assets/img/icon/search.png" alt=""></a></li>
+                            </ul>
+                        </div>
+                        <div class="product__item__text">
+                            <h6>${product.title}</h6>
+                            <a href="#" class="add-cart" onClick="addCart(${JSON.stringify(product)})">+ Add to cart</a>
+                            <div class="rating">
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            </div>
+                            <h5> ${Number(product.price).toLocaleString('vi-VN')} VND</h5>
+                            <div class="product__color__select">
+                                ${colorOptions}
+                            </div>
+                        </div>
+                    </div>
+                </div>        
+            `;
+            })
+            .join('');
+
+        productsContainer.innerHTML = productItems;
+
+        const productPicElements = productsContainer.querySelectorAll('.product__item__pic');
+        productPicElements.forEach(picElement => {
+            const imgPath = `<?php echo IMAGES_PATH; ?>/${products.find(p => picElement.closest('.product__item').innerHTML.includes(p.title)).img}`;
+            picElement.style.backgroundImage = `url(${imgPath})`;
+        });
+    };
+
+    $(document).ready(function() {
+        fetchNewProduct();
+
+        // Actions
+        const addCart = (productJson) => {
+            const product = JSON.parse(productJson);
+            console.log(product);
+            localStorage.setItem("cartItems", JSON.stringify(product));
+            showToast("Product have been added to cart!");
+        };
+    });
 </script>

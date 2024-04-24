@@ -39,6 +39,6 @@ class UserModel extends BaseModel
 
     public function updateUser($id, $data)
     {
-        return $this->update(self::TableName, $id, $data);
+        $this->update(self::TableName, $id, $data);
     }
 }

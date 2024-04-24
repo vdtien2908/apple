@@ -24,7 +24,7 @@
             </ul>
         </div>
         <div class="col-12 col-md-9 p-3">
-            <h2 class="font-weight-bolder mb-3 text-uppercase">User Information.</h2>
+            <h2 class="font-weight-bolder mb-3 text-uppercase"><?php echo $title ?>.</h2>
             <hr>
             <?php require_once "./App/views/pages/${pages}.php" ?>
         </div>

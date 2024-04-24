@@ -69,9 +69,8 @@ class BaseModel extends Database
         $this->_query($sql);
     }
 
-    public function update($id, $data)
+    public function update($table, $id, $data)
     {
-        $table = $this->table;
         $dataSet = [];
         foreach ($data as $key => $value) {
             array_push($dataSet, "${key} = '${value}'");

@@ -22,7 +22,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="about__pic">
-                    <img loading="lazy" src="<?php echo SCRIPT_ROOT; ?>/assets/img/about/about-us.jpg" alt="">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1487014679447-9f8336841d58?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8c2hvcCUyMG1hY2Jvb2t8ZW58MHwwfDB8fHwy" alt="">
                 </div>
             </div>
         </div>
@@ -140,7 +140,7 @@
                 <div class="team__item">
                     <img loading="lazy" src="<?php echo SCRIPT_ROOT; ?>/assets/img/about/team-1.jpg" alt="">
                     <h4>John Smith</h4>
-                    <span>Fashion Design</span>
+                    <span>UI/UX Design</span>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6">

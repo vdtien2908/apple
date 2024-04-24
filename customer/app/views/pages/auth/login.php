@@ -5,6 +5,10 @@
             <div class="row">
                 <div class="col-12 mb-4">
                     <h3 class="font-weight-bold text-center">Login to Apple Store</h3>
+                    <h4 class="text-success font-weight-bold">
+                        <?php echo isset($_SESSION['register-success']) ? $_SESSION['register-success'] : "" ?>
+                        <?php unset($_SESSION['register-success']) ?>
+                    </h4>
                 </div>
                 <div class="col-12 mb-3">
                     <div class="form-group">

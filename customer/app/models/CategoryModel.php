@@ -1,9 +1,19 @@
 <?php
 class CategoryModel extends BaseModel
 {
-    public function __construct()
+    const TableName = 'categories';
+
+    public function getCategories()
     {
-        parent::__construct();
-        $this->table ='categories';
+        $sql = "SELECT c.* FROM categories as c ORDER BY c.created_at DESC";
+
+        $result = $this->querySql($sql);
+
+        if ($result) {
+            $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
+            return $categories;
+        }
+
+        return [];
     }
 }
