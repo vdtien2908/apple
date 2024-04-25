@@ -247,7 +247,7 @@
                         </div>
                         <div class="product__item__text">
                             <h6>${product.title}</h6>
-                            <a href="#" class="add-cart" onClick="addCart(${JSON.stringify(product)})">+ Add to cart</a>
+                            <a href="#" class="add-cart" data-product='${encodeURIComponent(JSON.stringify(product))}' onclick="addCart(this)">+ Add to cart</a>
                             <div class="rating">
                                 <i class="fa fa-star-o"></i>
                                 <i class="fa fa-star-o"></i>
@@ -275,15 +275,27 @@
         });
     };
 
-    $(document).ready(function() {
-        fetchNewProduct();
+    const addCart = (element) => {
+        try {
+            const product = JSON.parse(element.dataset.product);
+            let cartItems = localStorage.getItem("cartItems");
+            cartItems = cartItems ? JSON.parse(cartItems) : [];
 
-        // Actions
-        const addCart = (productJson) => {
-            const product = JSON.parse(productJson);
-            console.log(product);
-            localStorage.setItem("cartItems", JSON.stringify(product));
-            showToast("Product have been added to cart!");
-        };
-    });
+            const existingCartItem = cartItems.find(item => item.id === product.id);
+
+            if (existingCartItem) {
+                existingCartItem.quantity += 1;
+            } else {
+                product.quantity = 1;
+                cartItems.push(product);
+            }
+
+            localStorage.setItem("cartItems", JSON.stringify(cartItems));
+            showToast("Product has been added to cart!", true);
+        } catch (error) {
+            showToast("Fail to add product to cart, contact to admin for more information!", false);
+        }
+    };
+
+    fetchNewProduct();
 </script>

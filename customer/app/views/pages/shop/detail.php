@@ -54,25 +54,27 @@
                                 <span>Color: </span>
                                 <span id="product-color" class="font-weight-bold"></span>
                             </div>
-                            <p class="mx-auto px-auto text-center">Specifications:</p>
-                            <table class="table">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th scope="col">Attribute</th>
-                                        <th scope="col">Value</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="specifiTable">
-                                </tbody>
-                            </table>
+                            <?php if (count($specifications) > 0) : ?>
+                                <p class="mx-auto px-auto text-center">Specifications:</p>
+                                <table class="table">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">Attribute</th>
+                                            <th scope="col">Value</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="specifiTable">
+                                    </tbody>
+                                </table>
+                            <?php endif; ?>
                         </div>
                         <div class="product__details__cart__option">
                             <div class="quantity">
                                 <div class="pro-qty">
-                                    <input type="text" value="1">
+                                    <input type="text" value="1" id="productQuantity">
                                 </div>
                             </div>
-                            <a href="#" class="primary-btn">add to cart</a>
+                            <a href="#" class="primary-btn add-cart" data-product="<?php echo htmlspecialchars(json_encode($product)); ?>" onclick="addCart(this)">add to cart</a>
                         </div>
                         <div class="product__details__btns__option">
                             <a href="#"><i class="fa fa-heart"></i> add to wishlist</a>
@@ -184,8 +186,11 @@
                     const data = res.data;
                     renderImagesTablist(data.images, data.product);
                     renderProduct(data.product);
-                    renderSpecifications(data.specifications);
                     renderRelatedProduct(data.relatedProduct);
+
+                    if (data.specifications.length > 0) {
+                        renderSpecifications(data.specifications);
+                    }
                 } else {
                     showToast(res.message, true);
                 }
@@ -293,7 +298,6 @@
                     </div>
                     <div class="product__item__text">
                         <h6>${product.title}</h6>
-                        <a href="#" class="add-cart">+ Add To Cart</a>
                         <div class="rating">
                             <i class="fa fa-star-o"></i>
                             <i class="fa fa-star-o"></i>
@@ -323,9 +327,31 @@
         relatedProductContainer.innerHTML = relatedElement;
     }
 
-    $(document).ready(function() {
-        fetchDetailproduct();
+    // Actions
+    const addCart = (element) => {
+        try {
+            const productQuantity = document.getElementById('productQuantity').value;
 
-        // Actions
-    });
+            const product = JSON.parse(element.dataset.product);
+            let cartItems = localStorage.getItem("cartItems");
+            cartItems = cartItems ? JSON.parse(cartItems) : [];
+
+            const existingCartItem = cartItems.find(item => item.id === product.id);
+
+            if (existingCartItem) {
+                existingCartItem.quantity += 1;
+            } else {
+                product.quantity = productQuantity;
+                cartItems.push(product);
+            }
+
+            localStorage.setItem("cartItems", JSON.stringify(cartItems));
+            showToast("Product has been added to cart!", true);
+        } catch (error) {
+            showToast("Fail to add product to cart, contact to admin for more information!", false);
+            console.log(error);
+        }
+    };
+
+    fetchDetailproduct();
 </script>

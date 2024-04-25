@@ -59,7 +59,7 @@
                     <a href="#" class="search-switch"><img loading="lazy" src="<?php echo SCRIPT_ROOT; ?>/assets/img/icon/search.png" alt=""></a>
                     <?php if (isset($_SESSION['auth'])) : ?>
                         <a href="#"><img loading="lazy" src="<?php echo SCRIPT_ROOT; ?>/assets/img/icon/heart.png" alt=""></a>
-                        <a href="<?php echo URL_APP; ?>/cart"><img loading="lazy" src="<?php echo SCRIPT_ROOT; ?>/assets/img/icon/shopping-cart.png" alt=""> <span>0</span></a>
+                        <a href="<?php echo URL_APP; ?>/cart"><img loading="lazy" src="<?php echo SCRIPT_ROOT; ?>/assets/img/icon/shopping-cart.png" alt=""> <span class="bg-dark text-white rounded" id="cartCount"></span></a>
                         <div class="dropdown">
                             <a class="btn btn-transparent dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <?php echo isset($_SESSION['auth']['email']) ? $_SESSION['auth']['email'] : ''; ?>
@@ -85,7 +85,21 @@
 </header>
 
 <script>
+    const caculatorCartCount = () => {
+        let cartItems = localStorage.getItem("cartItems");
+        cartItems = cartItems ? JSON.parse(cartItems) : [];
+
+        let cartCount = 0;
+        cartItems.forEach((item) => {
+            cartCount++;
+        });
+
+        document.getElementById('cartCount').innerHTML = cartCount;
+    }
+
     $(document).ready(function() {
+        caculatorCartCount();
+
         $('.logout-link').click(function(e) {
             e.preventDefault();
 

@@ -73,9 +73,5 @@
         blogContainer.innerHTML = htmlElement.join('');
     }
 
-    $(document).ready(function() {
-        fetchPost();
-
-        // Actions
-    });
+    fetchPost();
 </script>

@@ -139,7 +139,8 @@
                                     </div>
                                     <div class="product__item__text">
                                         <h6><?php echo $product['title'] ?></h6>
-                                        <a href="#" class="add-cart" onclick="addCart(<?php echo json_encode($product); ?>)">+ Add To Cart</a>
+                                        <a href="#" class="add-cart" data-product="<?php echo htmlspecialchars(json_encode($product)); ?>" onclick="addCart(this)">+ Add To Cart
+                                        </a>
                                         <div class="rating">
                                             <i class="fa fa-star-o"></i>
                                             <i class="fa fa-star-o"></i>
@@ -211,14 +212,28 @@
         categoriesContainer.innerHTML = categoryItem;
     }
 
-    $(document).ready(function() {
-        fetchCategories();
+    // Actions
+    const addCart = (element) => {
+        try {
+            const product = JSON.parse(element.dataset.product);
+            let cartItems = localStorage.getItem("cartItems");
+            cartItems = cartItems ? JSON.parse(cartItems) : [];
 
-        // Actions
-        const addCart = (product) => {
-            console.log(product);
-            localStorage.setItem("cartItems", JSON.stringify(product));
-            showToast("Product have been added to cart!");
-        };
-    })
+            const existingCartItem = cartItems.find(item => item.id === product.id);
+
+            if (existingCartItem) {
+                existingCartItem.quantity += 1;
+            } else {
+                product.quantity = 1;
+                cartItems.push(product);
+            }
+
+            localStorage.setItem("cartItems", JSON.stringify(cartItems));
+            showToast("Product has been added to cart!", true);
+        } catch (error) {
+            showToast("Fail to add product to cart, contact to admin for more information!", false);
+        }
+    };
+
+    fetchCategories();
 </script>

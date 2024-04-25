@@ -6,8 +6,8 @@
                  <div class="breadcrumb__text">
                      <h4 class="text-white">Checkout</h4>
                      <div class="breadcrumb__links">
-                         <a href="/home" class="text-secondary">Home</a>
-                         <a href="/shop" class="text-secondary">Shop</a>
+                         <a href="http://localhost/apple/customer/home" class="text-secondary">Home</a>
+                         <a href="http://localhost/apple/customer/shop" class="text-secondary">Shop</a>
                          <span class="text-secondary">Checkout</span>
                      </div>
                  </div>
@@ -29,54 +29,32 @@
                          <div class="row">
                              <div class="col-lg-6">
                                  <div class="checkout__input">
-                                     <p>Fist Name<span>*</span></p>
-                                     <input type="text">
+                                     <p>Name reveiver<span>*</span></p>
+                                     <input type="text" name="name_receiver">
                                  </div>
                              </div>
                              <div class="col-lg-6">
                                  <div class="checkout__input">
-                                     <p>Last Name<span>*</span></p>
-                                     <input type="text">
+                                     <p>Phone receiver<span>*</span></p>
+                                     <input type="text" name="phone_receiver">
                                  </div>
                              </div>
                          </div>
                          <div class="checkout__input">
-                             <p>Town/City<span>*</span></p>
-                             <input type="text">
-                         </div>
-                         <div class="row">
-                             <div class="col-lg-6">
-                                 <div class="checkout__input">
-                                     <p>Phone<span>*</span></p>
-                                     <input type="text">
-                                 </div>
-                             </div>
-                             <div class="col-lg-6">
-                                 <div class="checkout__input">
-                                     <p>Email<span>*</span></p>
-                                     <input type="text">
-                                 </div>
-                             </div>
+                             <p>Address receiver<span>*</span></p>
+                             <input type="text" name="address_receiver">
                          </div>
                          <div class="checkout__input">
-                             <p>Order notes<span>*</span></p>
-                             <input type="text" placeholder="Notes about your order, e.g. special notes for delivery.">
+                             <p>Order notes<span> (optional)</span></p>
+                             <input type="text" name="note" placeholder="Notes about your order, e.g. special notes for delivery.">
                          </div>
                      </div>
                      <div class="col-lg-4 col-md-6">
                          <div class="checkout__order">
                              <h4 class="order__title">Your orders</h4>
                              <div class="checkout__order__products">Product <span>Total price</span></div>
-                             <ul class="checkout__total__products">
-                                 <li>01. Vanilla salted caramel <span>$ 300.0</span></li>
-                                 <li>02. German chocolate <span>$ 170.0</span></li>
-                                 <li>03. Sweet autumn <span>$ 170.0</span></li>
-                                 <li>04. Cluten free mini dozen <span>$ 110.0</span></li>
-                             </ul>
-                             <ul class="checkout__total__all">
-                                 <li>Subtax <span>$750.99</span></li>
-                                 <li>TotalPrice <span>$750.99</span></li>
-                             </ul>
+                             <ul class="checkout__total__products" id="checkoutList"></ul>
+                             <ul class="checkout__total__all" id="checkoutPrice"></ul>
                              <div class="checkout__input__checkbox">
                                  <label for="payment">
                                      convential
@@ -91,7 +69,7 @@
                                      <span class="checkmark"></span>
                                  </label>
                              </div> -->
-                             <button type="submit" class="site-btn">PLACE ORDER</button>
+                             <button type="submit" class="site-btn" onclick="handleOrder()">PLACE ORDER</button>
                          </div>
                      </div>
                  </div>
@@ -100,3 +78,50 @@
      </div>
  </section>
  <!-- Checkout Section End -->
+
+ <script>
+     let checkoutItems = localStorage.getItem("checkoutItems");
+     checkoutItems = checkoutItems ? JSON.parse(checkoutItems) : [];
+
+     if (checkoutItems.length === 0 || checkoutItems === undefined) {
+         window.location.href = "<?php echo URL_APP; ?>/cart";
+     }
+
+     //  renders
+     const renderListProduct = (checkoutItems) => {
+         const checkoutContainer = document.getElementById('checkoutList');
+         let checkoutTotalPrice = 0;
+
+         const checkouttElm = checkoutItems.map((item, index) => {
+             let itemTotalPrice = item.price * item.quantity;
+             checkoutTotalPrice += itemTotalPrice;
+
+             return `
+                    <li>${index+1}. <span class="text-truncate" style="width:150px">${item.title}</span><span>${Number(itemTotalPrice).toLocaleString('vi-VN')} VND x ${item.quantity}</span></li>
+                </tr>
+            `
+         }).join(' ');
+
+         checkoutContainer.innerHTML = checkouttElm;
+
+         renderCheckout(checkoutTotalPrice);
+     }
+
+     const renderCheckout = (checkoutTotalPrice) => {
+         const checkoutContainer = document.getElementById('checkoutPrice');
+
+         const checkoutElm = `
+                <li>Subtax <span>${Number(checkoutTotalPrice - 100000).toLocaleString('vi-VN')} VND</span></li>
+                <li>TotalPrice <span id="totalMoney">${Number(checkoutTotalPrice).toLocaleString('vi-VN')} VND</span></li>
+            `;
+
+         checkoutContainer.innerHTML = checkoutElm;
+     }
+
+     renderListProduct(checkoutItems);
+
+     //  Actions
+     const handleOrder = () => {
+
+     }
+ </script>

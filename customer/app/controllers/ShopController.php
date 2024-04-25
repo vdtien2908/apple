@@ -141,12 +141,19 @@ class ShopController extends BaseController
             return;
         }
 
+        // update views
+        $this->productModel->updateViews($slug);
+
+        $specifications = $this->specificationModel->getSpecificationByProductId($product["id"]);
+
+
         $this->view(
             'app',
             [
                 'pages' => 'shop/detail',
                 'title' => 'Shop',
-                'product' => $product
+                'product' => $product,
+                'specifications' => $specifications ? $specifications  : [],
             ]
         );
     }

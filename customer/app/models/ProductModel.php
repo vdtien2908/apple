@@ -133,4 +133,10 @@ class ProductModel extends BaseModel
         }
         return [];
     }
+
+    public function updateViews($slug)
+    {
+        $sql = "UPDATE products SET view_count = view_count + 1 WHERE slug = '${slug}'";
+        return $this->querySql($sql);
+    }
 }

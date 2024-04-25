@@ -145,9 +145,5 @@
         blogContainer.innerHTML = htmlElement;
     }
 
-    $(document).ready(function() {
-        fetchPostDetail();
-
-        // Actions
-    });
+    fetchPostDetail();
 </script>
