@@ -47,13 +47,11 @@
 
     const getStatusIconAndText = (status) => {
         switch (status) {
-            case 'đang chờ':
+            case '1':
                 return `<span class="text-dark font-weight-bold">Đơn hàng của bạn đang chờ xác nhận</span>`;
-            case 'đang giao':
+            case '2':
                 return `<span class="text-dark font-weight-bold">Đơn hàng của bạn đang được vận chuyển</span>`;
-            case 'đã giao':
-                return `<span class="text-dark font-weight-bold">Đơn hàng của bạn đã giao thành công</span>`;
-            case 'đã hủy':
+            case '3':
                 return `<span class="text-dark font-weight-bold">Đơn hàng của bạn đã đưọc hủy</span>`;
             default:
                 return `<span class="text-dark font-weight-bold">Đơn hàng của bạn đang chờ xác nhận</span>`;
@@ -89,36 +87,36 @@
 
     const getButtonBasedOnStatus = (status, orderId) => {
         switch (status) {
-            case 'đang chờ':
+            case '1':
                 return `<button class="site-btn rounded-0 w-100" onclick="updateStatusCancle('${orderId}')">Hủy đơn hàng</button>`;
-            case 'đang giao':
-                return `<button class="btn btn-success w-100" onclick="updateStatusCompleted('${orderId}')">Xác nhận đã nhận</button>`;
-            case 'đã giao':
-                return `<button class="btn btn-secondary disabled w-100" style="cursor: not-allowed;">Đã giao</button>`;
+            case '2':
+                return `<button class="btn btn-secondary w-100">Đã nhận</button>`;
+            case '3':
+                return `<button class="btn btn-secondary disabled w-100" style="cursor: not-allowed;">Đã Hũy</button>`;
             default:
                 return `<button class="btn btn-secondary w-100 disabled" style="cursor: not-allowed;">Đơn hàng đã hủy</button>`;
         }
     }
 
-    const updateStatusCompleted = (orderId) => {
-        $.ajax({
-            url: `http://localhost/phone-ecommerce-chat/customer/user/receiveOrder/${orderId}`,
-            method: 'GET',
-            success: function(res) {
-                if (res.status === 200) {
-                    showToast(res.message, true)
-                    window.location.reload();
-                }
-            },
-            error: function(error) {
-                showToast("Cập nhật đơn hàng thất bại!", false)
-            }
-        });
-    };
+    // const updateStatusCompleted = (orderId) => {
+    //     $.ajax({
+    //         url: `http://localhost/phone-ecommerce-chat/customer/user/receiveOrder/${orderId}`,
+    //         method: 'GET',
+    //         success: function(res) {
+    //             if (res.status === 200) {
+    //                 showToast(res.message, true)
+    //                 window.location.reload();
+    //             }
+    //         },
+    //         error: function(error) {
+    //             showToast("Cập nhật đơn hàng thất bại!", false)
+    //         }
+    //     });
+    // };
 
     const updateStatusCancle = (orderId) => {
         $.ajax({
-            url: `http://localhost/phone-ecommerce-chat/customer/user/cancleOrder/${orderId}`,
+            url: `http://localhost/apple/customer/user/cancleOrder/${orderId}`,
             method: 'GET',
             success: function(res) {
                 if (res.status === 200) {

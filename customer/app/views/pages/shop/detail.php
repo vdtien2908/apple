@@ -298,6 +298,7 @@
                     </div>
                     <div class="product__item__text">
                         <h6>${product.title}</h6>
+                        <a href="#" class="add-cart" data-product='${JSON.stringify(product)}' onclick="addCart(this)">+ Add to cart</a>
                         <div class="rating">
                             <i class="fa fa-star-o"></i>
                             <i class="fa fa-star-o"></i>
@@ -341,7 +342,7 @@
             if (existingCartItem) {
                 existingCartItem.quantity += 1;
             } else {
-                product.quantity = productQuantity;
+                product.quantity = productQuantity ? productQuantity : 1;
                 cartItems.push(product);
             }
 

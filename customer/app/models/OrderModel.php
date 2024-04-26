@@ -3,6 +3,15 @@ class OrderModel extends BaseModel
 {
     const TableName = 'orders';
 
+    public function getOrder($id)
+    {
+        $sql = "SELECT * FROM orders AS o
+                WHERE o.id = ${id}";
+
+        $result = $this->querySql($sql);
+        return mysqli_fetch_assoc($result);
+    }
+
     public function getOrderHistory($cus_id)
     {
         $sql = "SELECT 
@@ -97,5 +106,12 @@ class OrderModel extends BaseModel
     public function createOrder($data)
     {
         return $this->create(self::TableName, $data);
+    }
+
+    public function updateStatusCancle($id)
+    {
+        $sql = "UPDATE " . self::TableName . " SET status_order = 3 WHERE id = '{$id}'";
+        $result = $this->querySql($sql);
+        return $result;
     }
 }

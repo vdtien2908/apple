@@ -140,19 +140,23 @@
 
          if (name === '') {
              $('<span class="error-message text-danger">Please, enter receiverr name</span>').insertAfter('input[name="name_receiverr"]');
+             showToast("Please, enter receiverr name", false);
              error = true;
          }
 
          if (phone === '') {
              $('<span class="error-message text-danger">Please, enter phone number</span>').insertAfter('input[name="phone_receiverr"]');
+             showToast("Please, enter phone number", false);
              error = true;
          } else if (!validatePhoneNumber(phone)) {
              $('<span class="error-message text-danger">Phone number not correct, must have 10 number and no charactor</span>').insertAfter('input[name="phone_receiverr"]');
+             showToast("Phone number not correct, must have 10 number and no character", false);
              error = true;
          }
 
          if (address === '') {
              $('<span class="error-message text-danger">Please, enter address</span>').insertAfter('input[name="address_receiverr"]');
+             showToast("Please, enter address", false);
              error = true;
          }
 

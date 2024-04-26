@@ -121,4 +121,32 @@ class UserController extends BaseController
             echo json_encode($result);
         }
     }
+
+    public function cancleOrder($id)
+    {
+        try {
+            $existOrder = $this->orderModel->getOrder($id);
+
+            if ($existOrder) {
+                $this->orderModel->updateStatusCancle($id);
+
+                $result = [
+                    'status' => 200,
+                    'message' => 'Hủy order thành công'
+                ];
+
+                header('Content-Type: application/json');
+                echo json_encode($result);
+                return;
+            }
+        } catch (\Throwable $th) {
+            $result = [
+                'status' => 404,
+                'message' => $th->getMessage(),
+            ];
+
+            header('Content-Type: application/json');
+            echo json_encode($result);
+        }
+    }
 }

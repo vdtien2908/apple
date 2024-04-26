@@ -12,7 +12,7 @@
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     <label for="nameinput">Fullname</label>
-                    <input type="text" name="name" class="form-control" value="<?php echo $_SESSION['auth']['name'] ?>" placeholder="Jony">
+                    <input type="text" name="name" class="form-control" value="<?php echo $_SESSION['auth']['name'] ?>" placeholder="">
                 </div>
             </div>
             <div class="col-12 col-md-6">

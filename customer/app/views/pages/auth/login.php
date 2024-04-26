@@ -5,10 +5,13 @@
             <div class="row">
                 <div class="col-12 mb-4">
                     <h3 class="font-weight-bold text-center">Login to Apple Store</h3>
-                    <h4 class="text-success font-weight-bold">
+                    <h6 class="text-success font-weight-bold">
                         <?php echo isset($_SESSION['register-success']) ? $_SESSION['register-success'] : "" ?>
                         <?php unset($_SESSION['register-success']) ?>
-                    </h4>
+
+                        <?php echo isset($_SESSION['changepw-success']) ? $_SESSION['changepw-success'] : "" ?>
+                        <?php unset($_SESSION['changepw-success']) ?>
+                    </h6>
                 </div>
                 <div class="col-12 mb-3">
                     <div class="form-group">
@@ -34,11 +37,11 @@
                     <button role="button" class="primary-btn w-100">Sign In</button>
                 </div>
                 <div class="col-12 text-center">
-                    <a href="http://localhost/apple/customer/auth/forgotPassword">Forgot your password?</a>
+                    <a class="text-dark font-weight-bold" href="http://localhost/apple/customer/auth/forgotPassword">Forgot your password?</a>
                 </div>
                 <div class="col-12 text-center">
                     Don't have account?
-                    <a href="http://localhost/apple/customer/auth/register">Register now.</a>
+                    <a class="text-dark font-weight-bold" href="http://localhost/apple/customer/auth/register">Register now.</a>
                 </div>
             </div>
         </form>

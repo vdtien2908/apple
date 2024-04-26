@@ -9,7 +9,7 @@ function showToast(message, isSuccess) {
     stopOnFocus: true,
     style: {
       background: isSuccess
-        ? "linear-gradient(to right, #00b09b, #96c93d)"
+        ? "linear-gradient(to right, #000000, #212121)"
         : "linear-gradient(to right, #ff416c, #ff4b2b)",
     },
     onClick: function () {},

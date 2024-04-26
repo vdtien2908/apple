@@ -179,6 +179,10 @@ class AuthController extends BaseController
 
                 $this->userModel->updateUser($result['id'], $data);
 
+                $_SESSION['changepw-success'] = "Change password successfullly! Please login for apply change.";
+                unset($_SESSION['auth']);
+                unset($_SESSION['authenticated']);
+
                 $result = [
                     'status' => 200,
                     'message' => "Change password successfully!"
