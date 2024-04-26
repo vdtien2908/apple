@@ -2,12 +2,12 @@
 class PostController extends BaseController
 {
     
-    private $ProductModel;
+    private $PostModel;
     private $folder;
 
     public function __construct()
     {
-        $this->ProductModel = $this->model('PostModel');
+        $this->PostModel = $this->model('PostModel');
         $this->folder = 'posts';
     }
 
@@ -24,7 +24,7 @@ class PostController extends BaseController
 
     function all()
     {
-        $products = $this->ProductModel->getAll();
+        $products = $this->PostModel->getAll();
 
         http_response_code(200);
         header('Content-Type: application/json');
@@ -35,7 +35,7 @@ class PostController extends BaseController
         // Result notification
         $result = [];
 
-        if(!isset($_POST['title']) || !isset($_POST['price']) || !isset($_POST['sale_price']) || !isset($_POST['color']) || !isset($_POST['content']) || !isset($_POST['description']) || !isset($_POST['hot']) || !isset($_POST['category_id']) || !isset($_FILES['img'])) {
+        if(!isset($_POST['title']) || !isset($_POST['content'])  || !isset($_POST['post_cat_id']) || !isset($_FILES['img'])) {
             $result['status'] = 500;
             $result['title'] = 'Error';
             $result['message'] = "Missing input!";
@@ -47,21 +47,17 @@ class PostController extends BaseController
         }
         
         $title = $_POST['title'];
-        $price = $_POST['price'];
-        $sale_price = $_POST['sale_price'];
-        $color = $_POST['color'];
         $content = $_POST['content'];
-        $description = $_POST['description'];
-        $hot = $_POST['hot'];
         $img = $_FILES['img'];
-        $category_id = $_POST['category_id'];
+        $post_cat_id = $_POST['post_cat_id'];
         $slug = $this->slugify($title);
+        $user_id =  $_SESSION['login']['id'];
     
         
 
-        $products = $this->ProductModel->querySql("SELECT * FROM products WHERE products.title = '$title' AND `delete` = 0");
+        $posts = $this->PostModel->querySql("SELECT * FROM posts WHERE posts.title = '$title' AND `delete` = 0");
     
-        if(mysqli_num_rows($products) > 0){
+        if(mysqli_num_rows($posts) > 0){
             $result['status'] = 500;
             $result['title'] = 'Failed';
             $result['message'] = "Title already exists!";
@@ -97,16 +93,12 @@ class PostController extends BaseController
             $data = [
                 'title' => $title,
                 'slug' => $slug, 
-                'price' => $price, 
-                'sale_price'=>$sale_price, 
-                'hot' => $hot, 
-                'color' => $color, 
                 'content' => $content, 
-                'description' => $description, 
                 'img' => $new_file_name, 
-                'category_id'=> $category_id
+                'post_cat_id'=> $post_cat_id,
+                'user_id' => $user_id
             ];
-            $this->ProductModel->create($data);
+            $this->PostModel->create($data);
     
             $result['status'] = 200;
             $result['title'] = 'Success';
@@ -119,7 +111,7 @@ class PostController extends BaseController
     }
 
     function edit($id){
-        $product =$this->ProductModel->find($id);
+        $product =$this->PostModel->find($id);
         header('Content-Type: application/json');
         echo json_encode($product);
     }
@@ -128,7 +120,7 @@ class PostController extends BaseController
         // Result notification
         $result = [];
 
-        if(!isset($_POST['title']) || !isset($_POST['price']) || !isset($_POST['sale_price']) || !isset($_POST['color']) || !isset($_POST['content']) || !isset($_POST['description']) || !isset($_POST['hot']) || !isset($_POST['category_id'])) {
+        if(!isset($_POST['title']) || !isset($_POST['content']) || !isset($_POST['post_cat_id'])) {
             $result['status'] = 500;
             $result['title'] = 'Error';
             $result['message'] = "Missing input!";
@@ -140,20 +132,14 @@ class PostController extends BaseController
         }
         
         $title = $_POST['title'];
-        $price = $_POST['price'];
-        $sale_price = $_POST['sale_price'];
-        $color = $_POST['color'];
         $content = $_POST['content'];
-        $description = $_POST['description'];
-        $hot = $_POST['hot'];
-        $category_id = $_POST['category_id'];
+        $post_cat_id = $_POST['post_cat_id'];
         $slug = $this->slugify($title);
     
         
-
-        $products = $this->ProductModel->querySql("SELECT * FROM products WHERE products.title = '$title' AND `delete` = 0 AND products.id != ${id}");
+        $posts = $this->PostModel->querySql("SELECT * FROM posts WHERE posts.title = '$title' AND `delete` = 0 AND posts.id != ${id}");
     
-        if(mysqli_num_rows($products) > 0){
+        if(mysqli_num_rows($posts) > 0){
             $result['status'] = 500;
             $result['title'] = 'Failed';
             $result['message'] = "Title already exists!";
@@ -162,17 +148,13 @@ class PostController extends BaseController
             header('Content-Type: application/json');
             echo json_encode($result);
         } else {
-            $product = $this->ProductModel->find($id);            
+            $product = $this->PostModel->find($id);            
             $data = [
                 'title' => $title,
                 'slug' => $slug, 
-                'price' => $price, 
-                'sale_price'=>$sale_price, 
-                'hot' => $hot, 
-                'color' => $color, 
                 'content' => $content, 
-                'description' => $description, 
-                'category_id'=> $category_id
+                'post_cat_id'=> $post_cat_id,
+                'user_id' => $_SESSION['login']['id']
             ];
 
             // format name file
@@ -212,7 +194,7 @@ class PostController extends BaseController
 
         
            
-            $this->ProductModel->update($id,$data);
+            $this->PostModel->update($id,$data);
     
             $result['status'] = 200;
             $result['title'] = 'Success';
@@ -225,7 +207,7 @@ class PostController extends BaseController
     }
 
     function delete($id){
-        $this->ProductModel->destroy($id);
+        $this->PostModel->destroy($id);
         $result =[
             'status'=>'success',
             'message'=>"Deleted category successfully"

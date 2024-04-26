@@ -641,7 +641,7 @@
                 const product = response;
                 $('#form_edit #id').val(product.id);
                 $('#form_edit #title').val(product.title);
-                $('#form_edit #price').val(product.price + 'đ');
+                $('#form_edit #price').val(product.price);
                 $('#form_edit #sale_price').val(product.sale_price);
                 $('#form_edit #content').val(product.content);
                 $('#form_edit #description').val(product.description);

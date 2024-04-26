@@ -39,6 +39,7 @@
     </div>
 </div>
 <style>
+    .btn_show,
     .btn_cancel,
     .btn_confirm {
         display: none;
@@ -106,64 +107,13 @@
             <i class="fa-solid fa-xmark"></i>
         </button>
         <div class="modal_inner">
-            <h1 class="modal_title">Update product</h1>
+            <h1 class="modal_title">Update Post</h1>
             <form class="form mt-5" id="form_edit" style="width: 700px;">
-                <div class="form_group" style="display: none;">
-                    <div class='form_field'>
-                        <input name="id" id='id' type="text" class="form_input">
-                    </div>
-                </div>
-                <div class="form_group ">
+            <div class="form_group ">
                     <div class='form_field'>
                         <input name="title" id='title' type="text" class="form_input" placeholder=" "
                             autocomplete="off">
                         <label for="title" class="form_label">Title</label>
-                    </div>
-                    <span class="form_messages"></span>
-                </div>
-                <div class="group_container">
-                    <div class="form_group ">
-                        <div class='form_field'>
-                            <input name="price" id='price' type="text" class="form_input" placeholder=" "
-                                autocomplete="off">
-                            <label for="price" class="form_label">Price</label>
-                        </div>
-                        <span class="form_messages"></span>
-                    </div>
-                    <div class="form_group ">
-                        <div class='form_field'>
-                            <input name="sale_price" id='sale_price' type="text" class="form_input"
-                                placeholder=" " autocomplete="off">
-                            <label for="sale_price" class="form_label">Sale price</label>
-                        </div>
-                        <span class="form_messages"></span>
-                    </div>
-                </div>
-                <div class="group_container">
-                    <div class="form_group ">
-                        <div class='form_field'>
-                            <input name="color" id='color' type="text" class="form_input" placeholder=" "
-                                autocomplete="off">
-                            <label for="color" class="form_label">Color</label>
-                        </div>
-                        <span class="form_messages"></span>
-                    </div>
-                    <div class="form_group ">
-                        <div class='form_field'>
-                            <select name="hot" id="hot" class="form_input">
-                                <option value="0" selected>No</option>
-                                <option value="1">Yes</option>
-                            </select>
-                            <label for="hot" class="form_label">Hot</label>
-                        </div>
-                        <span class="form_messages"></span>
-                    </div>
-                </div>
-                <div class="form_group ">
-                    <div class='form_field'>
-                        <textarea name="description" id='description' type="text" class="form_input" placeholder=" "
-                            autocomplete="off"></textarea>
-                        <label for="description" class="form_label">Description</label>
                     </div>
                     <span class="form_messages"></span>
                 </div>
@@ -176,10 +126,10 @@
                 </div>
                 <div class="form_group ">
                     <div class='form_field'>
-                        <select name="category_id" id="category_id" class="form_input">
+                        <select name="post_cat_id" id="post_cat_id" class="form_input">
                             <option selected disabled value="">Select category</option>
                         </select>
-                        <label for="category_id" class="form_label">Category</label>
+                        <label for="post_cat_id" class="form_label">Category</label>
                     </div>
                     <span class="form_messages"></span>
                 </div>
@@ -480,21 +430,17 @@
                 const product = response;
                 $('#form_edit #id').val(product.id);
                 $('#form_edit #title').val(product.title);
-                $('#form_edit #price').val(product.price + 'đ');
-                $('#form_edit #sale_price').val(product.sale_price);
                 $('#form_edit #content').val(product.content);
-                $('#form_edit #description').val(product.description);
-                $('#form_edit #color').val(product.color);
                     // Reset img  form edit
                 $('#form_edit #blah').attr('src', `../product_img/${product.img}`);
 
                  //  Handle load categories form edit product
                 $.ajax({
                     type: 'GET',
-                    url: '/apple/admin/category/all',
+                    url: '/apple/admin/post_category/all',
                     success: function(response) {
                         const categories = response;
-                        const selectElement = $('#edit-modal #category_id');
+                        const selectElement = $('#edit-modal #post_cat_id');
 
                         // Xóa các option cũ nếu có
                         selectElement.empty();
@@ -551,7 +497,7 @@
             success: function(response) {
                 toast({
                     title: 'Success',
-                    message: `Deleted product successfully!`,
+                    message: `Deleted post successfully!`,
                     type: 'success',
                     duration: 3000,
                 });
@@ -632,15 +578,8 @@
         errorSelector: '.form_messages',
         rules: [
             Validator.isRequired('#title', 'Title is require.'),
-            Validator.isRequired('#price', 'Price is require.'),
-            Validator.isNumber('#price', 'Please enter number.'),
-            Validator.isRequired('#sale_price', 'Sale price is require.'),
-            Validator.isNumber('#sale_price', 'Please enter number.'),
-            Validator.isRequired('#description', 'Description is require.'),
             Validator.isRequired('#content', 'Content is require.'),
-            Validator.isRequired('#color', 'Color is require.'),
-            // Validator.isRequired('#img', 'Image is require.'),
-            Validator.isRequired('#category_id', 'Category is require.'),
+            Validator.isRequired('#post_cat_id', 'Category is require.'),
         ],
         onSubmit: (data) => {
             const {
@@ -652,15 +591,10 @@
 
             // Add FormData when handle file with ajax
             const formData = new FormData();
-            formData.append('title', restData.title);
-            formData.append('price', restData.price);
-            formData.append('sale_price', restData.sale_price);
-            formData.append('hot', restData.hot);
-            formData.append('content', restData.content);
-            formData.append('description', restData.description);
-            formData.append('color', restData.color);
-            formData.append('category_id', restData.category_id);
-            formData.append('img', restData.img);
+            formData.append('title', data.title);
+            formData.append('content', data.content);
+            formData.append('img', data.img);
+            formData.append('post_cat_id', data.post_cat_id);
             
             $.ajax({
                 type: 'POST',

@@ -35,7 +35,7 @@ class ProductController extends BaseController
         // Result notification
         $result = [];
 
-        if(!isset($_POST['title']) || !isset($_POST['content']) || !isset($_POST['post_cat_id']) || !isset($_FILES['img'])) {
+        if(!isset($_POST['title']) || !isset($_POST['price']) || !isset($_POST['sale_price']) || !isset($_POST['color']) || !isset($_POST['content']) || !isset($_POST['description']) || !isset($_POST['hot']) || !isset($_POST['category_id']) || !isset($_FILES['img'])) {
             $result['status'] = 500;
             $result['title'] = 'Error';
             $result['message'] = "Missing input!";
@@ -47,17 +47,21 @@ class ProductController extends BaseController
         }
         
         $title = $_POST['title'];
+        $price = $_POST['price'];
+        $sale_price = $_POST['sale_price'];
+        $color = $_POST['color'];
         $content = $_POST['content'];
+        $description = $_POST['description'];
+        $hot = $_POST['hot'];
         $img = $_FILES['img'];
-        $post_cat_id = $_POST['post_cat_id'];
+        $category_id = $_POST['category_id'];
         $slug = $this->slugify($title);
-        $user_id = $_SESSION['login']['id'];
     
         
 
-        $posts = $this->ProductModel->querySql("SELECT * FROM posts WHERE products.title = '$title' AND `delete` = 0");
+        $products = $this->ProductModel->querySql("SELECT * FROM products WHERE products.title = '$title' AND `delete` = 0");
     
-        if(mysqli_num_rows($posts) > 0){
+        if(mysqli_num_rows($products) > 0){
             $result['status'] = 500;
             $result['title'] = 'Failed';
             $result['message'] = "Title already exists!";
@@ -93,10 +97,14 @@ class ProductController extends BaseController
             $data = [
                 'title' => $title,
                 'slug' => $slug, 
+                'price' => $price, 
+                'sale_price'=>$sale_price, 
+                'hot' => $hot, 
+                'color' => $color, 
                 'content' => $content, 
+                'description' => $description, 
                 'img' => $new_file_name, 
-                'post_cat_id'=> $post_cat_id,
-                'user_id' =>$user_id
+                'category_id'=> $category_id
             ];
             $this->ProductModel->create($data);
     

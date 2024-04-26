@@ -18,8 +18,7 @@
                 <i class="fa-solid fa-angle-down"></i>
             </div>
             <ul class="menu header_menu">
-                <li class="menu_item"><a class="menu_link" href="#">Thông tin cá nhân</a></li>
-                <li class="menu_item"><a class="menu_link" href="#">Đổi mật khẩu</a></li>
+                <!-- <li class="menu_item"><a class="menu_link" href="#">Đổi mật khẩu</a></li> -->
                 <li class="menu_item">
                     <a class="menu_link" href="/apple/admin/auth/logout">
                         Đăng xuất
