@@ -8,7 +8,7 @@ class PostModel extends BaseModel
         $sql = "SELECT p.*,pc.id as post_cat_id, pc.title as cat_title FROM posts as p
         JOIN post_categories as pc
         ON p.post_cat_id = pc.id
-        ORDER BY p.status = 1 DESC, p.created_at DESC";
+        ORDER BY p.delete = 0 DESC, p.created_at DESC";
 
         $result = $this->querySql($sql);
         if ($result) {
@@ -24,7 +24,7 @@ class PostModel extends BaseModel
         JOIN post_categories as pc ON p.post_cat_id = pc.id
         JOIN users as u ON p.user_id = u.id
         WHERE p.slug = '${slug}'
-        ORDER BY p.status = 1 DESC, p.created_at DESC";
+        ORDER BY p.delete = 0 DESC, p.created_at DESC";
 
         $result = $this->querySql($sql);
         return mysqli_fetch_assoc($result);

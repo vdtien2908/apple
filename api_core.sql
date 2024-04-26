@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2024 at 04:58 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Apr 26, 2024 at 07:12 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -109,7 +109,8 @@ INSERT INTO `orders` (`id`, `name_receive`, `phone_receive`, `address_receive`, 
 (15, 'Trần Trọng Hiến', '0706802119', 'Sài gòn', '', 75000000, 1, 8, 0, '2024-04-26 08:47:29', NULL),
 (16, 'Jony ', '0706802119', 'Disney, USA', '', 96998000, 1, 8, 0, '2024-04-26 08:53:19', NULL),
 (17, 'mickey', '0706802119', 'Disney, USA', '', 10999000, 1, 8, 0, '2024-04-26 08:54:25', NULL),
-(18, 'Augentern shop', '1827485728', '91B Jackson street Pizla', '', 37000000, 3, 10, 0, '2024-04-26 14:47:37', NULL);
+(18, 'Augentern shop', '1827485728', '91B Jackson street Pizla', '', 37000000, 0, 10, 0, '2024-04-26 14:47:37', NULL),
+(19, 'Lưu Vũ Tuyển', '1111111111', 'Cần Thơ', 'Giao nhanh', 25000000, 1, 12, 0, '2024-04-26 16:03:40', NULL);
 
 -- --------------------------------------------------------
 
@@ -139,7 +140,8 @@ INSERT INTO `order_details` (`product_id`, `order_id`, `quantity`, `price`, `cre
 (2, 16, 2, 10999000.00, '2024-04-26 08:53:19', NULL),
 (2, 17, 1, 10999000.00, '2024-04-26 08:54:25', NULL),
 (1, 18, 1, 12000000.00, '2024-04-26 14:47:37', NULL),
-(4, 18, 1, 25000000.00, '2024-04-26 14:47:37', NULL);
+(4, 18, 1, 25000000.00, '2024-04-26 14:47:37', NULL),
+(4, 19, 1, 25000000.00, '2024-04-26 16:03:40', NULL);
 
 -- --------------------------------------------------------
 
@@ -155,8 +157,8 @@ CREATE TABLE `posts` (
   `title` varchar(255) NOT NULL,
   `content` longtext NOT NULL,
   `views` bigint(20) NOT NULL DEFAULT 0,
-  `image` varchar(255) DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `img` varchar(255) DEFAULT NULL,
+  `delete` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -165,9 +167,9 @@ CREATE TABLE `posts` (
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`id`, `slug`, `post_cat_id`, `user_id`, `title`, `content`, `views`, `image`, `status`, `created_at`, `updated_at`) VALUES
-(3, 'how-to-use-dynamic-island-in-iphone-14', 1, 3, 'How to use dynamic island in iphone 14', '<p>\r\nWhen the iPhone 14 Pro models were announced in 2022, Apple surprised many with its innovative integration of software functions with the pill-shaped cutout at the top of the screen. Apple calls this area of the display the \"Dynamic Island,\" and has since extended the feature to all iPhone 15 models. This article explains what ‌Dynamic Island‌ does, how it works, and how you can interact with it to perform actions.\r\n</p>\r\n<h3>What Is Dynamic Island and How Does It Work?</h3>\r\n<p>Prior to Apple\'s ‌iPhone 14‌ Pro launch, we learned that Apple was working on an alternative to the notch that incorporated a pill-shaped cutout and a hole punch cutout to house the TrueDepth camera hardware. We also exclusively reported that these cutouts would appear as one contiguous, longer pill shape when the ‌iPhone 14‌ Pro was in use, and that Apple also planned to integrate software functions around the pill.</p>\r\n<p>As we know now, on the ‌iPhone 14‌ Pro and all ‌iPhone 15‌ models, display pixels around what Apple calls the \"‌Dynamic Island‌\" merge it into one pill-shaped area that changes size and shape to accommodate various types of alerts, notifications, and interactions, turning it into a kind of front-and-center information hub.</p>\r\n', 7, '990fb55b94167b9c7683dbe96880fc0d.jpg', 1, '2024-04-21 07:57:21', '2024-04-21 07:57:21'),
-(4, 'help-with-the-app-store', 2, 3, 'Help to fix app store issue', '<p>\r\nWhen the iPhone 14 Pro models were announced in 2022, Apple surprised many with its innovative integration of software functions with the pill-shaped cutout at the top of the screen. Apple calls this area of the display the \"Dynamic Island,\" and has since extended the feature to all iPhone 15 models. This article explains what ‌Dynamic Island‌ does, how it works, and how you can interact with it to perform actions.\r\n</p>\r\n<h3>What Is Dynamic Island and How Does It Work?</h3>\r\n<p>Prior to Apple\'s ‌iPhone 14‌ Pro launch, we learned that Apple was working on an alternative to the notch that incorporated a pill-shaped cutout and a hole punch cutout to house the TrueDepth camera hardware. We also exclusively reported that these cutouts would appear as one contiguous, longer pill shape when the ‌iPhone 14‌ Pro was in use, and that Apple also planned to integrate software functions around the pill.</p>\r\n<p>As we know now, on the ‌iPhone 14‌ Pro and all ‌iPhone 15‌ models, display pixels around what Apple calls the \"‌Dynamic Island‌\" merge it into one pill-shaped area that changes size and shape to accommodate various types of alerts, notifications, and interactions, turning it into a kind of front-and-center information hub.</p>\r\n', 8, '418f9bc51058627937eaf375b131825e.jpg', 1, '2024-04-21 07:57:21', '2024-04-21 07:57:21');
+INSERT INTO `posts` (`id`, `slug`, `post_cat_id`, `user_id`, `title`, `content`, `views`, `img`, `delete`, `created_at`, `updated_at`) VALUES
+(3, 'how-to-use-dynamic-island-in-iphone-14', 1, 3, 'How to use dynamic island in iphone 14', '<p>\r\nWhen the iPhone 14 Pro models were announced in 2022, Apple surprised many with its innovative integration of software functions with the pill-shaped cutout at the top of the screen. Apple calls this area of the display the \"Dynamic Island,\" and has since extended the feature to all iPhone 15 models. This article explains what ‌Dynamic Island‌ does, how it works, and how you can interact with it to perform actions.\r\n</p>\r\n<h3>What Is Dynamic Island and How Does It Work?</h3>\r\n<p>Prior to Apple\'s ‌iPhone 14‌ Pro launch, we learned that Apple was working on an alternative to the notch that incorporated a pill-shaped cutout and a hole punch cutout to house the TrueDepth camera hardware. We also exclusively reported that these cutouts would appear as one contiguous, longer pill shape when the ‌iPhone 14‌ Pro was in use, and that Apple also planned to integrate software functions around the pill.</p>\r\n<p>As we know now, on the ‌iPhone 14‌ Pro and all ‌iPhone 15‌ models, display pixels around what Apple calls the \"‌Dynamic Island‌\" merge it into one pill-shaped area that changes size and shape to accommodate various types of alerts, notifications, and interactions, turning it into a kind of front-and-center information hub.</p>\r\n', 9, '990fb55b94167b9c7683dbe96880fc0d.jpg', 0, '2024-04-21 07:57:21', '2024-04-21 07:57:21'),
+(4, 'help-with-the-app-store', 2, 3, 'Help to fix app store issue', '<p>\nWhen the iPhone 14 Pro models were announced in 2022, Apple surprised many with its innovative integration of software functions with the pill-shaped cutout at the top of the screen. Apple calls this area of the display the \"Dynamic Island,\" and has since extended the feature to all iPhone 15 models. This article explains what ‌Dynamic Island‌ does, how it works, and how you can interact with it to perform actions.\n</p>\n<h3>What Is Dynamic Island and How Does It Work?</h3>\n<p>Prior to Apple\'s ‌iPhone 14‌ Pro launch, we learned that Apple was working on an alternative to the notch that incorporated a pill-shaped cutout and a hole punch cutout to house the TrueDepth camera hardware. We also exclusively reported that these cutouts would appear as one contiguous, longer pill shape when the ‌iPhone 14‌ Pro was in use, and that Apple also planned to integrate software functions around the pill.</p>\n<p>As we know now, on the ‌iPhone 14‌ Pro and all ‌iPhone 15‌ models, display pixels around what Apple calls the \"‌Dynamic Island‌\" merge it into one pill-shaped area that changes size and shape to accommodate various types of alerts, notifications, and interactions, turning it into a kind of front-and-center information hub.</p>\n                                                         ', 10, '418f9bc51058627937eaf375b131825e.jpg', 0, '2024-04-21 07:57:21', '2024-04-21 07:57:21');
 
 -- --------------------------------------------------------
 
@@ -180,7 +182,7 @@ CREATE TABLE `post_categories` (
   `slug` varchar(100) NOT NULL,
   `title` varchar(255) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `delete` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -189,9 +191,10 @@ CREATE TABLE `post_categories` (
 -- Dumping data for table `post_categories`
 --
 
-INSERT INTO `post_categories` (`id`, `slug`, `title`, `image`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'technologies', 'Technologies', '', 1, '2024-04-21 03:34:01', '2024-04-21 03:34:01'),
-(2, 'help-center', 'Help center', '', 1, '2024-04-21 03:34:01', '2024-04-21 03:34:01');
+INSERT INTO `post_categories` (`id`, `slug`, `title`, `image`, `delete`, `created_at`, `updated_at`) VALUES
+(1, 'technologies', 'Technologies', '', 0, '2024-04-21 03:34:01', '2024-04-21 03:34:01'),
+(2, 'help-center', 'Help center', '', 0, '2024-04-21 03:34:01', '2024-04-21 03:34:01'),
+(3, 'demo-1', 'demo 1', NULL, 1, '2024-04-26 16:32:51', '2024-04-26 16:32:51');
 
 -- --------------------------------------------------------
 
@@ -224,9 +227,9 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `title`, `slug`, `description`, `content`, `price`, `sale_price`, `hot`, `view_count`, `brand`, `img`, `color`, `category_id`, `delete`, `created_at`, `updated_at`) VALUES
 (1, 'Iphone 12 pro max 2', 'iphone-12-pro-max-2', 'demo 2\r\n', 'demo', 12000000, 11000000, 0, 1, 'Apple', '990fb55b94167b9c7683dbe96880fc0d.jpg', 'Black', 13, 0, '2024-04-01 12:37:41', '2024-04-01 15:40:22'),
-(2, 'iphone 11 pro', 'iphone-11-pro', 'demo', 'Demo', 10999000, 9900000, 1, 1, 'Apple', '418f9bc51058627937eaf375b131825e.jpg', 'Titan', 13, 0, '2024-04-01 12:43:30', NULL),
-(3, 'Samsung demo', 'samsung-demo', 'Demo', 'Demo', 23000000, 23000000, 0, 0, 'Apple', '9a9dd60538ad32c71282c5f4b49d3dc4.png', 'Red', 15, 0, '2024-04-01 15:19:46', '2024-04-01 15:33:56'),
-(4, 'Iphone 13 Promax', 'iphone-13-promax', 'Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut risus. Sedcus faucibus an sullamcorper mattis drostique des commodo pharetras loremos.\r\n\r\nProducts Infomation\r\n', 'Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. \r\n\r\n', 25000000, 20000000, 1, 12, 'Apple', 'f19b5c895f400152d56bb7169c22e3f6.jpg', 'Black', 13, 0, '2024-04-23 09:17:56', NULL);
+(2, 'iphone 11 pro', 'iphone-11-pro', 'demo', 'Demo', 10999000, 9900000, 1, 5, 'Apple', '418f9bc51058627937eaf375b131825e.jpg', 'Titan', 13, 0, '2024-04-01 12:43:30', NULL),
+(3, 'Samsung demo', 'samsung-demo', 'Demo', 'Demo', 23000000, 23000000, 0, 1, 'Apple', '9a9dd60538ad32c71282c5f4b49d3dc4.png', 'Red', 15, 0, '2024-04-01 15:19:46', '2024-04-01 15:33:56'),
+(4, 'Iphone 13 Promax', 'iphone-13-promax', 'Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut risus. Sedcus faucibus an sullamcorper mattis drostique des commodo pharetras loremos.\r\n\r\nProducts Infomation\r\n', 'Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. \r\n\r\n', 25000000, 20000000, 1, 13, 'Apple', 'f19b5c895f400152d56bb7169c22e3f6.jpg', 'Black', 13, 0, '2024-04-23 09:17:56', NULL);
 
 -- --------------------------------------------------------
 
@@ -254,7 +257,8 @@ INSERT INTO `specifications` (`id`, `key`, `value`, `product_id`, `delete`, `cre
 (4, 'CPU', 'Apple A12', 1, 1, '2024-04-02 15:50:54', NULL),
 (5, 'demo 1 ', '1', 1, 1, '2024-04-02 16:01:48', NULL),
 (8, 'demo 2', '2', 1, 0, '2024-04-02 16:02:43', NULL),
-(11, 'ssd', '312312', 1, 0, '2024-04-02 16:03:47', NULL);
+(11, 'ssd', '312312', 1, 0, '2024-04-02 16:03:47', NULL),
+(26, 'APU', 'Apple a13', 2, 0, '2024-04-26 16:24:23', NULL);
 
 -- --------------------------------------------------------
 
@@ -286,8 +290,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `address`, `gender`, `ph
 (4, 'Nguyễn Văn A 1', 'nguyenvana@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Cần Thơ', 1, '123456789', 0, 'staff', '2024-04-03 17:54:07', '2024-04-03 18:03:41'),
 (5, 'Vũ Bảo Khanh', 'vubaokhanh@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Kiên Giang', 1, '1123123123', 0, 'staff', '2024-04-03 18:16:34', NULL),
 (8, 'Jony Nguyen', 'abc@gmail.com', '$2y$10$d5jy3chJfJHAAXuAbRTYkuJmiLFb/IzsG5yuJktQK1xixU8Mq6wWW', 'Can Tho Sai Gon Cai Rang', 0, '0758395394', 0, 'customer', '2024-04-23 02:44:58', '2024-04-26 14:37:26'),
-(9, NULL, 'annv@gmail.com', '$2y$10$q8Sq.LY7Olqqlr39Ionx/.CcZtSgqwMbV6V6AIL2Sd5omat62onRa', NULL, NULL, NULL, 0, 'customer', '2024-04-23 02:47:32', NULL),
-(10, NULL, 'tranhien@gmail.com', '$2y$10$WELa5GKYuk6J2BAGI7qjnunMEogRi6L4PmbQGo.i/4IeT6yu3dPVm', NULL, NULL, NULL, 0, 'customer', '2024-04-26 14:38:14', NULL);
+(10, NULL, 'tranhien@gmail.com', '$2y$10$WELa5GKYuk6J2BAGI7qjnunMEogRi6L4PmbQGo.i/4IeT6yu3dPVm', NULL, NULL, NULL, 0, 'customer', '2024-04-26 14:38:14', NULL),
+(12, 'Vũ Đức Tiến', 'vdtien@gmail.com', '$2y$10$RZHuyLdMy8feBU2v94yPs.ObvKoelCdGImH3EiS4in/A9HHEDwRVq', 'Cần Thơ', 0, '0333669832', 0, 'customer', '2024-04-26 16:01:36', '2024-04-26 16:02:23');
 
 --
 -- Indexes for dumped tables
@@ -376,7 +380,7 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `posts`
@@ -388,7 +392,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `post_categories`
 --
 ALTER TABLE `post_categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -400,13 +404,13 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `specifications`
 --
 ALTER TABLE `specifications`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables

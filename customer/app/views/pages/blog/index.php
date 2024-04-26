@@ -57,7 +57,7 @@
                 <div class="blog__item">
                     <a href="<?php echo URL_APP; ?>/blog/detail/${blog.slug}">
                         <div class="blog__item__pic">
-                            <img loading="lazy" class="image" src="<?php echo IMAGES_PATH; ?>/${blog.image}" alt="${blog.title}" style="object-fit:contain; width:360px; height:240px" />
+                            <img loading="lazy" class="image" src="<?php echo IMAGES_PATH; ?>/${blog.img}" alt="${blog.title}" style="object-fit:contain; width:360px; height:240px" />
                         </div>
                     </a>
                     <div class="blog__item__text">

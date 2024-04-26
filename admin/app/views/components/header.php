@@ -14,7 +14,7 @@
                 <i class="fa-regular fa-user"></i>
             </div>
             <div class="user_name">
-                Admin
+            <?php echo $name = isset($_SESSION['login']) ? $_SESSION['login']['name'] : 'Admin'; ?>
                 <i class="fa-solid fa-angle-down"></i>
             </div>
             <ul class="menu header_menu">

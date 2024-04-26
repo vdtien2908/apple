@@ -97,11 +97,11 @@ function renderTable(data, columns, showAction, fieldStatus = 'confirm') {
                                 </td>`;
                     } else if (column.type === 'img') {
                         return `<td style="width: ${column.width}; text-align:${column.align}">
-                            <img src="../product_img/${rowData[field]}" alt="Logo product">
+                            <img src="../product_img/${rowData[field]}" alt="image">
                     </td>`;
                     } else {
                         return `<td style="width: ${column.width}; text-align:${column.align}">
-                                    ${rowData[field]}
+                                    ${rowData[field]}                                   
                                 </td>`;
                     }
                 }

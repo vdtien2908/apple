@@ -47,6 +47,33 @@
                 </span>
             </a>
         </li>
+        <li class="menu_item menu_item-title">
+            Post
+        </li>
+        <li class="menu_item <?php
+            echo $func->handleActive('post_category')['active'];
+            ?>">
+            <a href="/apple/admin/post_category" class="menu_link">
+                <span class="icon">
+                    <i class="fa-regular fa-rectangle-list"></i>
+                </span>
+                <span class="text">
+                    Post category manage
+                </span>
+            </a>
+        </li>
+        <li class="menu_item <?php
+            echo $func->handleActive('post')['active'];
+            ?>">
+            <a href="/apple/admin/post" class="menu_link">
+                <span class="icon">
+                    <i class="fa-solid fa-file-pen"></i>
+                </span>
+                <span class="text">
+                    Post manage
+                </span>
+            </a>
+        </li>
 
         <li class="menu_item menu_item-title">
             Product
