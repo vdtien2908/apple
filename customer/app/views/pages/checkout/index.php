@@ -21,59 +21,57 @@
  <section class="checkout spad">
      <div class="container">
          <div class="checkout__form">
-             <form action="#">
-                 <div class="row">
-                     <div class="col-lg-8 col-md-6">
-                         <h6 class="coupon__code"><span class="icon_tag_alt"></span> you wanna checkout? Please carefully checking your information before checkout!</h6>
-                         <h6 class="checkout__title">Billing Details</h6>
-                         <div class="row">
-                             <div class="col-lg-6">
-                                 <div class="checkout__input">
-                                     <p>Name reveiver<span>*</span></p>
-                                     <input type="text" name="name_receiver">
-                                 </div>
-                             </div>
-                             <div class="col-lg-6">
-                                 <div class="checkout__input">
-                                     <p>Phone receiver<span>*</span></p>
-                                     <input type="text" name="phone_receiver">
-                                 </div>
+             <div class="row">
+                 <div class="col-lg-8 col-md-6">
+                     <h6 class="coupon__code"><span class="icon_tag_alt"></span> you wanna checkout? Please carefully checking your information before checkout!</h6>
+                     <h6 class="checkout__title">Billing Details</h6>
+                     <div class="row">
+                         <div class="col-lg-6">
+                             <div class="checkout__input">
+                                 <p>Name reveiver<span>*</span></p>
+                                 <input type="text" name="name_receiver" required>
                              </div>
                          </div>
-                         <div class="checkout__input">
-                             <p>Address receiver<span>*</span></p>
-                             <input type="text" name="address_receiver">
-                         </div>
-                         <div class="checkout__input">
-                             <p>Order notes<span> (optional)</span></p>
-                             <input type="text" name="note" placeholder="Notes about your order, e.g. special notes for delivery.">
+                         <div class="col-lg-6">
+                             <div class="checkout__input">
+                                 <p>Phone receiver<span>*</span></p>
+                                 <input type="text" name="phone_receiver" required>
+                             </div>
                          </div>
                      </div>
-                     <div class="col-lg-4 col-md-6">
-                         <div class="checkout__order">
-                             <h4 class="order__title">Your orders</h4>
-                             <div class="checkout__order__products">Product <span>Total price</span></div>
-                             <ul class="checkout__total__products" id="checkoutList"></ul>
-                             <ul class="checkout__total__all" id="checkoutPrice"></ul>
-                             <div class="checkout__input__checkbox">
-                                 <label for="payment">
-                                     convential
-                                     <input type="checkbox" id="payment" checked>
-                                     <span class="checkmark"></span>
-                                 </label>
-                             </div>
-                             <!-- <div class="checkout__input__checkbox">
+                     <div class="checkout__input">
+                         <p>Address receiver<span>*</span></p>
+                         <input type="text" name="address_receiver" required>
+                     </div>
+                     <div class="checkout__input">
+                         <p>Order notes<span> (optional)</span></p>
+                         <input type="text" name="notes" placeholder="Notes about your order, e.g. special notes for delivery.">
+                     </div>
+                 </div>
+                 <div class="col-lg-4 col-md-6">
+                     <div class="checkout__order">
+                         <h4 class="order__title">Your orders</h4>
+                         <div class="checkout__order__products">Product <span>Total price</span></div>
+                         <ul class="checkout__total__products" id="checkoutList"></ul>
+                         <ul class="checkout__total__all" id="checkoutPrice"></ul>
+                         <div class="checkout__input__checkbox">
+                             <label for="payment">
+                                 convential
+                                 <input type="checkbox" id="payment" checked>
+                                 <span class="checkmark"></span>
+                             </label>
+                         </div>
+                         <!-- <div class="checkout__input__checkbox">
                                  <label for="paypal">
                                      Paypal
                                      <input type="checkbox" id="paypal">
                                      <span class="checkmark"></span>
                                  </label>
                              </div> -->
-                             <button type="submit" class="site-btn" onclick="handleOrder()">PLACE ORDER</button>
-                         </div>
+                         <button type="button" class="site-btn">PLACE ORDER</button>
                      </div>
                  </div>
-             </form>
+             </div>
          </div>
      </div>
  </section>
@@ -82,6 +80,7 @@
  <script>
      let checkoutItems = localStorage.getItem("checkoutItems");
      checkoutItems = checkoutItems ? JSON.parse(checkoutItems) : [];
+     let totalMoneyCheckout = 0;
 
      if (checkoutItems.length === 0 || checkoutItems === undefined) {
          window.location.href = "<?php echo URL_APP; ?>/cart";
@@ -116,12 +115,85 @@
             `;
 
          checkoutContainer.innerHTML = checkoutElm;
+         totalMoneyCheckout = checkoutTotalPrice;
      }
 
      renderListProduct(checkoutItems);
 
      //  Actions
-     const handleOrder = () => {
+     const validatePhoneNumber = (phoneNumber) => {
+         var regex = /^\d{10}$/;
+         return regex.test(phoneNumber);
+     }
 
+     $('.site-btn').click(function(e) {
+         e.preventDefault();
+
+         $('.error-message').remove();
+
+         var name = $('input[name="name_receiver"]').val().trim();
+         var phone = $('input[name="phone_receiver"]').val().trim();
+         var address = $('input[name="address_receiver"]').val().trim();
+         var notes = $('input[name="notes"]').val().trim();
+
+         var error = false;
+
+         if (name === '') {
+             $('<span class="error-message text-danger">Please, enter receiverr name</span>').insertAfter('input[name="name_receiverr"]');
+             error = true;
+         }
+
+         if (phone === '') {
+             $('<span class="error-message text-danger">Please, enter phone number</span>').insertAfter('input[name="phone_receiverr"]');
+             error = true;
+         } else if (!validatePhoneNumber(phone)) {
+             $('<span class="error-message text-danger">Phone number not correct, must have 10 number and no charactor</span>').insertAfter('input[name="phone_receiverr"]');
+             error = true;
+         }
+
+         if (address === '') {
+             $('<span class="error-message text-danger">Please, enter address</span>').insertAfter('input[name="address_receiverr"]');
+             error = true;
+         }
+
+         if (!error) {
+             handleOrder(name, phone, address, notes);
+         }
+     });
+
+     const handleOrder = (name, phone, address, notes) => {
+         $.ajax({
+             url: `http://localhost/apple/customer/checkout/placeOrder`,
+             type: 'POST',
+             data: {
+                 name_receive: name,
+                 phone_receive: phone,
+                 address_receive: address,
+                 note: notes,
+                 total_money: totalMoneyCheckout,
+                 listProductDetail: checkoutItems
+             },
+             success: function(res) {
+                 if (res.status === 200) {
+                     showToast(res.message, true);
+                     localStorage.removeItem("checkoutItems")
+
+                     // delete item out of cart
+                     let cartItems = localStorage.getItem("cartItems");
+                     cartItems = cartItems ? JSON.parse(cartItems) : [];
+
+                     const newCartItems = cartItems.filter(item => !checkoutItems.some(checkout => parseInt(item.id) === parseInt(checkout.id)));
+                     localStorage.setItem("cartItems", JSON.stringify(newCartItems));
+
+                     // Navigate
+                     window.location.href = "http://localhost/apple/customer/cart";
+                 } else {
+                     showToast(res.message, false);
+                 }
+             },
+             error: function(xhr, error) {
+                 showToast('Error: ' + 'error', false);
+             }
+         });
      }
  </script>

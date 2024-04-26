@@ -80,11 +80,36 @@ class ShopController extends BaseController
 
     public function filterByTitle($title)
     {
-        if (!isset($title)) {
+        $_SESSION['filter-title'] = $title;
+        
+        if ($title == "getAll") {
+            $_SESSION['filter-title'] = "";
+            $products = $this->productModel->getProducts();
+
+            if (!$products) {
+                $this->view(
+                    'app',
+                    [
+                        'pages' => 'shop/index',
+                        'title' => 'Shop',
+                        'products' => []
+                    ]
+                );
+            }
+
+            $this->view(
+                'app',
+                [
+                    'pages' => 'shop/index',
+                    'title' => 'Shop',
+                    'products' => $products
+                ]
+            );
+
             return;
         }
 
-        $products = $this->productModel->getProductByTitle($title);
+        $products = $this->productModel->getProductByTitle(isset($title) ? $title : '');
 
         if (!$products) {
             $this->view(

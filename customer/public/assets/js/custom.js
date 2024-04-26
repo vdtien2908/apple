@@ -15,27 +15,28 @@ function showToast(message, isSuccess) {
     onClick: function () {},
   }).showToast();
 }
-function addCart(element) {
-  try {
-    const product = JSON.parse(element.dataset.product);
-    let cartItems = localStorage.getItem("cartItems");
-    cartItems = cartItems ? JSON.parse(cartItems) : [];
 
-    const existingCartItem = cartItems.find((item) => item.id === product.id);
+// function addCart(element) {
+//   try {
+//     const product = JSON.parse(element.dataset.product);
+//     let cartItems = localStorage.getItem("cartItems");
+//     cartItems = cartItems ? JSON.parse(cartItems) : [];
 
-    if (existingCartItem) {
-      existingCartItem.quantity += 1;
-    } else {
-      product.quantity = 1;
-      cartItems.push(product);
-    }
+//     const existingCartItem = cartItems.find((item) => item.id === product.id);
 
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    showToast("Product has been added to cart!", true);
-  } catch (error) {
-    showToast(
-      "Fail to add product to cart, contact to admin for more information!",
-      false
-    );
-  }
-}
+//     if (existingCartItem) {
+//       existingCartItem.quantity += 1;
+//     } else {
+//       product.quantity = 1;
+//       cartItems.push(product);
+//     }
+
+//     localStorage.setItem("cartItems", JSON.stringify(cartItems));
+//     showToast("Product has been added to cart!", true);
+//   } catch (error) {
+//     showToast(
+//       "Fail to add product to cart, contact to admin for more information!",
+//       false
+//     );
+//   }
+// }

@@ -41,6 +41,17 @@ class AuthController extends BaseController
         );
     }
 
+    public function forgotpassword()
+    {
+        $this->view(
+            'app',
+            [
+                'pages' => 'auth/forgot',
+                'title' => 'Register',
+            ]
+        );
+    }
+
     public function signIn()
     {
         try {
@@ -145,6 +156,49 @@ class AuthController extends BaseController
             $result = [
                 'status' => 404,
                 'message' => $e->getMessage()
+            ];
+
+            header('Content-Type: application/json');
+            echo json_encode($result);
+        }
+    }
+
+    public function changePassword()
+    {
+        try {
+            $email = $_POST['email'];
+            $pass = $_POST['password'];
+
+            $result = $this->userModel->findEmail($email);
+
+            if ($result) {
+
+                $data = [
+                    'password' => password_hash($pass, PASSWORD_DEFAULT),
+                ];
+
+                $this->userModel->updateUser($result['id'], $data);
+
+                $result = [
+                    'status' => 200,
+                    'message' => "Change password successfully!"
+                ];
+
+                header('Content-Type: application/json');
+                echo json_encode($result);
+            } else {
+                $result = [
+                    'status' => 204,
+                    'message' => "Email not exist!"
+                ];
+
+                header('Content-Type: application/json');
+                echo json_encode($result);
+            }
+        } catch (\Throwable $th) {
+            $result = [
+                'status' => 500,
+                'message' => 'Got error in server process, please contact admin for more information!'
             ];
 
             header('Content-Type: application/json');

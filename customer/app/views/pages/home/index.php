@@ -229,14 +229,14 @@
 
                 let productClasses = ['mix'];
 
-                if (product.hot) {
+                if (parseInt(product.hot) === 1) {
                     productClasses.push('hot-sales');
                 } else {
                     productClasses.push('new-arrivals');
                 }
 
                 return `
-                <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix ${productClasses.join(' ')}">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 ${productClasses.join(' ')}">
                     <div class="product__item">
                         <div class="product__item__pic set-bg" style="object-fit: cover;background-position: center center;background-size: contain;" data-setbg="">
                             <span class="label">new</span>

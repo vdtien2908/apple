@@ -24,7 +24,8 @@
                 <div class="shop__sidebar">
                     <div class="shop__sidebar__search">
                         <form id="searchForm" action="<?php echo URL_APP; ?>/shop/filterByTitle" method="get">
-                            <input type="text" name="title" placeholder="Search by name..." required>
+                            <input type="text" name="title" placeholder="Search by name..." value="<?php echo isset($_SESSION['filter-title']) ? $_SESSION['filter-title'] : "" ?>">
+                            <?php unset($_SESSION['filter-title']) ?>
                             <button type="submit"><span class="icon_search"></span></button>
                         </form>
                         <script>
@@ -36,7 +37,7 @@
                                 searchForm.addEventListener('submit', function(event) {
                                     event.preventDefault();
                                     const titleValue = titleInput.value.trim();
-                                    const actionUrl = `${searchForm.action}/${encodeURIComponent(titleValue)}`;
+                                    const actionUrl = `${searchForm.action}/${encodeURIComponent(titleValue ? titleValue : "getAll")}`;
                                     searchForm.action = actionUrl;
                                     searchForm.submit();
                                 });
@@ -87,12 +88,10 @@
                                 <div id="collapseSix" class="collapse show" data-parent="#accordionExample">
                                     <div class="card-body">
                                         <div class="shop__sidebar__tags">
-                                            <a href="#">Products</a>
-                                            <a href="#">Laptop</a>
-                                            <a href="#">Ipad</a>
-                                            <a href="#">Iphone</a>
-                                            <a href="#">Best sell</a>
-                                            <a href="#">accessories</a>
+                                            <a href="<?php echo URL_APP ?>/shop/filterByCat">Products</a>
+                                            <a href="<?php echo URL_APP ?>/shop/filterByCat/macbook">Laptop</a>
+                                            <a href="<?php echo URL_APP ?>/shop/filterByCat/ipad-mini">Ipad</a>
+                                            <a href="<?php echo URL_APP ?>/shop/filterByCat/iphone">Iphone</a>
                                         </div>
                                     </div>
                                 </div>
@@ -124,7 +123,7 @@
                 <div class="row">
                     <?php if (empty($products)) { ?>
                         <div class="col-lg-12">
-                            <h3 class="text-dark font-weight-bolder mx-auto px-auto text-center my-4" style="max-width: 550px">Sorry, we don't have the product you're loolomg for.</h3>
+                            <h3 class="text-dark font-weight-bolder mx-auto px-auto text-center my-4" style="max-width: 550px">Sorry, we don't have the product you're looking for.</h3>
                         </div>
                     <?php } else { ?>
                         <?php foreach ($products as $product) { ?>

@@ -36,7 +36,7 @@
                         <tbody id="cartTable"></tbody>
                     </table>
                 </div>
-                <div class="row">
+                <div class="row mb-3">
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <div class="continue__btn">
                             <a href="<?php echo URL_APP; ?>/shop">Continue shopping</a>
@@ -67,7 +67,7 @@
         let checkoutTotalPrice = 0;
 
         if (cartItems.length === 0) {
-            cartContainer.innerHTML = `<h3 class="text-dark font-weight-bold">You don't have any product in your cart! Go and getsome.</h3>`
+            cartContainer.innerHTML = `<h3 class="text-dark font-weight-bold my-3">You don't have any product in your cart! Go and getsome.</h3>`
             renderCheckout(checkoutTotalPrice);
             return;
         }
@@ -172,7 +172,7 @@
 
     const processCheckout = () => {
         let checkoutItems = localStorage.getItem("checkoutItems");
-        checkoutItems = checkoutItems ? JSON.parse(checkoutItems) : [];
+        checkoutItems = [];
 
         if (cartItems.length === 0) {
             showToast("You don't have any product to checkout!", false);

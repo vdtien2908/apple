@@ -86,4 +86,16 @@ class OrderModel extends BaseModel
 
         return [];
     }
+
+    public function getLastestOrder()
+    {
+        $sql = "SELECT o.* FROM orders as o ORDER BY o.id DESC LIMIT 1";
+        $result = $this->querySql($sql);
+        return mysqli_fetch_assoc($result);
+    }
+
+    public function createOrder($data)
+    {
+        return $this->create(self::TableName, $data);
+    }
 }
