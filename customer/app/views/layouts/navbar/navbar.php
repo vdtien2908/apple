@@ -23,14 +23,14 @@
                             <a href="<?php echo URL_APP; ?>/auth">Login</a>
                             <a href="#">FAQs</a>
                         </div>
-                        <div class="header__top__hover">
+                        <!-- <div class="header__top__hover">
                             <span>VNĐ <i class="arrow_carrot-down"></i></span>
                             <ul>
                                 <li>VNĐ</li>
                                 <li>EUR</li>
                                 <li>USD</li>
                             </ul>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -50,7 +50,6 @@
                         <li class="<?php echo ($_SERVER['REQUEST_URI'] == '/apple/customer' .  '/shop' ? 'active' : ''); ?>"><a href="http://localhost/apple/customer/shop">Shop</a></li>
                         <li class="<?php echo ($_SERVER['REQUEST_URI'] == '/apple/customer' .  '/about' ? 'active' : ''); ?>"><a href="http://localhost/apple/customer/about">About us</a></li>
                         <li class="<?php echo ($_SERVER['REQUEST_URI'] == '/apple/customer' .  '/blog' ? 'active' : ''); ?>"><a href="http://localhost/apple/customer/blog">Blog</a></li>
-                        <li class="<?php echo ($_SERVER['REQUEST_URI'] == '/apple/customer' .  '/contact' ? 'active' : ''); ?>"><a href="http://localhost/apple/customer/contact">contact</a></li>
                     </ul>
                 </nav>
             </div>
@@ -68,7 +67,7 @@
                                 <li><a class="dropdown-item" href="<?php echo URL_APP . '/user/profile' ?>"><i class="fa fa-user-o mr-1" aria-hidden="true"></i>User Information</a></li>
                                 <li><a class="dropdown-item" href="<?php echo URL_APP . '/user/orderHistory' ?>"><i class="fa fa-history mr-1" aria-hidden="true"></i>Order History</a></li>
                                 <hr>
-                                <li><a class="dropdown-item" href="<?php echo URL_APP . '/auth/forgotpassword' ?>"><i class="fa fa-unlock-alt mr-1" aria-hidden="true"></i>Forgot-password?</a></li>
+                                <li><a class="dropdown-item" href="<?php echo URL_APP . '/auth/forgotpassword' ?>"><i class="fa fa-unlock-alt mr-1" aria-hidden="true"></i>Change password?</a></li>
                                 <li><a class="dropdown-item text-danger logout-link" href="#"><i class="fa fa-sign-out mr-1" aria-hidden="true"></i>Logout</a></li>
                             </div>
                         </div>
@@ -98,7 +97,7 @@
     }
 
     $(document).ready(function() {
-        caculatorCartCount();
+        // caculatorCartCount();
 
         $('.logout-link').click(function(e) {
             e.preventDefault();

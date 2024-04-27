@@ -17,9 +17,38 @@ class ProductModel extends BaseModel
         return [];
     }
 
+    public function getProductsASC()
+    {
+        $sql = "SELECT p.* FROM products as p ORDER BY p.price ASC";
+
+        $result = $this->querySql($sql);
+
+        if ($result) {
+            $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
+            return $products;
+        }
+
+        return [];
+    }
+
+    public function getProductsDESC()
+    {
+        $sql = "SELECT p.* FROM products as p ORDER BY p.price DESC";
+
+        $result = $this->querySql($sql);
+
+        if ($result) {
+            $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
+            return $products;
+        }
+
+        return [];
+    }
+
     public function getProduct($slug)
     {
-        $sql = "SELECT p.* FROM products p
+        $sql = "SELECT p.*, c.title as cat_title FROM products p
+            JOIN categories as c ON p.category_id = c.id 
             WHERE p.slug = '$slug'
             ORDER BY p.created_at DESC";
         $result = $this->querySql($sql);
@@ -41,6 +70,7 @@ class ProductModel extends BaseModel
                     'image' => $row['img'],
                     'color' => $row['color'],
                     'category_id' => $row['category_id'],
+                    'cat_title' => $row['cat_title'],
                     'delete' => $row['delete'],
                     'created_at' => $row['created_at'],
                     'updated_at' => $row['updated_at'],
@@ -138,5 +168,24 @@ class ProductModel extends BaseModel
     {
         $sql = "UPDATE products SET view_count = view_count + 1 WHERE slug = '${slug}'";
         return $this->querySql($sql);
+    }
+
+    public function getProductPagination($itemsPerPage, $offset)
+    {
+        $limit = '';
+        if ($itemsPerPage > 0) {
+            $limit = "LIMIT $itemsPerPage OFFSET $offset";
+        }
+
+        $sql = "SELECT p.* FROM products p ORDER BY p.created_at DESC $limit";
+
+        $result = $this->querySql($sql);
+
+        if ($result) {
+            $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
+            return $products;
+        }
+
+        return [];
     }
 }

@@ -81,7 +81,7 @@ class ShopController extends BaseController
     public function filterByTitle($title)
     {
         $_SESSION['filter-title'] = $title;
-        
+
         if ($title == "getAll") {
             $_SESSION['filter-title'] = "";
             $products = $this->productModel->getProducts();
@@ -155,6 +155,35 @@ class ShopController extends BaseController
                 ]
             );
         }
+    }
+
+
+    public function sortASC()
+    {
+        $products = $this->productModel->getProductsASC();
+
+        $this->view(
+            'app',
+            [
+                'pages' => 'shop/index',
+                'title' => 'Shop',
+                'products' => $products
+            ]
+        );
+    }
+
+    public function sortDESC()
+    {
+        $products = $this->productModel->getProductsDESC();
+
+        $this->view(
+            'app',
+            [
+                'pages' => 'shop/index',
+                'title' => 'Shop',
+                'products' => $products
+            ]
+        );
     }
 
     public function detail($slug)

@@ -114,7 +114,6 @@
         const checkoutElm = `
             <h6>TOTAL PRICE</h6>
             <ul>
-                <li>Subtax <span>${checkoutTotalPrice > 0?Number(checkoutTotalPrice - 100000).toLocaleString('vi-VN'):0} VND</span></li>
                 <li>Total <span>${Number(checkoutTotalPrice).toLocaleString('vi-VN')} VND</span></li>
             </ul>
             <button type="button" onclick="processCheckout()" class="w-100 primary-btn">Process checkout</button>
@@ -153,7 +152,12 @@
 
     const deleteItem = (id) => {
         try {
-            const newCartItems = cartItems.filter(item => parseInt(item.id) !== id);
+            const newCartItems = [];
+            cartItems.forEach(item => {
+                if (parseInt(item.id) !== id) {
+                    newCartItems.push(item)
+                }
+            });
 
             localStorage.setItem("cartItems", JSON.stringify(newCartItems));
             showToast("Delete product successfully!", true);

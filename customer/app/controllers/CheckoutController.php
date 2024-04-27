@@ -22,7 +22,7 @@ class CheckoutController extends BaseController
             'app',
             [
                 'pages' => 'checkout/index',
-                'title' => 'Trang Checkout',
+                'title' => 'Checkout',
             ]
         );
     }
@@ -33,7 +33,18 @@ class CheckoutController extends BaseController
             'app',
             [
                 'pages' => 'checkout/index',
-                'title' => 'Trang Checkout',
+                'title' => 'Checkout',
+            ]
+        );
+    }
+
+    public function success()
+    {
+        $this->view(
+            'app',
+            [
+                'pages' => 'checkout/success',
+                'title' => 'Checkout',
             ]
         );
     }
@@ -56,7 +67,7 @@ class CheckoutController extends BaseController
                 'address_receive' => $addressReceive,
                 'note' => $notes,
                 'total_money' => $totalPrice,
-                'status_order' => 1
+                'status_order' => 0
             ];
 
 

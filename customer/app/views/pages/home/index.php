@@ -1,5 +1,6 @@
 <!-- Hero Section Begin -->
 <section class="hero">
+    <input type="hidden" id="authenticated" value="<?php echo isset($_SESSION['authenticated']) ? "authenticated" : "noauthenticated"; ?>">
     <div class="hero__slider owl-carousel">
         <div class="hero__items set-bg" data-setbg="<?php echo SCRIPT_ROOT; ?>/assets/img/hero/hero-3.jpg">
             <div class="container">
@@ -158,6 +159,7 @@
 
 <script>
     const URL = "http://localhost/apple/customer"
+    const authenticated = $('#authenticated').val();
 
     // Fetch 
     const fetchNewProduct = async () => {
@@ -276,26 +278,31 @@
     };
 
     const addCart = (element) => {
-        try {
-            const product = JSON.parse(element.dataset.product);
-            let cartItems = localStorage.getItem("cartItems");
-            cartItems = cartItems ? JSON.parse(cartItems) : [];
+        if (authenticated === "noauthenticated") {
+            showToast("Please login before add product to cart", false);
+            return;
+        } else {
+            try {
+                const product = JSON.parse(element.dataset.product);
+                let cartItems = localStorage.getItem("cartItems");
+                cartItems = cartItems ? JSON.parse(cartItems) : [];
 
-            console.log(product);
+                console.log(product);
 
-            const existingCartItem = cartItems.find(item => item.id === product.id);
+                const existingCartItem = cartItems.find(item => item.id === product.id);
 
-            if (existingCartItem) {
-                existingCartItem.quantity += 1;
-            } else {
-                product.quantity = 1;
-                cartItems.push(product);
+                if (existingCartItem) {
+                    existingCartItem.quantity += 1;
+                } else {
+                    product.quantity = 1;
+                    cartItems.push(product);
+                }
+
+                localStorage.setItem("cartItems", JSON.stringify(cartItems));
+                showToast("Product has been added to cart!", true);
+            } catch (error) {
+                showToast("Fail to add product to cart, contact to admin for more information!", false);
             }
-
-            localStorage.setItem("cartItems", JSON.stringify(cartItems));
-            showToast("Product has been added to cart!", true);
-        } catch (error) {
-            showToast("Fail to add product to cart, contact to admin for more information!", false);
         }
     };
 

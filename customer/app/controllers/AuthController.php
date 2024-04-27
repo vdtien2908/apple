@@ -129,10 +129,10 @@ class AuthController extends BaseController
             if (!isset($password)) {
                 $result = [
                     'status' => 404,
-                    'message' => "Wrong password, please check your password."
+                    'message' => "Please, enter your password."
                 ];
 
-                header('Content-Type: application/json');
+                header('Content-Type: application/json'); 
                 echo json_encode($result);
             }
 

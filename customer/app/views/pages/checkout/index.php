@@ -97,7 +97,6 @@
 
              return `
                     <li>${index+1}. <span class="text-truncate" style="width:150px">${item.title}</span><span>${Number(itemTotalPrice).toLocaleString('vi-VN')} VND x ${item.quantity}</span></li>
-                </tr>
             `
          }).join(' ');
 
@@ -110,7 +109,7 @@
          const checkoutContainer = document.getElementById('checkoutPrice');
 
          const checkoutElm = `
-                <li>Subtax <span>${Number(checkoutTotalPrice - 100000).toLocaleString('vi-VN')} VND</span></li>
+                <li>SubPrice <span>${Number(checkoutTotalPrice - 100000).toLocaleString('vi-VN')} VND</span></li>
                 <li>TotalPrice <span id="totalMoney">${Number(checkoutTotalPrice).toLocaleString('vi-VN')} VND</span></li>
             `;
 
@@ -189,8 +188,18 @@
                      const newCartItems = cartItems.filter(item => !checkoutItems.some(checkout => parseInt(item.id) === parseInt(checkout.id)));
                      localStorage.setItem("cartItems", JSON.stringify(newCartItems));
 
+                     // add item to checkout success variable
+                     const successItems = {
+                         name: name,
+                         address: address,
+                         phone: phone,
+                         products: checkoutItems
+                     };
+
+                     localStorage.setItem("successCheckoutItems", JSON.stringify(successItems));
+
                      // Navigate
-                     window.location.href = "http://localhost/apple/customer/cart";
+                     window.location.href = "http://localhost/apple/customer/checkout/success";
                  } else {
                      showToast(res.message, false);
                  }

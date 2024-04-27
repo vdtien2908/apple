@@ -15,7 +15,7 @@
                 <div class="col-12">
                     <div class="form-group">
                         <label for="passwordinput">Password</label>
-                        <input type="password" name="password" class="form-control" id="passwordinput" placeholder="123456">
+                        <input type="password" name="password" class="form-control" id="passwordinput" placeholder="">
                     </div>
                 </div>
                 <div class="col-12 mb-3">
@@ -31,7 +31,7 @@
                 </div>
                 <div class="col-12 text-center">
                     Alrealy have account?
-                    <a href="http://localhost/apple/customer/auth/login">Login now.</a>
+                    <a href="http://localhost/apple/customer/auth/login" class="text-dark font-weight-bold">Login now.</a>
                 </div>
             </div>
         </form>
@@ -41,32 +41,52 @@
 <script>
     const URL = "http://localhost/apple/customer"
 
+    const validateForm = () => {
+        var email = $('input[name="email"]').val().trim();
+        var password = $('input[name="password"]').val().trim();
+
+        if (email === '') {
+            showToast("Please, enter email account", false);
+            return false;
+        }
+
+        if (password === '') {
+            showToast("Please, enter password", false);
+            return false;
+        } else if (password.length < 6) {
+            showToast("Please, password must have at least 6 character", false);
+            return false;
+        }
+
+        return true;
+    }
+
     $(document).ready(function() {
         $('#registerForm').submit(function(e) {
             e.preventDefault();
 
-            var formData = new FormData(this);
+            if (validateForm()) {
+                var formData = new FormData(this);
 
-            $.ajax({
-                type: 'POST',
-                url: $(this).attr('action'),
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function(res) {
-                    if (res.status === 200) {
-                        showToast(res.message, true);
-                        window.location.href = URL + '/auth/login';
-                    } else if (res.status === 204) {
-                        showToast(res.message, false);
-                    } else if (res.status === 404) {
-                        showToast(res.message, false);
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(res) {
+                        if (res.status === 200) {
+                            showToast(res.message, true);
+                            window.location.href = URL + '/auth/login';
+                        } else
+                            showToast(res.message, false);
+                            
+                    },
+                    error: function(xhr, status, error) {
+                        showToast('Có lỗi xảy ra: ' + error, false);
                     }
-                },
-                error: function(xhr, status, error) {
-                    showToast('Có lỗi xảy ra: ' + error, false);
-                }
-            });
+                });
+            }
         });
     });
 </script>

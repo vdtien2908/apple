@@ -8,6 +8,7 @@
                     <div class="breadcrumb__links">
                         <a href="<?php echo URL_APP ?>/home" class="text-secondary">Home</a>
                         <span class="text-secondary">Shop</span>
+                        <input type="hidden" id="authenticated" value="<?php echo isset($_SESSION['authenticated']) ? "authenticated" : "noauthenticated"; ?>">
                     </div>
                 </div>
             </div>
@@ -111,55 +112,54 @@
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="shop__product__option__right">
                                 <p>Sort by price:</p>
-                                <select>
-                                    <option value="">low to hight</option>
-                                    <option value="">low to hight</option>
-                                    <option value="">hight to low</option>
+                                <select onchange="handleSortChange(this.value)">
+                                    <option value="">Select sort order</option>
+                                    <option value="ASC">Low to high</option>
+                                    <option value="DESC">High to low</option>
                                 </select>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <?php if (empty($products)) { ?>
-                        <div class="col-lg-12">
-                            <h3 class="text-dark font-weight-bolder mx-auto px-auto text-center my-4" style="max-width: 550px">Sorry, we don't have the product you're looking for.</h3>
-                        </div>
-                    <?php } else { ?>
-                        <?php foreach ($products as $product) { ?>
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="<?php echo IMAGES_PATH . '/' . $product['img']; ?>">
-                                        <ul class="product__hover">
-                                            <li><a href="<?php echo URL_APP . '/shop/detail/' . $product['slug'] ?>"><img loading="lazy" src="<?php echo SCRIPT_ROOT; ?>/assets/img/icon/heart.png" alt=""></a></li>
-                                            <li><a href="<?php echo URL_APP . '/shop/detail/' . $product['slug'] ?>"><img loading="lazy" src="<?php echo SCRIPT_ROOT; ?>/assets/img/icon/compared.png" alt=""> <span>Compare</span></a></li>
-                                            <li><a href="<?php echo URL_APP . '/shop/detail/' . $product['slug'] ?>"><img loading="lazy" src="<?php echo SCRIPT_ROOT; ?>/assets/img/icon/search.png" alt=""></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="product__item__text">
-                                        <h6><?php echo $product['title'] ?></h6>
-                                        <a href="#" class="add-cart" data-product="<?php echo htmlspecialchars(json_encode($product)); ?>" onclick="addCart(this)">+ Add To Cart
-                                        </a>
-                                        <div class="rating">
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
+                    <div class="row">
+                        <?php if (empty($products)) { ?>
+                            <div class="col-lg-12">
+                                <h3 class="text-dark font-weight-bolder mx-auto px-auto text-center my-4" style="max-width: 550px">Sorry, we don't have the product you're looking for.</h3>
+                            </div>
+                        <?php } else { ?>
+                            <?php foreach ($products as $product) { ?>
+                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                    <div class="product__item">
+                                        <div class="product__item__pic set-bg" data-setbg="<?php echo IMAGES_PATH . '/' . $product['img']; ?>">
+                                            <ul class="product__hover">
+                                                <li><a href="<?php echo URL_APP . '/shop/detail/' . $product['slug'] ?>"><img loading="lazy" src="<?php echo SCRIPT_ROOT; ?>/assets/img/icon/heart.png" alt=""></a></li>
+                                                <li><a href="<?php echo URL_APP . '/shop/detail/' . $product['slug'] ?>"><img loading="lazy" src="<?php echo SCRIPT_ROOT; ?>/assets/img/icon/compared.png" alt=""> <span>Compare</span></a></li>
+                                                <li><a href="<?php echo URL_APP . '/shop/detail/' . $product['slug'] ?>"><img loading="lazy" src="<?php echo SCRIPT_ROOT; ?>/assets/img/icon/search.png" alt=""></a></li>
+                                            </ul>
                                         </div>
-                                        <h5><?php echo number_format($product['price'], 0, ',', ',') . ' VND'; ?></h5>
-                                        <div class="product__color__select">
-                                            <label for="pc-4"><input type="radio" id="pc-4"></label>
-                                            <label class="active black" for="pc-5"><input type="radio" id="pc-5"></label>
-                                            <label class="grey" for="pc-6"><input type="radio" id="pc-6"></label>
+                                        <div class="product__item__text">
+                                            <h6><?php echo $product['title'] ?></h6>
+                                            <a href="#" class="add-cart" data-product="<?php echo htmlspecialchars(json_encode($product)); ?>" onclick="addCart(this)">+ Add To Cart
+                                            </a>
+                                            <div class="rating">
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                            </div>
+                                            <h5><?php echo number_format($product['price'], 0, ',', ',') . ' VND'; ?></h5>
+                                            <div class="product__color__select">
+                                                <label for="pc-4"><input type="radio" id="pc-4"></label>
+                                                <label class="active black" for="pc-5"><input type="radio" id="pc-5"></label>
+                                                <label class="grey" for="pc-6"><input type="radio" id="pc-6"></label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            <?php } ?>
                         <?php } ?>
-                    <?php } ?>
-                </div>
-                <div class="row">
+                    </div>
+                    <!-- <div class="row">
                     <div class="col-lg-12">
                         <div class="product__pagination">
                             <a class="active" href="#">1</a>
@@ -169,15 +169,16 @@
                             <a href="#">21</a>
                         </div>
                     </div>
+                </div> -->
                 </div>
             </div>
         </div>
-    </div>
 </section>
 <!-- Shop Section End -->
 
 <script>
     const URL = "http://localhost/apple/customer"
+    const authenticated = $('#authenticated').val();
 
     // Fetch 
     const fetchCategories = async () => {
@@ -213,26 +214,38 @@
 
     // Actions
     const addCart = (element) => {
-        try {
-            const product = JSON.parse(element.dataset.product);
-            let cartItems = localStorage.getItem("cartItems");
-            cartItems = cartItems ? JSON.parse(cartItems) : [];
+        if (authenticated === "noauthenticated") {
+            showToast("Please login before add product to cart", false);
+            return;
+        } else {
+            try {
+                const product = JSON.parse(element.dataset.product);
+                let cartItems = localStorage.getItem("cartItems");
+                cartItems = cartItems ? JSON.parse(cartItems) : [];
 
-            const existingCartItem = cartItems.find(item => item.id === product.id);
+                const existingCartItem = cartItems.find(item => item.id === product.id);
 
-            if (existingCartItem) {
-                existingCartItem.quantity += 1;
-            } else {
-                product.quantity = 1;
-                cartItems.push(product);
+                if (existingCartItem) {
+                    existingCartItem.quantity += 1;
+                } else {
+                    product.quantity = 1;
+                    cartItems.push(product);
+                }
+
+                localStorage.setItem("cartItems", JSON.stringify(cartItems));
+                showToast("Product has been added to cart!", true);
+            } catch (error) {
+                showToast("Fail to add product to cart, contact to admin for more information!", false);
             }
-
-            localStorage.setItem("cartItems", JSON.stringify(cartItems));
-            showToast("Product has been added to cart!", true);
-        } catch (error) {
-            showToast("Fail to add product to cart, contact to admin for more information!", false);
         }
     };
+
+    const handleSortChange = async (value) => {
+        console.log(value);
+        if (value) {
+            window.location.href = `${URL}/shop/sort${value}`;
+        }
+    }
 
     fetchCategories();
 </script>

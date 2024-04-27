@@ -6,141 +6,120 @@
     .tab-pane.active {
         display: block;
     }
+
+    .carousel-indicators {
+        position: static;
+    }
+
+    .carousel-indicators li {
+        width: 300px;
+        height: 100%;
+        opacity: 0.8;
+    }
 </style>
 
-<!-- Shop Details Section Begin -->
-<section class="shop-details">
-    <div class="product__details__pic">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="product__details__breadcrumb">
-                        <a href="./home">Home</a>
-                        <a href="./shop">Shop</a>
-                        <span>Product Details</span>
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-option" style="background: #1a1a1a;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__text">
+                    <h4 class="text-white">Shop</h4>
+                    <div class="breadcrumb__links">
+                        <a href="<?php echo URL_APP ?>/home" class="text-secondary">Home</a>
+                        <span class="text-secondary">Shop Details > <?php echo $product['title'] ?></span>
                         <input type="hidden" name="productSlug" id="productSlug" value="<?php echo $product['slug'] ?>">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-3">
-                    <ul class="nav nav-tabs" role="tablist" id="image-tablist">
-                    </ul>
-                </div>
-                <div class="col-lg-6 col-md-9">
-                    <div class="tab-content" id="image-tabcontent">
+                        <input type="hidden" id="authenticated" value="<?php echo isset($_SESSION['authenticated']) ? "authenticated" : "noauthenticated"; ?>">
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="product__details__content">
-        <div class="container">
-            <div class="row d-flex justify-content-center">
-                <div class="col-lg-8">
-                    <div class="product__details__text">
-                        <h4 id="product-title"></h4>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o"></i>
-                            <span> - 5 Reviews</span>
-                        </div>
-                        <h3 id="product-price"></h3>
-                        <div class="product__details__option d-flex flex-column">
-                            <div class="d-flex align-items-center justify-content-center mb-3 text-xl">
-                                <span>Color: </span>
-                                <span id="product-color" class="font-weight-bold"></span>
-                            </div>
-                            <?php if (count($specifications) > 0) : ?>
-                                <p class="mx-auto px-auto text-center">Specifications:</p>
-                                <table class="table">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            <th scope="col">Attribute</th>
-                                            <th scope="col">Value</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="specifiTable">
-                                    </tbody>
-                                </table>
-                            <?php endif; ?>
-                        </div>
-                        <div class="product__details__cart__option">
-                            <div class="quantity">
-                                <div class="pro-qty">
-                                    <input type="text" value="1" id="productQuantity">
-                                </div>
-                            </div>
-                            <a href="#" class="primary-btn add-cart" data-product="<?php echo htmlspecialchars(json_encode($product)); ?>" onclick="addCart(this)">add to cart</a>
-                        </div>
-                        <div class="product__details__btns__option">
-                            <a href="#"><i class="fa fa-heart"></i> add to wishlist</a>
-                            <a href="#"><i class="fa fa-exchange"></i> Add To Compare</a>
-                        </div>
-                        <div class="product__details__last__option">
-                            <h5><span>Guaranteed Safe Checkout</span></h5>
-                            <img loading="lazy" src="<?php echo SCRIPT_ROOT ?>/assets/img/shop-details/details-payment.png" alt="">
-                            <ul>
-                                <li><span>SKU:</span> 3812912</li>
-                                <li><span>Categories:</span> Technologies</li>
-                                <li><span>Tag:</span> Technologies, Phone,Laptop</li>
-                            </ul>
-                        </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Shop Details Section Begin -->
+<section class="shop-details">
+
+    <div class="container">
+        <div class="row mt-5 shadow-sm p-3">
+            <div class="col-12 col-md-7 col-lg-8">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" id="crs-main-images">
                     </div>
                 </div>
+                <ol class="carousel-indicators" id="crs-navigation">
+                </ol>
             </div>
+            <div class="col-12 col-md-5 col-lg-4">
+                <h3 class="font-weight-bold mb-1 text-uppercase" id="product-title"></h3>
+                <ul class="mb-4 list-unstyled">
+                    <li><span class="text-secondary">Categories:</span> <?php echo $product['cat_title'] ?></li>
+                    <li><span class="text-secondary">Tag:</span> Technologies, Phone, Laptop</li>
+                </ul>
+                <div class="mb-3">
+                    <h5 class="text-secondary font-weight-bold">Price:</h5>
+                    <div class="d-flex flex-wrap font-weight-bold">
+                        <h4 class="text-danger font-weight-bold" id="product-price-hot"></h4>
+                        <del class="text-secondary ml-2" id="product-price"></del>
+                    </div>
+                </div>
+                <div class="d-flex flex-column mb-3">
+                    <h5 class="text-dark font-weight-bold">Color: <span id="product-color"></span></h5>
+                </div>
+                <div class="product__details__last__option my-3">
+                    <h5><span>Guaranteed Safe Checkout</span></h5>
+                    <img loading="lazy" src="<?php echo SCRIPT_ROOT ?>/assets/img/shop-details/details-payment.png" alt="">
+                </div>
+                <div class="product__details__cart__option mt-5">
+                    <div class="quantity">
+                        <div class="pro-qty">
+                            <input type="text" value="1" id="productQuantity">
+                        </div>
+                    </div>
+                    <a href="#" class="primary-btn add-cart" data-product="<?php echo htmlspecialchars(json_encode($product)); ?>" onclick="addCart(this)">add to cart</a>
+                </div>
+                <div>
+                    <h4 class="font-weight-bold">Product short information</h4>
+                    <span id="product-content">
+                        Content
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Related Section Begin -->
+    <section class="related spad">
+        <div class="container">
             <div class="row">
                 <div class="col-lg-12">
+                    <h3 class="related-title text-left">Related Product</h3>
+                </div>
+            </div>
+            <div class="row" id="relatedContainer">
+            </div>
+        </div>
+    </section>
+    <!-- Related Section End -->
+
+    <div class="product__details__content">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-8">
+                    <h3 class="font-weight-bold">Product Details</h3>
                     <div class="product__details__tab">
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" href="#tabs-5" role="tab">Description</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tabs-6" role="tab">Customer
-                                    Previews(5)</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tabs-7" role="tab">Additional
-                                    information</a>
-                            </li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="tabs-5" role="tabpanel">
                                 <div class="product__details__tab__content">
-                                    <p class="note product-desc">.</p>
                                     <div class="product__details__tab__content__item">
                                         <h5>Products Infomation</h5>
                                         <p class="product-desc">.</p>
-                                    </div>
-                                    <div class="product__details__tab__content__item">
-                                        <h5>Material used</h5>
-                                        <p class="product-desc">.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="tabs-6" role="tabpanel">
-                                <div class="product__details__tab__content">
-                                    <div class="product__details__tab__content__item">
-                                        <h5>Products Infomation</h5>
-                                        <p class="product-desc">.</p>
-
-                                    </div>
-                                    <div class="product__details__tab__content__item">
-                                        <h5>Material used</h5>
-                                        <p class="product-desc">.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="tabs-7" role="tabpanel">
-                                <div class="product__details__tab__content">
-                                    <div class="product__details__tab__content__item">
-                                        <h5>Products Infomation</h5>
-                                        <p class="product-desc">.</p>
-
                                     </div>
                                     <div class="product__details__tab__content__item">
                                         <h5>Material used</h5>
@@ -150,6 +129,14 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <h3 class="font-weight-bold mb-3">Specifications</h3>
+                    <table class="table table-striped border rounded-lg">
+                        <tbody id="specifiTable">
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -157,40 +144,24 @@
 </section>
 <!-- Shop Details Section End -->
 
-<!-- Related Section Begin -->
-<section class="related spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h3 class="related-title">Related Product</h3>
-            </div>
-        </div>
-        <div class="row" id="relatedContainer">
-        </div>
-    </div>
-</section>
-<!-- Related Section End -->
-
 <script>
     const URL = "http://localhost/apple/customer"
     const productSlug = $('#productSlug').val();
+    const authenticated = $('#authenticated').val();
 
     // Fetch 
     const fetchDetailproduct = async () => {
-        $.ajax({
+        await $.ajax({
             url: `${URL}/shop/getDetail/${productSlug}`,
             type: 'GET',
             success: function(res) {
                 console.log(res);
                 if (res.status === 200) {
                     const data = res.data;
-                    renderImagesTablist(data.images, data.product);
+                    renderImagesCaroucel(data.images);
                     renderProduct(data.product);
                     renderRelatedProduct(data.relatedProduct);
-
-                    if (data.specifications.length > 0) {
-                        renderSpecifications(data.specifications);
-                    }
+                    renderSpecifications(data.specifications);
                 } else {
                     showToast(res.message, true);
                 }
@@ -203,73 +174,73 @@
     }
 
     const renderProduct = (product) => {
-        $(document).ready(function() {
-            $('#product-title').text(product.title);
-            $('#product-price').html(`${Number(product.price).toLocaleString('vi-VN')} VND <span>${Number((product.price - 1000000)).toLocaleString('vi-VN')} VND</span>`);
-            $('#product-content').text(product.content);
-            $('#product-color').text(product.color);
+        $('#product-price-hot').html(`${Number(product.sale_price).toLocaleString('vi-VN')} VND`);
+        $('#product-price').html(`${Number((product.price)).toLocaleString('vi-VN')} VND`);
+        $('#product-content').text(product.content);
+        $('#product-title').text(product.title);
+        $('#product-color').text(product.color);
 
-            const productDescs = document.querySelectorAll('.product-desc');
-            productDescs.forEach(element => {
-                element.innerHTML = product.description;
-            });
+        const productDescs = document.querySelectorAll('.product-desc');
+        productDescs.forEach(element => {
+            element.innerHTML = product.description;
         });
     };
 
-    const renderImagesTablist = (images, product) => {
-        const imageTabListContainer = document.getElementById('image-tablist')
-        const imageTabContenttContainer = document.getElementById('image-tabcontent')
+    const renderImagesCaroucel = (images) => {
+        const carouselMainContainer = document.getElementById('crs-main-images')
+        const carouselNavigation = document.getElementById('crs-navigation')
 
-        const imageTabListElement = images.map((image, index) => (
-            `
-            <li class="nav-item">
-                <a class="nav-link ${index == 0 && 'active'}" data-toggle="tab" href="#tabs-${index}" role="tab">
-                    <div class="product__thumb__pic set-bg" style="background: url('<?php echo IMAGES_PATH; ?>/${image.path_name}') no-repeat;object-fit: cover;background-position: center center;background-size: contain;">
-                    </div>
-                </a>
-            </li>
-        `
-        )).join(' ');
-
-
-        const imageTabContentElement = `
-            <div class="tab-pane active" role="tabpanel">
-                <div class="product__details__pic__item">
-                    <img loading="lazy" src="<?php echo IMAGES_PATH; ?>/${product.image}" alt="">
+        const carouselElement = images.map((image, index) => {
+            if (index === 0) {
+                return `
+                <div class="carousel-item active">
+                    <img src="<?php echo IMAGES_PATH; ?>/${image.path_name}" class="" style="width:640px !important; height:400px; object-fit:cover;">
                 </div>
-            </div>
-        `;
-        // const imageTabContentElement = images.map((image, index) => {
-        //     if (index > 0) {
-        //         return;
-        //     }
-        //     return `
-        //     <div class="tab-pane active" id="tabs-${index}" role="tabpanel">
-        //         <div class="product__details__pic__item">
-        //             <img loading="lazy" src="<?php echo IMAGES_PATH; ?>/${image.path_name}" alt="">
-        //         </div>
-        //     </div>
-        // `
-        // }).join(' ');
+            `;
+            } else {
+                return `
+                <div class="carousel-item">
+                    <img src="<?php echo IMAGES_PATH; ?>/${image.path_name}" class="" style="width:640px !important; height:400px; object-fit:cover;">
+                </div>
+            `;
+            }
+        }).join(' ');
 
+        const navigationElement = images.map((image, index) => {
+            if (index === 0) {
+                return `
+                    <li data-target="#carouselExampleIndicators" data-slide-to="${index}" class="active">
+                        <img src="<?php echo IMAGES_PATH; ?>/${image.path_name}" class="d-block" style="width:100px; height:100px;object-fit:cover;">
+                    </li>
+                `;
+            } else {
+                return `
+                    <li data-target="#carouselExampleIndicators" data-slide-to="${index}">
+                        <img src="<?php echo IMAGES_PATH; ?>/${image.path_name}" class="d-block" style="width:100px; height:100px;object-fit:cover;">
+                    </li>
+                `;
+            }
+        }).join(' ');
 
-        imageTabListContainer.innerHTML = imageTabListElement;
-        imageTabContenttContainer.innerHTML = imageTabContentElement;
+        carouselMainContainer.innerHTML = carouselElement;
+        carouselNavigation.innerHTML = navigationElement;
     };
 
     const renderSpecifications = (specifications) => {
         const tableContainer = document.getElementById('specifiTable');
 
+        console.log(specifications.length);
+
         if (specifications.length === 0) {
-            tableContainer.innerHTML = `<h5 class="font-weight-bold text-dark text-center mx-auto px-auto">No specification available!</h5>`;
+            tableContainer.innerHTML = `<h5 class="font-weight-bold text-dark text-left">No specification available!</h5>`;
             return;
         }
 
-        const tableElement = specifications.map((sp, index) => (
+        const tableElement = specifications.map((p, index) => (
             `
                 <tr>
-                    <td>${sp.key}</td>
-                    <td>${sp.value}</td>
+                    <td>${p.key}</td>
+                    <td>${p.value}</td>
                 </tr>
             `
         )).join(' ');
@@ -330,27 +301,32 @@
 
     // Actions
     const addCart = (element) => {
-        try {
-            const productQuantity = document.getElementById('productQuantity').value;
+        if (authenticated === "noauthenticated") {
+            showToast("Please login before add product to cart", false);
+            return;
+        } else {
+            try {
+                const productQuantity = document.getElementById('productQuantity').value;
 
-            const product = JSON.parse(element.dataset.product);
-            let cartItems = localStorage.getItem("cartItems");
-            cartItems = cartItems ? JSON.parse(cartItems) : [];
+                const product = JSON.parse(element.dataset.product);
+                let cartItems = localStorage.getItem("cartItems");
+                cartItems = cartItems ? JSON.parse(cartItems) : [];
 
-            const existingCartItem = cartItems.find(item => item.id === product.id);
+                const existingCartItem = cartItems.find(item => item.id === product.id);
 
-            if (existingCartItem) {
-                existingCartItem.quantity += 1;
-            } else {
-                product.quantity = productQuantity ? productQuantity : 1;
-                cartItems.push(product);
+                if (existingCartItem) {
+                    existingCartItem.quantity += 1;
+                } else {
+                    product.quantity = productQuantity ? productQuantity : 1;
+                    cartItems.push(product);
+                }
+
+                localStorage.setItem("cartItems", JSON.stringify(cartItems));
+                showToast("Product has been added to cart!", true);
+            } catch (error) {
+                showToast("Fail to add product to cart, contact to admin for more information!", false);
+                console.log(error);
             }
-
-            localStorage.setItem("cartItems", JSON.stringify(cartItems));
-            showToast("Product has been added to cart!", true);
-        } catch (error) {
-            showToast("Fail to add product to cart, contact to admin for more information!", false);
-            console.log(error);
         }
     };
 

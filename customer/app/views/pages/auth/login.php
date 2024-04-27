@@ -36,9 +36,9 @@
                 <div class="col-12 my-4">
                     <button role="button" class="primary-btn w-100">Sign In</button>
                 </div>
-                <div class="col-12 text-center">
+                <!-- <div class="col-12 text-center">
                     <a class="text-dark font-weight-bold" href="http://localhost/apple/customer/auth/forgotPassword">Forgot your password?</a>
-                </div>
+                </div> -->
                 <div class="col-12 text-center">
                     Don't have account?
                     <a class="text-dark font-weight-bold" href="http://localhost/apple/customer/auth/register">Register now.</a>
@@ -51,29 +51,52 @@
 <script>
     const URL = "http://localhost/apple/customer"
 
+    const validateForm = () => {
+        var email = $('input[name="email"]').val().trim();
+        var password = $('input[name="password"]').val().trim();
+
+        if (email === '') {
+            showToast("Please, enter email account", false);
+            return false;
+        }
+
+        if (password === '') {
+            showToast("Please, enter password", false);
+            return false;
+        } else if (password.length < 6) {
+            showToast("Please, password must have at least 6 character", false);
+            return false;
+        }
+
+        return true;
+    }
+
+
     $(document).ready(function() {
         $('form').submit(function(e) {
             e.preventDefault();
 
-            var formData = new FormData(this);
+            if (validateForm()) {
+                var formData = new FormData(this);
 
-            $.ajax({
-                type: 'POST',
-                url: $(this).attr('action'),
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function(res) {
-                    if (res.status === 200) {
-                        showToast(res.message, true);
-                        window.location.href = URL + '/home';
-                    } else
-                        showToast(res.message, false);
-                },
-                error: function(xhr, status, error) {
-                    showToast('Có lỗi xảy ra: ' + error, false);
-                }
-            });
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(res) {
+                        if (res.status === 200) {
+                            showToast(res.message, true);
+                            window.location.href = URL + '/home';
+                        } else
+                            showToast(res.message, false);
+                    },
+                    error: function(xhr, status, error) {
+                        showToast('Có lỗi xảy ra: ' + error, false);
+                    }
+                });
+            }
         });
     });
 </script>
