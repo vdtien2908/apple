@@ -221,8 +221,6 @@
 
         if (slug) {
             fetchPostByCategorySlug(slug);
-        } else {
-            fetchPost();
         }
     });
 
@@ -235,6 +233,6 @@
     } else {
         fetchPost();
     }
-    
+
     fetchCategories();
 </script>

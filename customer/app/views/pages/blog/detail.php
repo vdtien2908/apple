@@ -99,7 +99,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="blog__details__comment">
+                <!-- <div class="blog__details__comment">
                     <h4>Leave A Comment</h4>
                     <form action="#">
                         <div class="row">
@@ -118,7 +118,7 @@
                             </div>
                         </div>
                     </form>
-                </div>
+                </div> -->
             </div>
             <div class="col-12 col-md-4 mb-5 order-md-2 mb-5">
                 <h4 class="tex-dark font-weight-bold mb-2 mr-auto ms-0">WANNA SEE SOME BLOG CATEGORIES.</h4>

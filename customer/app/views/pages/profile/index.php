@@ -5,37 +5,37 @@
             <div class="col-12 col-md-6 mb-3">
                 <div class="form-group">
                     <label for="emailinput">Email address</label>
-                    <input type="email" name="email" class="form-control" value="<?php echo $_SESSION['auth']['email'] ?>" placeholder="name@example.com">
+                    <input type="email" name="email" class="form-control" value="<?php echo isset($_SESSION['auth']['email']) ? $_SESSION['auth']['email'] : "" ?>" placeholder="name@example.com">
                 </div>
             </div>
 
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     <label for="nameinput">Fullname</label>
-                    <input type="text" name="name" class="form-control" value="<?php echo $_SESSION['auth']['name'] ?>" placeholder="">
+                    <input type="text" name="name" class="form-control" value="<?php echo isset($_SESSION['auth']['name']) ? $_SESSION['auth']['name'] : "" ?>" placeholder="">
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     <label for="address">Address</label>
-                    <input type="text" name="address" class="form-control" value="<?php echo $_SESSION['auth']['address'] ?>" placeholder="">
+                    <input type="text" name="address" class="form-control" value="<?php echo isset($_SESSION['auth']['address']) ? $_SESSION['auth']['address'] : "" ?>" placeholder="">
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     <label for="phone">Phone</label>
-                    <input type="number" name="phone" class="form-control" value="<?php echo $_SESSION['auth']['phone'] ?>" placeholder="">
+                    <input type="number" name="phone" class="form-control" value="<?php echo isset($_SESSION['auth']['phone']) ? $_SESSION['auth']['phone'] : "" ?>" placeholder="">
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     <label>Gender</label>
                     <div>
-                        <input type="radio" name="gender" value="Male" <?php echo $_SESSION['auth']['gender'] == 0 ? "checked" : "" ?>>
+                        <input type="radio" name="gender" value="Male" <?php echo isset($_SESSION['auth']['gender']) == 0 ? "checked" : "" ?>>
                         <label for="male">Male</label>
                     </div>
                     <div>
-                        <input type="radio" name="gender" value="Female" <?php echo $_SESSION['auth']['gender'] == 1 ? "checked" : "" ?>>
+                        <input type="radio" name="gender" value="Female" <?php echo isset($_SESSION['auth']['gender']) == 1 ? "checked" : "" ?>>
                         <label for="female">Female</label>
                     </div>
                 </div>
