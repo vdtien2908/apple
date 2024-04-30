@@ -1268,3 +1268,66 @@ button {
     font-size: 14px;
     vertical-align: middle;
 }
+
+.card {
+    margin-top: 30px;
+    display: flex;
+    gap: 0 30px;
+}
+.card-item {
+    width: 25%;
+    padding: 20px 28px;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+}
+@media (min-width: 1600px) {
+    .card-item {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+.card-item__icon > i {
+    font-size: 22px;
+    padding: 20px;
+    border-radius: 50%;
+    background-color: #fff;
+}
+.card-item__desc {
+    color: #fff;
+}
+.card-item__desc .desc__name {
+    font-weight: 500;
+    line-height: 24px;
+    margin: 4px 0px 8px;
+}
+.card-item__desc .desc__price {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 28.8px;
+}
+.card-item:nth-child(1) {
+    background-color: #00c689;
+}
+.card-item:nth-child(1) .card-item__icon > i {
+    color: #00c689;
+}
+.card-item:nth-child(2) {
+    background-color: #3da5f4;
+}
+.card-item:nth-child(2) .card-item__icon > i {
+    color: #3da5f4;
+}
+.card-item:nth-child(3) {
+    background-color: #f1536e;
+}
+.card-item:nth-child(3) .card-item__icon > i {
+    color: #f1536e;
+}
+.card-item:nth-child(4) {
+    background-color: #fda006;
+}
+.card-item:nth-child(4) .card-item__icon > i {
+    color: #fda006;
+}

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2024 at 07:12 PM
+-- Generation Time: May 01, 2024 at 12:42 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -51,37 +51,6 @@ INSERT INTO `categories` (`id`, `title`, `slug`, `delete`, `created_at`, `update
 -- --------------------------------------------------------
 
 --
--- Table structure for table `images`
---
-
-CREATE TABLE `images` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `path_name` varchar(255) NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `product_id` bigint(20) UNSIGNED NOT NULL,
-  `delete` tinyint(1) NOT NULL DEFAULT 0,
-  `created_at` timestamp NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `images`
---
-
-INSERT INTO `images` (`id`, `path_name`, `title`, `product_id`, `delete`, `created_at`, `updated_at`) VALUES
-(1, 'f19b5c895f400152d56bb7169c22e3f6.jpg', 'iphone-13-promax', 4, 0, '2024-04-23 09:18:53', NULL),
-(3, '9a9dd60538ad32c71282c5f4b49d3dc4.png', 'iphone-13-promax-2', 4, 0, '2024-04-23 09:19:56', NULL),
-(4, '418f9bc51058627937eaf375b131825e.jpg', 'iphoen-13-pm-3', 4, 0, '2024-04-23 09:20:14', NULL),
-(7, '418f9bc51058627937eaf375b131825e.jpg', 'samsung', 3, 0, '2024-04-24 13:32:58', NULL),
-(8, '9a9dd60538ad32c71282c5f4b49d3dc4.png', 'samsung', 3, 0, '2024-04-24 13:33:11', NULL),
-(9, 'f19b5c895f400152d56bb7169c22e3f6.jpg', 'samsung', 3, 0, '2024-04-24 13:33:26', NULL),
-(10, 'f19b5c895f400152d56bb7169c22e3f6.jpg', 'ip-11', 2, 0, '2024-04-24 13:33:41', NULL),
-(13, '9a9dd60538ad32c71282c5f4b49d3dc4.png', 'ip-11', 2, 0, '2024-04-24 13:33:53', NULL),
-(14, '418f9bc51058627937eaf375b131825e.jpg', 'ip-11', 2, 0, '2024-04-24 13:34:06', NULL);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `orders`
 --
 
@@ -109,7 +78,7 @@ INSERT INTO `orders` (`id`, `name_receive`, `phone_receive`, `address_receive`, 
 (15, 'Trần Trọng Hiến', '0706802119', 'Sài gòn', '', 75000000, 1, 8, 0, '2024-04-26 08:47:29', NULL),
 (16, 'Jony ', '0706802119', 'Disney, USA', '', 96998000, 1, 8, 0, '2024-04-26 08:53:19', NULL),
 (17, 'mickey', '0706802119', 'Disney, USA', '', 10999000, 1, 8, 0, '2024-04-26 08:54:25', NULL),
-(18, 'Augentern shop', '1827485728', '91B Jackson street Pizla', '', 37000000, 0, 10, 0, '2024-04-26 14:47:37', NULL),
+(18, 'Augentern shop', '1827485728', '91B Jackson street Pizla', '', 37000000, 1, 10, 0, '2024-04-26 14:47:37', '2024-04-30 21:04:31'),
 (19, 'Lưu Vũ Tuyển', '1111111111', 'Cần Thơ', 'Giao nhanh', 25000000, 1, 12, 0, '2024-04-26 16:03:40', NULL);
 
 -- --------------------------------------------------------
@@ -169,7 +138,10 @@ CREATE TABLE `posts` (
 
 INSERT INTO `posts` (`id`, `slug`, `post_cat_id`, `user_id`, `title`, `content`, `views`, `img`, `delete`, `created_at`, `updated_at`) VALUES
 (3, 'how-to-use-dynamic-island-in-iphone-14', 1, 3, 'How to use dynamic island in iphone 14', '<p>\r\nWhen the iPhone 14 Pro models were announced in 2022, Apple surprised many with its innovative integration of software functions with the pill-shaped cutout at the top of the screen. Apple calls this area of the display the \"Dynamic Island,\" and has since extended the feature to all iPhone 15 models. This article explains what ‌Dynamic Island‌ does, how it works, and how you can interact with it to perform actions.\r\n</p>\r\n<h3>What Is Dynamic Island and How Does It Work?</h3>\r\n<p>Prior to Apple\'s ‌iPhone 14‌ Pro launch, we learned that Apple was working on an alternative to the notch that incorporated a pill-shaped cutout and a hole punch cutout to house the TrueDepth camera hardware. We also exclusively reported that these cutouts would appear as one contiguous, longer pill shape when the ‌iPhone 14‌ Pro was in use, and that Apple also planned to integrate software functions around the pill.</p>\r\n<p>As we know now, on the ‌iPhone 14‌ Pro and all ‌iPhone 15‌ models, display pixels around what Apple calls the \"‌Dynamic Island‌\" merge it into one pill-shaped area that changes size and shape to accommodate various types of alerts, notifications, and interactions, turning it into a kind of front-and-center information hub.</p>\r\n', 9, '990fb55b94167b9c7683dbe96880fc0d.jpg', 0, '2024-04-21 07:57:21', '2024-04-21 07:57:21'),
-(4, 'help-with-the-app-store', 2, 3, 'Help to fix app store issue', '<p>\nWhen the iPhone 14 Pro models were announced in 2022, Apple surprised many with its innovative integration of software functions with the pill-shaped cutout at the top of the screen. Apple calls this area of the display the \"Dynamic Island,\" and has since extended the feature to all iPhone 15 models. This article explains what ‌Dynamic Island‌ does, how it works, and how you can interact with it to perform actions.\n</p>\n<h3>What Is Dynamic Island and How Does It Work?</h3>\n<p>Prior to Apple\'s ‌iPhone 14‌ Pro launch, we learned that Apple was working on an alternative to the notch that incorporated a pill-shaped cutout and a hole punch cutout to house the TrueDepth camera hardware. We also exclusively reported that these cutouts would appear as one contiguous, longer pill shape when the ‌iPhone 14‌ Pro was in use, and that Apple also planned to integrate software functions around the pill.</p>\n<p>As we know now, on the ‌iPhone 14‌ Pro and all ‌iPhone 15‌ models, display pixels around what Apple calls the \"‌Dynamic Island‌\" merge it into one pill-shaped area that changes size and shape to accommodate various types of alerts, notifications, and interactions, turning it into a kind of front-and-center information hub.</p>\n                                                         ', 10, '418f9bc51058627937eaf375b131825e.jpg', 0, '2024-04-21 07:57:21', '2024-04-21 07:57:21');
+(4, 'help-with-the-app-store', 2, 3, 'Help to fix app store issue', '<p>\nWhen the iPhone 14 Pro models were announced in 2022, Apple surprised many with its innovative integration of software functions with the pill-shaped cutout at the top of the screen. Apple calls this area of the display the \"Dynamic Island,\" and has since extended the feature to all iPhone 15 models. This article explains what ‌Dynamic Island‌ does, how it works, and how you can interact with it to perform actions.\n</p>\n<h3>What Is Dynamic Island and How Does It Work?</h3>\n<p>Prior to Apple\'s ‌iPhone 14‌ Pro launch, we learned that Apple was working on an alternative to the notch that incorporated a pill-shaped cutout and a hole punch cutout to house the TrueDepth camera hardware. We also exclusively reported that these cutouts would appear as one contiguous, longer pill shape when the ‌iPhone 14‌ Pro was in use, and that Apple also planned to integrate software functions around the pill.</p>\n<p>As we know now, on the ‌iPhone 14‌ Pro and all ‌iPhone 15‌ models, display pixels around what Apple calls the \"‌Dynamic Island‌\" merge it into one pill-shaped area that changes size and shape to accommodate various types of alerts, notifications, and interactions, turning it into a kind of front-and-center information hub.</p>\n                                                         ', 10, '418f9bc51058627937eaf375b131825e.jpg', 0, '2024-04-21 07:57:21', '2024-04-21 07:57:21'),
+(5, 'help-center', 2, 3, 'Help center', 'demo', 0, 'fe3cfe74b1f0de178bb3a0513222207f.png', 0, '2024-04-26 17:25:57', '2024-04-26 17:25:57'),
+(6, 'demo-1', 1, 3, 'demo 1', 'demo 1', 1, 'c73aac9802dbd43854afe8a148c26dc0.jpg', 1, '2024-04-30 21:33:03', '2024-04-30 21:47:12'),
+(7, 'iphone-ipad', 1, 3, 'Iphone & ipad', '<h2>Tổng quan về iPhone và iPad</h2><p>iPad là máy tính bảng được Apple sản xuất và chạy bởi hệ điều hành iOS. Có thể nói, đây là sự kết hợp tối ưu giữa laptop và điện thoại thông minh. Apple đưa ra rất nhiều dòng iPad để có thể đáp ứng nhu cầu sử dụng khác nhau của người dùng chẳng hạn như iPad 10, iPad Pro 11, …&nbsp;</p><figure class=\"image\"><img src=\"https://cdn11.dienmaycholon.vn/filewebdmclnew/public/userupload/files/news/di-dong/nen-mua-iphone-hay-ipad-dau-la-su-lua-chon-phu-hop-voi-ban.jpg\" alt=\"Nên mua iPhone hay iPad? Đâu là sự lựa chọn phù hợp với bạn\"></figure><p>iPhone là điện thoại thông minh của nhà Táo khuyết và không còn quá xa lạ gì với người dùng. Đây là một chiếc di động được yêu thích và săn đón trên toàn thế giới. Trong những năm qua, Apple luôn mang đến cho người dùng nhiều sự cải tiến mới mẻ và hiện đại trên những dòng sản phẩm iPhone mới. Dòng iPhone mới và cao cấp vừa được ra mắt thị trường là <a href=\"https://dienmaycholon.vn/dien-thoai-di-dong-apple?t=iphone-14-series\">iPhone 14 Series</a>&nbsp;như iPhone 14, 14 Pro, 14 Pro Max,...</p><figure class=\"image\"><img src=\"https://cdn11.dienmaycholon.vn/filewebdmclnew/public/userupload/files/news/di-dong/ipad-la-gi.jpg\" alt=\"iPad là gì?\"></figure><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>', 2, '285f2774735ede7132f753ee93930d20.png', 0, '2024-04-30 22:11:14', '2024-04-30 22:20:11');
 
 -- --------------------------------------------------------
 
@@ -229,7 +201,8 @@ INSERT INTO `products` (`id`, `title`, `slug`, `description`, `content`, `price`
 (1, 'Iphone 12 pro max 2', 'iphone-12-pro-max-2', 'demo 2\r\n', 'demo', 12000000, 11000000, 0, 1, 'Apple', '990fb55b94167b9c7683dbe96880fc0d.jpg', 'Black', 13, 0, '2024-04-01 12:37:41', '2024-04-01 15:40:22'),
 (2, 'iphone 11 pro', 'iphone-11-pro', 'demo', 'Demo', 10999000, 9900000, 1, 5, 'Apple', '418f9bc51058627937eaf375b131825e.jpg', 'Titan', 13, 0, '2024-04-01 12:43:30', NULL),
 (3, 'Samsung demo', 'samsung-demo', 'Demo', 'Demo', 23000000, 23000000, 0, 1, 'Apple', '9a9dd60538ad32c71282c5f4b49d3dc4.png', 'Red', 15, 0, '2024-04-01 15:19:46', '2024-04-01 15:33:56'),
-(4, 'Iphone 13 Promax', 'iphone-13-promax', 'Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut risus. Sedcus faucibus an sullamcorper mattis drostique des commodo pharetras loremos.\r\n\r\nProducts Infomation\r\n', 'Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. \r\n\r\n', 25000000, 20000000, 1, 13, 'Apple', 'f19b5c895f400152d56bb7169c22e3f6.jpg', 'Black', 13, 0, '2024-04-23 09:17:56', NULL);
+(4, 'Iphone 13 Promax', 'iphone-13-promax', 'Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut risus. Sedcus faucibus an sullamcorper mattis drostique des commodo pharetras loremos.\r\n\r\nProducts Infomation\r\n', 'Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. \r\n\r\n', 25000000, 20000000, 1, 13, 'Apple', 'f19b5c895f400152d56bb7169c22e3f6.jpg', 'Black', 13, 0, '2024-04-23 09:17:56', NULL),
+(5, 'Apple 13 pro max', 'apple-13-pro-max', 'demo', 'demo 12\r\n', 12000000, 11890000, 0, 1, 'Apple', '8cf5347adade85a1b94c9adb0156e87e.png', 'đen', 15, 0, '2024-04-26 17:19:01', '2024-04-26 17:21:02');
 
 -- --------------------------------------------------------
 
@@ -304,13 +277,6 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `images`
---
-ALTER TABLE `images`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `images_product_id_foreign` (`product_id`);
-
---
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
@@ -371,12 +337,6 @@ ALTER TABLE `categories`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT for table `images`
---
-ALTER TABLE `images`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
@@ -386,7 +346,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `post_categories`
@@ -398,7 +358,7 @@ ALTER TABLE `post_categories`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `specifications`
@@ -415,12 +375,6 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `images`
---
-ALTER TABLE `images`
-  ADD CONSTRAINT `images_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
 --
 -- Constraints for table `orders`
