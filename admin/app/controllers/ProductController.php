@@ -228,7 +228,7 @@ class ProductController extends BaseController
         $this->ProductModel->destroy($id);
         $result =[
             'status'=>'success',
-            'message'=>"Deleted category successfully"
+            'message'=>"Deleted post successfully"
         ];
         header('Content-Type: application/json');
         echo json_encode($result);

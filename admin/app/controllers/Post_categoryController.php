@@ -117,12 +117,12 @@ class Post_categoryController extends BaseController
     }
 
     function delete($id){
-        $products_by_category = $this->categoryModel->querySql("SELECT * FROM products WHERE products.category_id = '$id' AND `delete` = 0");
+        $post_by_category = $this->categoryModel->querySql("SELECT * FROM posts WHERE posts.post_cat_id = '$id' AND `delete` = 0");
     
-        if(mysqli_num_rows($products_by_category) > 0){
+        if(mysqli_num_rows($post_by_category) > 0){
             $result['status'] = 500;
             $result['title'] = 'Failed';
-            $result['message'] = "Products containing categories cannot be deleted!";
+            $result['message'] = "Posts containing categories cannot be deleted!";
 
             http_response_code($result['status']);
             header('Content-Type: application/json');

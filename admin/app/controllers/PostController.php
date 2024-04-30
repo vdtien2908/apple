@@ -111,9 +111,9 @@ class PostController extends BaseController
     }
 
     function edit($id){
-        $product =$this->PostModel->find($id);
+        $post =$this->PostModel->find($id);
         header('Content-Type: application/json');
-        echo json_encode($product);
+        echo json_encode($post);
     }
 
     function update($id){
@@ -148,7 +148,7 @@ class PostController extends BaseController
             header('Content-Type: application/json');
             echo json_encode($result);
         } else {
-            $product = $this->PostModel->find($id);            
+            $post = $this->PostModel->find($id);            
             $data = [
                 'title' => $title,
                 'slug' => $slug, 
@@ -173,7 +173,7 @@ class PostController extends BaseController
                     if ($size <= $size_allow) {
                         // Xóa ảnh cũ trước khi tải lên ảnh mới
                         if (isset($product['img'])) {
-                            $old_file_path = '../product_img/' . $product['img'];
+                            $old_file_path = '../product_img/' . $post['img'];
                             if (file_exists($old_file_path)) {
                                 unlink($old_file_path);
                             }
@@ -210,7 +210,7 @@ class PostController extends BaseController
         $this->PostModel->destroy($id);
         $result =[
             'status'=>'success',
-            'message'=>"Deleted category successfully"
+            'message'=>"Deleted post successfully"
         ];
         header('Content-Type: application/json');
         echo json_encode($result);

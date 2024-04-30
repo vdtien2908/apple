@@ -109,6 +109,11 @@
         <div class="modal_inner">
             <h1 class="modal_title">Update Post</h1>
             <form class="form mt-5" id="form_edit" style="width: 700px;">
+            <div class="form_group" style="display: none;">
+                    <div class='form_field'>
+                        <input name="id" id='id' type="text" class="form_input">
+                    </div>
+            </div>
             <div class="form_group ">
                     <div class='form_field'>
                         <input name="title" id='title' type="text" class="form_input" placeholder=" "
@@ -163,9 +168,9 @@
             <i class="fa-solid fa-xmark"></i>
         </button>
         <div class="modal_inner">
-            <h1 class="modal_title">Delete product</h1>
+            <h1 class="modal_title">Delete post</h1>
             <div class="form mt-5" id="form_delete" style="width: 450px;">
-                <h1>Are you sure you want to delete the product?</h1>
+                <h1>Are you sure you want to delete the post?</h1>
                 <div class="form_action text-right mt-5">
                     <div class="btn btn_secondary modal_close">Cance</div>
                     <button type="submit" class="btn btn_submit-delete">
@@ -427,12 +432,12 @@
             type: 'GET',
             url: `${urlGlobal}/edit/${id}`,
             success: function(response) {
-                const product = response;
-                $('#form_edit #id').val(product.id);
-                $('#form_edit #title').val(product.title);
-                $('#form_edit #content').val(product.content);
+                const post = response;
+                $('#form_edit #id').val(post.id);
+                $('#form_edit #title').val(post.title);
+                $('#form_edit #content').val(post.content);
                     // Reset img  form edit
-                $('#form_edit #blah').attr('src', `../product_img/${product.img}`);
+                $('#form_edit #blah').attr('src', `../product_img/${post.img}`);
 
                  //  Handle load categories form edit product
                 $.ajax({
@@ -450,7 +455,7 @@
                             const option = $('<option></option>');
                             option.attr('value', category.id);
                             option.text(category.title);
-                            if(product.category_id == category.id){
+                            if(post.post_cat_id  == category.id){
                                 option.attr('selected', 'selected');
                             }
                             selectElement.append(option);
@@ -606,7 +611,7 @@
                 success: function(response) {
                     toast({
                         title: 'Success',
-                        message: `Update product successfully!`,
+                        message: `Update post successfully!`,
                         type: 'success',
                         duration: 3000,
                     });
