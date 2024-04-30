@@ -64,8 +64,8 @@
                 </div>
                 <div class="form_group ">
                     <div class='form_field'>
-                        <textarea name="content" id='content' type="text" class="form_input" placeholder=" " autocomplete="off"></textarea>
-                        <label for="content" class="form_label">Content</label>
+                        <textarea name="content" id='content' type="text" class="form_input" placeholder=" " autocomplete="off" ></textarea>
+                        <!-- <label for="content" class="form_label">Content</label> -->
                     </div>
                     <span class="form_messages"></span>
                 </div>
@@ -125,7 +125,6 @@
                 <div class="form_group ">
                     <div class='form_field'>
                         <textarea name="content" id='content' type="text" class="form_input" placeholder=" " autocomplete="off"></textarea>
-                        <label for="content" class="form_label">Content</label>
                     </div>
                     <span class="form_messages"></span>
                 </div>
@@ -314,12 +313,29 @@
 
 
 <script src="./public/js/table.js"></script>
-<script src="./public/js/table-mini.js"></script>
 <script src="./public/js/toast.js"></script>
 <script src="./public/js/validator.js"></script>
 <script src="./public/js/utils.js"></script>
+<!-- Ck editor -->
+<script src="./public/vendor/ckeditor5/ckeditor.js"></script>
 
 <script>
+    ClassicEditor.create(document.querySelector('#create-modal #content')).catch((error) => {
+        console.error(error);
+    });
+
+    let editor;
+
+    ClassicEditor
+        .create( document.querySelector( '#edit-modal #content' ) )
+        .then( newEditor => {
+            editor = newEditor;
+        } )
+        .catch( error => {
+            console.error( error );
+        } );
+
+
     let product_id = 0;
     // Preview Img Input form create
     const fileValueCreate =document.querySelector('#form_create #img');
@@ -435,7 +451,8 @@
                 const post = response;
                 $('#form_edit #id').val(post.id);
                 $('#form_edit #title').val(post.title);
-                $('#form_edit #content').val(post.content);
+                // $('#form_edit #content').val(post.content);
+                editor.setData(post.content);
                     // Reset img  form edit
                 $('#form_edit #blah').attr('src', `../product_img/${post.img}`);
 
