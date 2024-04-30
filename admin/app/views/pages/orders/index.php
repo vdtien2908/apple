@@ -20,10 +20,11 @@
             </div>
             <div class="top_table">
                 <div class="table_right">
-                    <div class="table_search">
+                    <h3>Orders are sorted in order of newest.</h3>
+                    <!-- <div class="table_search">
                         <input id="search" type="text" placeholder="Search...">
                         <i class="fa-solid fa-magnifying-glass"></i>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="table_content">
@@ -116,6 +117,7 @@
 <script src="./public/js/toast.js"></script>
 <script src="./public/js/validator.js"></script>
 <script src="./public/js/utils.js"></script>
+
 <script>
     const urlGlobal ="/apple/admin/order";
 
@@ -146,7 +148,7 @@
                 renderTable(orders, columns, true, 'status_order');
 
                 // Handle search
-                searchTable(orders, '#search', columns, true)
+                // searchTable(orders, '#search', columns, true)
 
                 $('#table_main').removeClass('animation')
             },

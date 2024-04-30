@@ -149,25 +149,25 @@ function renderTable(data, columns, showAction, fieldStatus = 'confirm') {
         });
         tbody.innerHTML = rowsHTML.join('');
 
-        const rows = table.querySelectorAll('tbody tr');
-        if ($('#search').val() !== '') {
-            const searchTerm = $('#search').val();
-            const filteredData = data.filter((item) =>
-                Object.values(item).some(
-                    (value) =>
-                        typeof value === 'string' && value.includes(searchTerm)
-                )
-            );
+        // const rows = table.querySelectorAll('tbody tr');
+        // if ($('#search').val() !== '') {
+        //     const searchTerm = $('#search').val();
+        //     const filteredData = data.filter((item) =>
+        //         Object.values(item).some(
+        //             (value) =>
+        //                 typeof value === 'string' && value.includes(searchTerm)
+        //         )
+        //     );
 
-            rows.forEach((row, index) => {
-                const rowData = data[index];
-                if (filteredData.includes(rowData)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        }
+        //     rows.forEach((row, index) => {
+        //         const rowData = data[index];
+        //         if (filteredData.includes(rowData)) {
+        //             row.style.display = '';
+        //         } else {
+        //             row.style.display = 'none';
+        //         }
+        //     });
+        // }
     }
 }
 
