@@ -67,7 +67,7 @@ class ProductModel extends BaseModel
                     'hot' => $row['hot'],
                     'view_count' => $row['view_count'],
                     'brand' => $row['brand'],
-                    'image' => $row['img'],
+                    'img' => $row['img'],
                     'color' => $row['color'],
                     'category_id' => $row['category_id'],
                     'cat_title' => $row['cat_title'],

@@ -17,26 +17,36 @@
             return `
                 <div class="col-lg-12 mb-5 shadow-lg p-3">
                     <div class="d-flex justify-content-between">
-                        <div class="d-flex" style="gap: 5px;">
-                            <span class="text-dark font-weight-bold text-truncate" style="max-width: 250px;">Đơn hàng số: ${('00000' + Math.floor(Math.random() * 10000000000)).slice(-5)}</span>
-                        </div>
-                        <div class="d-flex align-items-center" style="gap: 3px;">
+                        <div class="d-flex align-items-start flex-column" style="gap: 3px;">
                             ${getStatusIconAndText(order.status)}
+                            <div>
+                                Tổng thành tiền: <span class="fs-4 text-danger font-weight-bold">${Number(order.total_price).toLocaleString('vi-VN')} VND <span>
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            ${getButtonBasedOnStatus(order.status,order.order_id)}
                         </div>
                     </div>
                     <hr class="dropdown-divider">
                     <div class="my-2">
-                        ${renderOrderDetails(order.orderDetail)}
+                        <table class="table table-striped border rounded-lg">
+                            <thead>
+                                <tr>
+                                    <td>ID</td>
+                                    <td>Image</td>
+                                    <td>Title</td>
+                                    <td>Quantity</td>
+                                    <td>Price</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${renderOrderDetails(order.orderDetail)}
+                            </tbody>
+                        </table>
                     </div>
                     <hr class="dropdown-divider">
-                    <div class="my-2 ml-auto ms-auto">
-                        Tổng thành tiền: <span class="fs-4 text-danger font-weight-bold">${Number(order.total_price).toLocaleString('vi-VN')} VND <span>
-                    </div>
-                    <div class="mt-3 d-flex justify-content-between ">
-                        <span>Ngày tạo đơn hàng: <span class="text-dark flex-1">${order.created_at}</span>.</span>
-                        <div class="flex-1">
-                            ${getButtonBasedOnStatus(order.status,order.order_id)}
-                        </div>
+                    <div class="mt-3 d-flex justify-content-end">
+                        <span>Ngày tạo: <span class="text-dark font-weight-bold flex-1">${order.created_at}</span>.</span>
                     </div>
                 </div>
             `;
@@ -48,37 +58,28 @@
     const getStatusIconAndText = (status) => {
         switch (status) {
             case '0':
-                return `<span class="text-dark font-weight-bold">Đơn hàng của bạn đang chờ xác nhận</span>`;
+                return `<span class="text-dark font-weight-bold"># Đơn hàng của bạn đang chờ xác nhận</span>`;
             case '1':
-                return `<span class="text-dark font-weight-bold">Đơn hàng của bạn đã được xác nhận</span>`;
+                return `<span class="text-dark font-weight-bold"># Đơn hàng của bạn đã được xác nhận</span>`;
             case '2':
-                return `<span class="text-dark font-weight-bold">Đơn hàng của bạn đã đưọc hủy</span>`;
+                return `<span class="text-dark font-weight-bold"># Đơn hàng của bạn đã đưọc hủy</span>`;
             default:
-                return `<span class="text-dark font-weight-bold">Đơn hàng của bạn đang chờ xác nhận</span>`;
+                return `<span class="text-dark font-weight-bold"># Đơn hàng của bạn đang chờ xác nhận</span>`;
         }
     }
 
     const renderOrderDetails = (orderDetails) => {
         let html = '';
         if (orderDetails && orderDetails.length > 0) {
-            orderDetails.forEach(orderDetail => {
+            orderDetails.forEach((orderDetail, index) => {
                 html += `
-                <div class="row">
-                    <div class="col-2 mb-2">
-                        <img src=" ${IMAGES_PATH}/${orderDetail.product.image}" alt="" width="50" height="50">
-                    </div>
-                    <div class="col-7 d-flex flex-column" style="gap: 5px;">
-                        <span class="text-dark font-weight-bold">
-                            ${orderDetail.product.title }
-                        </span>
-                        <span class="text-muted">
-                            Số lượng: ${orderDetail.quantity}
-                        </span>
-                    </div>
-                    <div class="col-3">
-                        <span class="text-danger font-weight-bold">${Number(orderDetail.product.price).toLocaleString('vi-VN')} VND</span>
-                    </div>
-                </div>
+                <tr>
+                    <td>${index+1}</td>
+                    <td><img src=" ${IMAGES_PATH}/${orderDetail.product.image}" alt="" width="25" height="25"></td>
+                    <td>${orderDetail.product.title}</td>
+                    <td>${orderDetail.quantity}</td>
+                    <td>${Number(orderDetail.product.price).toLocaleString('vi-VN')} VND</td>
+                </tr>
             `;
             });
         }

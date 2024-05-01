@@ -43,29 +43,25 @@
 
     <div class="container">
         <div class="row mt-5 shadow-sm p-3">
-            <div class="col-12 col-md-7 col-lg-8">
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner" id="crs-main-images">
-                    </div>
+            <div class="col-12 col-md-6 col-lg-6">
+                <div class="w-100" id="crs-main-image">
                 </div>
-                <ol class="carousel-indicators" id="crs-navigation">
-                </ol>
             </div>
-            <div class="col-12 col-md-5 col-lg-4">
+            <div class="col-12 col-md-6 col-lg-6">
                 <h3 class="font-weight-bold mb-1 text-uppercase" id="product-title"></h3>
                 <ul class="mb-4 list-unstyled">
                     <li><span class="text-secondary">Categories:</span> <?php echo $product['cat_title'] ?></li>
                     <li><span class="text-secondary">Tag:</span> Technologies, Phone, Laptop</li>
                 </ul>
                 <div class="mb-3">
-                    <h5 class="text-secondary font-weight-bold">Price:</h5>
+                    <h5 class="text-secondary">Price:</h5>
                     <div class="d-flex flex-wrap font-weight-bold">
                         <h4 class="text-danger font-weight-bold" id="product-price-hot"></h4>
                         <del class="text-secondary ml-2" id="product-price"></del>
                     </div>
                 </div>
                 <div class="d-flex flex-column mb-3">
-                    <h5 class="text-dark font-weight-bold">Color: <span id="product-color"></span></h5>
+                    <h5 class="text-secondary">Color: <span class="text-dark font-weight-bold" id="product-color"></span></h5>
                 </div>
                 <div class="product__details__last__option my-3">
                     <h5><span>Guaranteed Safe Checkout</span></h5>
@@ -79,8 +75,8 @@
                     </div>
                     <a href="#" class="primary-btn add-cart" data-product="<?php echo htmlspecialchars(json_encode($product)); ?>" onclick="addCart(this)">add to cart</a>
                 </div>
-                <div>
-                    <h4 class="font-weight-bold">Product short information</h4>
+                <div class="mt-5">
+                    <h5 class="font-weight-bold">Product short information</h5>
                     <span id="product-content">
                         Content
                     </span>
@@ -158,7 +154,7 @@
                 console.log(res);
                 if (res.status === 200) {
                     const data = res.data;
-                    renderImagesCaroucel(data.images);
+                    renderImagesCaroucel(data.product.img);
                     renderProduct(data.product);
                     renderRelatedProduct(data.relatedProduct);
                     renderSpecifications(data.specifications);
@@ -186,50 +182,18 @@
         });
     };
 
-    const renderImagesCaroucel = (images) => {
-        const carouselMainContainer = document.getElementById('crs-main-images')
-        const carouselNavigation = document.getElementById('crs-navigation')
+    const renderImagesCaroucel = (image) => {
+        const carouselMainContainer = document.getElementById('crs-main-image')
 
-        const carouselElement = images.map((image, index) => {
-            if (index === 0) {
-                return `
-                <div class="carousel-item active">
-                    <img src="<?php echo IMAGES_PATH; ?>/${image.path_name}" class="" style="width:640px !important; height:400px; object-fit:cover;">
-                </div>
-            `;
-            } else {
-                return `
-                <div class="carousel-item">
-                    <img src="<?php echo IMAGES_PATH; ?>/${image.path_name}" class="" style="width:640px !important; height:400px; object-fit:cover;">
-                </div>
-            `;
-            }
-        }).join(' ');
-
-        const navigationElement = images.map((image, index) => {
-            if (index === 0) {
-                return `
-                    <li data-target="#carouselExampleIndicators" data-slide-to="${index}" class="active">
-                        <img src="<?php echo IMAGES_PATH; ?>/${image.path_name}" class="d-block" style="width:100px; height:100px;object-fit:cover;">
-                    </li>
-                `;
-            } else {
-                return `
-                    <li data-target="#carouselExampleIndicators" data-slide-to="${index}">
-                        <img src="<?php echo IMAGES_PATH; ?>/${image.path_name}" class="d-block" style="width:100px; height:100px;object-fit:cover;">
-                    </li>
-                `;
-            }
-        }).join(' ');
+        const carouselElement = `
+            <img src="<?php echo IMAGES_PATH; ?>/${image}" class="d-block" style="object-fit:cover;">
+        `;
 
         carouselMainContainer.innerHTML = carouselElement;
-        carouselNavigation.innerHTML = navigationElement;
     };
 
     const renderSpecifications = (specifications) => {
         const tableContainer = document.getElementById('specifiTable');
-
-        console.log(specifications.length);
 
         if (specifications.length === 0) {
             tableContainer.innerHTML = `<h5 class="font-weight-bold text-dark text-left">No specification available!</h5>`;
@@ -315,7 +279,7 @@
                 const existingCartItem = cartItems.find(item => item.id === product.id);
 
                 if (existingCartItem) {
-                    existingCartItem.quantity += 1;
+                    existingCartItem.quantity++;
                 } else {
                     product.quantity = productQuantity ? productQuantity : 1;
                     cartItems.push(product);

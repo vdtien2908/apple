@@ -4,14 +4,12 @@ class ShopController extends BaseController
     private $productModel;
     private $categoriesModel;
     private $specificationModel;
-    private $imagesModel;
 
     public function __construct()
     {
         $this->productModel = $this->model('ProductModel');
         $this->categoriesModel = $this->model('CategoryModel');
         $this->specificationModel = $this->model('SpecificationModel');
-        $this->imagesModel = $this->model('ImagesModel');
     }
 
     public function index()
@@ -157,7 +155,6 @@ class ShopController extends BaseController
         }
     }
 
-
     public function sortASC()
     {
         $products = $this->productModel->getProductsASC();
@@ -217,13 +214,11 @@ class ShopController extends BaseController
         $product = $this->productModel->getProduct($slug);
 
         $specifications = $this->specificationModel->getSpecificationByProductId($product["id"]);
-        $images = $this->imagesModel->getImagesByProductId($product["id"]);
         $relatedProduct = $this->productModel->getRelatedProducts($product["id"], $product["category_id"]);
 
         $data = [
             'product' => $product,
             'specifications' => $specifications ? $specifications  : [],
-            'images' => $images ? $images  : [],
             'relatedProduct' => $relatedProduct ? $relatedProduct  : [],
         ];
 

@@ -226,7 +226,7 @@
                 const existingCartItem = cartItems.find(item => item.id === product.id);
 
                 if (existingCartItem) {
-                    existingCartItem.quantity += 1;
+                    existingCartItem.quantity++;
                 } else {
                     product.quantity = 1;
                     cartItems.push(product);
@@ -235,6 +235,7 @@
                 localStorage.setItem("cartItems", JSON.stringify(cartItems));
                 showToast("Product has been added to cart!", true);
             } catch (error) {
+                console.log(error);
                 showToast("Fail to add product to cart, contact to admin for more information!", false);
             }
         }

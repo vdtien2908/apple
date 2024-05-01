@@ -292,7 +292,7 @@
                 const existingCartItem = cartItems.find(item => item.id === product.id);
 
                 if (existingCartItem) {
-                    existingCartItem.quantity += 1;
+                    existingCartItem.quantity++;
                 } else {
                     product.quantity = 1;
                     cartItems.push(product);

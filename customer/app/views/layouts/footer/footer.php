@@ -1,5 +1,5 @@
 <!-- Instagram Section Begin -->
-<section class="instagram spad">
+<section class="instagram spad mx-auto">
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
