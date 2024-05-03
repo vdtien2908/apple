@@ -5,9 +5,10 @@ class SpecificationModel extends BaseModel
 
     public function getSpecificationByProductId($id)
     {
-        $sql = "SELECT sp.* FROM specifications sp
-            JOIN products p ON sp.product_id = p.id
-            WHERE sp.product_id = ${id}";
+        $sql = "
+        SELECT * FROM specifications, products WHERE specifications.product_id = products.id AND specifications.delete=0 AND products.id = ${id}
+    ";
+    
 
         $result = $this->querySql($sql);
 

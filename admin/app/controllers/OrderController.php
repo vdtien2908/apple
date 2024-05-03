@@ -24,7 +24,7 @@ class OrderController extends BaseController
 
     function all()
     {
-        $orders = $this->orderModel->getAll();
+        $orders = $this->orderModel->getAll(['*'], ['id DESC']);
 
         http_response_code(200);
         header('Content-Type: application/json');

@@ -1,6 +1,7 @@
 <div class="sidebar">
     <ul class="menu">
 
+    <?php if($_SESSION['login']['role'] == 'admin') { ?>
         <li class="menu_item 
         <?php
             $display = $func->handleActive('home');
@@ -20,7 +21,7 @@
         <li class="menu_item menu_item-title">
             Manage
         </li>
-
+    
         <li class="menu_item <?php
             echo $func->handleActive('staff')['active'];
             ?>">
@@ -33,6 +34,9 @@
                 </span>
             </a>
         </li>
+    <?php }?>
+
+        
 
 
         <li class="menu_item <?php

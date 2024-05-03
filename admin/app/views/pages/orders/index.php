@@ -122,7 +122,7 @@
     const urlGlobal ="/apple/admin/order";
 
     const columns = [
-        { title: '#', field: 'id', align: 'center', width: '120px' },
+        { title: '#', field: 'index', width: '100px' },
         {
             title: 'Status',
             field: 'status_order',

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2024 at 12:42 AM
+-- Generation Time: May 03, 2024 at 03:42 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -46,7 +46,8 @@ INSERT INTO `categories` (`id`, `title`, `slug`, `delete`, `created_at`, `update
 (14, 'Ipad mini', 'ipad-mini', 0, '2024-04-01 11:35:57', NULL),
 (15, 'Ipad gen', 'ipad-gen', 0, '2024-04-01 11:36:12', NULL),
 (16, 'macbook', 'macbook', 0, '2024-04-01 11:36:25', '2024-04-01 11:43:36'),
-(17, 'Mac mini', 'mac-mini', 0, '2024-04-01 11:36:30', NULL);
+(17, 'Mac mini', 'mac-mini', 0, '2024-04-01 11:36:30', NULL),
+(21, 'demo 1', 'demo-1', 1, '2024-04-30 22:47:12', NULL);
 
 -- --------------------------------------------------------
 
@@ -141,7 +142,7 @@ INSERT INTO `posts` (`id`, `slug`, `post_cat_id`, `user_id`, `title`, `content`,
 (4, 'help-with-the-app-store', 2, 3, 'Help to fix app store issue', '<p>\nWhen the iPhone 14 Pro models were announced in 2022, Apple surprised many with its innovative integration of software functions with the pill-shaped cutout at the top of the screen. Apple calls this area of the display the \"Dynamic Island,\" and has since extended the feature to all iPhone 15 models. This article explains what ‌Dynamic Island‌ does, how it works, and how you can interact with it to perform actions.\n</p>\n<h3>What Is Dynamic Island and How Does It Work?</h3>\n<p>Prior to Apple\'s ‌iPhone 14‌ Pro launch, we learned that Apple was working on an alternative to the notch that incorporated a pill-shaped cutout and a hole punch cutout to house the TrueDepth camera hardware. We also exclusively reported that these cutouts would appear as one contiguous, longer pill shape when the ‌iPhone 14‌ Pro was in use, and that Apple also planned to integrate software functions around the pill.</p>\n<p>As we know now, on the ‌iPhone 14‌ Pro and all ‌iPhone 15‌ models, display pixels around what Apple calls the \"‌Dynamic Island‌\" merge it into one pill-shaped area that changes size and shape to accommodate various types of alerts, notifications, and interactions, turning it into a kind of front-and-center information hub.</p>\n                                                         ', 10, '418f9bc51058627937eaf375b131825e.jpg', 0, '2024-04-21 07:57:21', '2024-04-21 07:57:21'),
 (5, 'help-center', 2, 3, 'Help center', 'demo', 0, 'fe3cfe74b1f0de178bb3a0513222207f.png', 0, '2024-04-26 17:25:57', '2024-04-26 17:25:57'),
 (6, 'demo-1', 1, 3, 'demo 1', 'demo 1', 1, 'c73aac9802dbd43854afe8a148c26dc0.jpg', 1, '2024-04-30 21:33:03', '2024-04-30 21:47:12'),
-(7, 'iphone-ipad', 1, 3, 'Iphone & ipad', '<h2>Tổng quan về iPhone và iPad</h2><p>iPad là máy tính bảng được Apple sản xuất và chạy bởi hệ điều hành iOS. Có thể nói, đây là sự kết hợp tối ưu giữa laptop và điện thoại thông minh. Apple đưa ra rất nhiều dòng iPad để có thể đáp ứng nhu cầu sử dụng khác nhau của người dùng chẳng hạn như iPad 10, iPad Pro 11, …&nbsp;</p><figure class=\"image\"><img src=\"https://cdn11.dienmaycholon.vn/filewebdmclnew/public/userupload/files/news/di-dong/nen-mua-iphone-hay-ipad-dau-la-su-lua-chon-phu-hop-voi-ban.jpg\" alt=\"Nên mua iPhone hay iPad? Đâu là sự lựa chọn phù hợp với bạn\"></figure><p>iPhone là điện thoại thông minh của nhà Táo khuyết và không còn quá xa lạ gì với người dùng. Đây là một chiếc di động được yêu thích và săn đón trên toàn thế giới. Trong những năm qua, Apple luôn mang đến cho người dùng nhiều sự cải tiến mới mẻ và hiện đại trên những dòng sản phẩm iPhone mới. Dòng iPhone mới và cao cấp vừa được ra mắt thị trường là <a href=\"https://dienmaycholon.vn/dien-thoai-di-dong-apple?t=iphone-14-series\">iPhone 14 Series</a>&nbsp;như iPhone 14, 14 Pro, 14 Pro Max,...</p><figure class=\"image\"><img src=\"https://cdn11.dienmaycholon.vn/filewebdmclnew/public/userupload/files/news/di-dong/ipad-la-gi.jpg\" alt=\"iPad là gì?\"></figure><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>', 2, '285f2774735ede7132f753ee93930d20.png', 0, '2024-04-30 22:11:14', '2024-04-30 22:20:11');
+(7, 'iphone-ipad', 1, 3, 'Iphone & ipad', '<h2>Tổng quan về iPhone và iPad</h2><p>iPad là máy tính bảng được Apple sản xuất và chạy bởi hệ điều hành iOS. Có thể nói, đây là sự kết hợp tối ưu giữa laptop và điện thoại thông minh. Apple đưa ra rất nhiều dòng iPad để có thể đáp ứng nhu cầu sử dụng khác nhau của người dùng chẳng hạn như iPad 10, iPad Pro 11, …&nbsp;</p><figure class=\"image\"><img src=\"https://cdn11.dienmaycholon.vn/filewebdmclnew/public/userupload/files/news/di-dong/nen-mua-iphone-hay-ipad-dau-la-su-lua-chon-phu-hop-voi-ban.jpg\" alt=\"Nên mua iPhone hay iPad? Đâu là sự lựa chọn phù hợp với bạn\"></figure><p>iPhone là điện thoại thông minh của nhà Táo khuyết và không còn quá xa lạ gì với người dùng. Đây là một chiếc di động được yêu thích và săn đón trên toàn thế giới. Trong những năm qua, Apple luôn mang đến cho người dùng nhiều sự cải tiến mới mẻ và hiện đại trên những dòng sản phẩm iPhone mới. Dòng iPhone mới và cao cấp vừa được ra mắt thị trường là <a href=\"https://dienmaycholon.vn/dien-thoai-di-dong-apple?t=iphone-14-series\">iPhone 14 Series</a>&nbsp;như iPhone 14, 14 Pro, 14 Pro Max,...</p><figure class=\"image\"><img src=\"https://cdn11.dienmaycholon.vn/filewebdmclnew/public/userupload/files/news/di-dong/ipad-la-gi.jpg\" alt=\"iPad là gì?\"></figure><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>', 5, '285f2774735ede7132f753ee93930d20.png', 0, '2024-04-30 22:11:14', '2024-04-30 22:20:11');
 
 -- --------------------------------------------------------
 
@@ -198,11 +199,11 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `title`, `slug`, `description`, `content`, `price`, `sale_price`, `hot`, `view_count`, `brand`, `img`, `color`, `category_id`, `delete`, `created_at`, `updated_at`) VALUES
-(1, 'Iphone 12 pro max 2', 'iphone-12-pro-max-2', 'demo 2\r\n', 'demo', 12000000, 11000000, 0, 1, 'Apple', '990fb55b94167b9c7683dbe96880fc0d.jpg', 'Black', 13, 0, '2024-04-01 12:37:41', '2024-04-01 15:40:22'),
-(2, 'iphone 11 pro', 'iphone-11-pro', 'demo', 'Demo', 10999000, 9900000, 1, 5, 'Apple', '418f9bc51058627937eaf375b131825e.jpg', 'Titan', 13, 0, '2024-04-01 12:43:30', NULL),
+(1, 'Iphone 12 pro max 2', 'iphone-12-pro-max-2', 'demo 2\r\n', 'demo', 12000000, 11000000, 0, 2, 'Apple', '990fb55b94167b9c7683dbe96880fc0d.jpg', 'Black', 13, 0, '2024-04-01 12:37:41', '2024-04-01 15:40:22'),
+(2, 'iphone 11 pro', 'iphone-11-pro', 'demo', 'Demo', 10999000, 9900000, 1, 6, 'Apple', '418f9bc51058627937eaf375b131825e.jpg', 'Titan', 13, 0, '2024-04-01 12:43:30', NULL),
 (3, 'Samsung demo', 'samsung-demo', 'Demo', 'Demo', 23000000, 23000000, 0, 1, 'Apple', '9a9dd60538ad32c71282c5f4b49d3dc4.png', 'Red', 15, 0, '2024-04-01 15:19:46', '2024-04-01 15:33:56'),
-(4, 'Iphone 13 Promax', 'iphone-13-promax', 'Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut risus. Sedcus faucibus an sullamcorper mattis drostique des commodo pharetras loremos.\r\n\r\nProducts Infomation\r\n', 'Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. \r\n\r\n', 25000000, 20000000, 1, 13, 'Apple', 'f19b5c895f400152d56bb7169c22e3f6.jpg', 'Black', 13, 0, '2024-04-23 09:17:56', NULL),
-(5, 'Apple 13 pro max', 'apple-13-pro-max', 'demo', 'demo 12\r\n', 12000000, 11890000, 0, 1, 'Apple', '8cf5347adade85a1b94c9adb0156e87e.png', 'đen', 15, 0, '2024-04-26 17:19:01', '2024-04-26 17:21:02');
+(4, 'Iphone 13 Promax', 'iphone-13-promax', 'Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut risus. Sedcus faucibus an sullamcorper mattis drostique des commodo pharetras loremos.\r\n\r\nProducts Infomation\r\n', 'Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. \r\n\r\n', 25000000, 20000000, 1, 14, 'Apple', 'f19b5c895f400152d56bb7169c22e3f6.jpg', 'Black', 13, 0, '2024-04-23 09:17:56', NULL),
+(5, 'Apple 13 pro max', 'apple-13-pro-max', 'demo', 'demo 12\r\n', 12000000, 11890000, 0, 4, 'Apple', '8cf5347adade85a1b94c9adb0156e87e.png', 'đen', 15, 0, '2024-04-26 17:19:01', '2024-04-26 17:21:02');
 
 -- --------------------------------------------------------
 
@@ -264,7 +265,9 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `address`, `gender`, `ph
 (5, 'Vũ Bảo Khanh', 'vubaokhanh@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Kiên Giang', 1, '1123123123', 0, 'staff', '2024-04-03 18:16:34', NULL),
 (8, 'Jony Nguyen', 'abc@gmail.com', '$2y$10$d5jy3chJfJHAAXuAbRTYkuJmiLFb/IzsG5yuJktQK1xixU8Mq6wWW', 'Can Tho Sai Gon Cai Rang', 0, '0758395394', 0, 'customer', '2024-04-23 02:44:58', '2024-04-26 14:37:26'),
 (10, NULL, 'tranhien@gmail.com', '$2y$10$WELa5GKYuk6J2BAGI7qjnunMEogRi6L4PmbQGo.i/4IeT6yu3dPVm', NULL, NULL, NULL, 0, 'customer', '2024-04-26 14:38:14', NULL),
-(12, 'Vũ Đức Tiến', 'vdtien@gmail.com', '$2y$10$RZHuyLdMy8feBU2v94yPs.ObvKoelCdGImH3EiS4in/A9HHEDwRVq', 'Cần Thơ', 0, '0333669832', 0, 'customer', '2024-04-26 16:01:36', '2024-04-26 16:02:23');
+(12, 'Vũ Đức Tiến', 'vdtien@gmail.com', '$2y$10$RZHuyLdMy8feBU2v94yPs.ObvKoelCdGImH3EiS4in/A9HHEDwRVq', 'Cần Thơ', 0, '0333669832', 0, 'customer', '2024-04-26 16:01:36', '2024-04-26 16:02:23'),
+(13, 'demo', 'demo@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Cần Thơ', 0, '0333669832', 0, 'staff', '2024-05-03 01:35:21', NULL),
+(14, 'admin', 'admin@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'TP HCM', 0, '1231231232', 0, 'admin', '2024-05-03 01:39:36', NULL);
 
 --
 -- Indexes for dumped tables
@@ -334,7 +337,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -370,7 +373,7 @@ ALTER TABLE `specifications`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
