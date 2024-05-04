@@ -9,7 +9,7 @@ class PostModel extends BaseModel
         FROM posts as p
         JOIN post_categories as pc
         ON p.post_cat_id = pc.id
-        ORDER BY p.delete = 0 DESC, p.created_at DESC";
+        where p.delete = 0 ORDER BY p.created_at DESC";
 
         $result = $this->querySql($sql);
         if ($result) {

@@ -5,7 +5,7 @@ class CategoryModel extends BaseModel
 
     public function getCategories()
     {
-        $sql = "SELECT c.* FROM categories as c ORDER BY c.created_at DESC";
+        $sql = "SELECT c.* FROM categories as c where `delete` = 0 ORDER BY c.created_at DESC";
 
         $result = $this->querySql($sql);
 

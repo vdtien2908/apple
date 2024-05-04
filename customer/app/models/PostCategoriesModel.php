@@ -6,7 +6,7 @@ class PostCategoriesModel extends BaseModel
     public function getCategories()
     {
         $sql = "SELECT * FROM post_categories 
-        ORDER BY `delete` = 0 DESC, created_at DESC";
+        WHERE `delete` = 0 order by created_at DESC";
 
         $result = $this->querySql($sql);
         if ($result) {
