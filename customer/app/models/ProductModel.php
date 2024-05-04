@@ -5,7 +5,7 @@ class ProductModel extends BaseModel
 
     public function getProducts()
     {
-        $sql = "SELECT p.* FROM products as p ORDER BY p.created_at DESC";
+        $sql = "SELECT p.* FROM products as p WHERE p.delete = 0 ORDER BY p.created_at DESC";
 
         $result = $this->querySql($sql);
 
@@ -19,7 +19,7 @@ class ProductModel extends BaseModel
 
     public function getProductsASC()
     {
-        $sql = "SELECT p.* FROM products as p ORDER BY p.price ASC";
+        $sql = "SELECT p.* FROM products as p WHERE p.delete = 0 ORDER BY p.price ASC";
 
         $result = $this->querySql($sql);
 
@@ -33,7 +33,7 @@ class ProductModel extends BaseModel
 
     public function getProductsDESC()
     {
-        $sql = "SELECT p.* FROM products as p ORDER BY p.price DESC";
+        $sql = "SELECT p.* FROM products as p WHERE p.delete = 0 ORDER BY p.price DESC";
 
         $result = $this->querySql($sql);
 
@@ -49,7 +49,7 @@ class ProductModel extends BaseModel
     {
         $sql = "SELECT p.*, c.title as cat_title FROM products p
             JOIN categories as c ON p.category_id = c.id 
-            WHERE p.slug = '$slug'
+            WHERE p.slug = '$slug' AND p.delete = 0
             ORDER BY p.created_at DESC";
         $result = $this->querySql($sql);
 
@@ -85,7 +85,7 @@ class ProductModel extends BaseModel
     {
         $sql = "SELECT p.* FROM products as p 
         JOIN categories AS c ON c.id = p.category_id
-        WHERE c.slug = '${cat_slug}'
+        WHERE c.slug = '${cat_slug}' AND p.delete = 0
         ORDER BY p.created_at DESC";
 
         $result = $this->querySql($sql);
@@ -101,7 +101,7 @@ class ProductModel extends BaseModel
     public function getProductByTitle($title)
     {
         $sql = "SELECT p.* FROM products as p 
-        WHERE p.title LIKE '%${title}%'
+        WHERE p.title LIKE '%${title}%' AND p.delete = 0
         ORDER BY p.created_at DESC";
 
         $result = $this->querySql($sql);
@@ -117,7 +117,7 @@ class ProductModel extends BaseModel
     public function getProductsByPriceRange($minPrice, $maxPrice)
     {
         $sql = "SELECT p.* FROM products as p 
-                WHERE p.price BETWEEN ${minPrice} AND ${maxPrice}
+                WHERE p.price BETWEEN ${minPrice} AND ${maxPrice} AND p.delete = 0
                 ORDER BY p.created_at DESC";
 
         $result = $this->querySql($sql);
@@ -135,6 +135,7 @@ class ProductModel extends BaseModel
         $sql = "SELECT products.*, SUM(order_details.quantity) AS total_quantity FROM products
         JOIN order_details ON order_details.product_id = products.id
         JOIN orders ON orders.id = order_details.order_id
+        WHERE products.delete = 0
         GROUP BY products.id, products.category_id, products.title, products.price, 
             products.slug, products.img, products.description,
             products.content,products.sale_price,products.hot,products.view_count,
@@ -155,7 +156,7 @@ class ProductModel extends BaseModel
 
     public function getRelatedProducts($id, $cat_id)
     {
-        $sql = "SELECT * FROM products WHERE category_id = ${cat_id} AND id != ${id}";
+        $sql = "SELECT * FROM products WHERE category_id = ${cat_id} AND id != ${id} AND products.delete = 0";
         $result = $this->querySql($sql);
         if ($result) {
             $products = mysqli_fetch_all($result, MYSQLI_ASSOC);

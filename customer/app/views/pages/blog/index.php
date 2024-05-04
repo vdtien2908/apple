@@ -158,7 +158,7 @@
             });
 
             htmlElement = `
-                <div class="col-12">
+                <div class="col-12 my-2 shadow-sm">
                     <div class="row">
                         <div class="col-3 col-md-2">
                             <a href="<?php echo URL_APP; ?>/blog/detail/${data.slug}">
